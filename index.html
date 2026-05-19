@@ -339,17 +339,16 @@
     }
 
     /* ===== HERO ===== */
-    #hero {
-      min-height: 100vh;
-      min-height: 100dvh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      padding: clamp(80px, 14vw, 130px) var(--section-px) clamp(30px, 5vw, 60px);
-      gap: clamp(1rem, 3vw, 2rem);
-      position: relative; z-index: 10;
-      /* CRITICAL: no flex-wrap on desktop, wrap only on mobile via media query */
-    }
+   #hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: clamp(80px, 14vw, 130px) var(--section-px) clamp(30px, 5vw, 60px);
+  gap: clamp(1rem, 3vw, 2rem);
+  position: relative; z-index: 10;
+}
 
     .hero-left { flex: 1; min-width: 0; max-width: 560px; }
 
@@ -514,18 +513,17 @@
     @keyframes float-badge { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-10px) rotate(2deg)} }
 
     /* ===== HERO MOBILE - CRITICAL FIX ===== */
-   @media screen and (max-width: 900px) {
+  @media screen and (max-width: 900px) {
   #hero {
     flex-direction: column !important;
     justify-content: flex-start !important;
     align-items: center !important;
     text-align: center !important;
     padding-top: 70px !important;
-    padding-bottom: 40px !important;
+    padding-bottom: 2rem !important;
     min-height: 0 !important;
     height: auto !important;
     gap: 0.8rem !important;
-    /* FIX: remove vertical centering stretch */
     display: flex !important;
   }
       .hero-right {
