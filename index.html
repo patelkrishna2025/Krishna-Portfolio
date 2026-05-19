@@ -340,7 +340,7 @@
 
     /* ===== HERO ===== */
    #hero {
-  min-height: 100vh;
+  min-height: 0;
   min-height: 100dvh;
   display: flex;
   align-items: flex-start;
@@ -513,7 +513,7 @@
     @keyframes float-badge { 0%,100%{transform:translateY(0) rotate(-2deg)} 50%{transform:translateY(-10px) rotate(2deg)} }
 
     /* ===== HERO MOBILE - CRITICAL FIX ===== */
-  @media screen and (max-width: 900px) {
+  @media screen and (max-width: 901px) {
   #hero {
     flex-direction: column !important;
     justify-content: flex-start !important;
@@ -521,7 +521,8 @@
     text-align: center !important;
     padding-top: 70px !important;
     padding-bottom: 2rem !important;
-    min-height: 0 !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
     height: auto !important;
     gap: 0.8rem !important;
     display: flex !important;
