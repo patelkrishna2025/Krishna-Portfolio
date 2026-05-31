@@ -338,6 +338,15 @@
       #nav-links a { font-size: 1.1rem !important; }
     }
 
+    /* ===== MOBILE HERO HEIGHT FINAL FIX ===== */
+@media screen and (max-width: 900px) {
+  #hero {
+    min-height: unset !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+}
+    
     /* ===== HERO ===== */
  #hero {
   display: flex;
@@ -1515,6 +1524,19 @@
       document.body.style.overflow='hidden';
       document.getElementById('universal-modal-box').scrollTop=0;
     }
+
+  // Mobile hero height fix
+  function fixHeroHeight() {
+    if (window.innerWidth <= 900) {
+      const hero = document.getElementById('hero');
+      if (hero) {
+        hero.style.minHeight = '0';
+        hero.style.height = 'auto';
+      }
+    }
+  }
+  fixHeroHeight();
+  window.addEventListener('resize', fixHeroHeight);
 
     /* === MODAL CLOSE === */
     function closeModal(){
