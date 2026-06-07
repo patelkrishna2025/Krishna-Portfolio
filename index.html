@@ -323,16 +323,21 @@
     .btn-live svg{ width:12px;height:12px;flex-shrink:0; }
 
     /* Read More button — filled gradient (slightly muted) */
-  .btn-read-more{
-  background:linear-gradient(135deg,#ff416c,#8e2de2);
+/* Read More button — pill gradient like screenshot */
+.btn-read-more{
+  background:linear-gradient(90deg,#c2185b,#7b1fa2);
   color:#fff;
-  box-shadow:0 4px 20px rgba(255,65,108,.35);
+  border-radius:50px !important;
+  padding:0 22px !important;
+  font-size:clamp(0.75rem,2vw,0.85rem) !important;
+  height:clamp(38px,5vw,44px) !important;
+  box-shadow:0 4px 18px rgba(194,24,91,0.35);
 }
-    .btn-read-more:hover{
-      background:var(--grad);
-      box-shadow:0 10px 30px rgba(255,65,108,.45);
-      transform:translateY(-2px);
-    }
+.btn-read-more:hover{
+  background:linear-gradient(90deg,#e91e63,#9c27b0);
+  box-shadow:0 10px 30px rgba(194,24,91,0.55);
+  transform:translateY(-2px);
+}
     .btn-read-more .btn-arrow{ transition:transform .3s; }
     .btn-read-more:hover .btn-arrow{ transform:translateX(4px); }
 
