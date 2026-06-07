@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Krishna Patel | Data Science & Analyst</title>
-  <meta name="description" content="Krishna Patel - Data Science & Analyst">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Krishna Patel | Data Science & Analyst</title>
+    <meta name="description" content="Krishna Patel - Data Science & Analyst">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Poppins:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet">
+    <style>
     /* ============================================================
        ROOT VARIABLES & RESET
     ============================================================ */
@@ -325,17 +328,19 @@
     /* Read More button — filled gradient (slightly muted) */
 /* Read More button — pill gradient like screenshot */
 .btn-read-more{
-  background:linear-gradient(90deg,#c2185b,#7b1fa2);
+  background:linear-gradient(90deg,#8e2de2,#e91e8c);
   color:#fff;
   border-radius:50px !important;
-  padding:0 22px !important;
-  font-size:clamp(0.75rem,2vw,0.85rem) !important;
-  height:clamp(38px,5vw,44px) !important;
-  box-shadow:0 4px 18px rgba(194,24,91,0.35);
+  padding:0 24px !important;
+  height:42px !important;
+  font-size:0.82rem !important;
+  font-weight:600 !important;
+  box-shadow:0 4px 20px rgba(142,45,226,0.4);
+  border:none !important;
 }
 .btn-read-more:hover{
-  background:linear-gradient(90deg,#e91e63,#9c27b0);
-  box-shadow:0 10px 30px rgba(194,24,91,0.55);
+  background:linear-gradient(90deg,#a855f7,#ff416c);
+  box-shadow:0 10px 32px rgba(142,45,226,0.6);
   transform:translateY(-2px);
 }
     .btn-read-more .btn-arrow{ transition:transform .3s; }
@@ -530,470 +535,683 @@
       .certs-grid{ grid-template-columns:repeat(2,1fr); }
     }
   </style>
-</head>
-<body>
-  <div id="cursor"></div>
-  <div id="cursor-ring"></div>
-  <div id="scroll-progress"></div>
-  <div id="mouse-glow"></div>
-  <canvas id="galaxy"></canvas>
+  </head>
+  <body>
+    <div id="cursor"></div>
+    <div id="cursor-ring"></div>
+    <div id="scroll-progress"></div>
+    <div id="mouse-glow"></div>
+    <canvas id="galaxy"></canvas>
 
-  <!-- ===== NAVBAR ===== -->
-  <nav id="navbar">
-    <a href="#" class="nav-logo">KP.</a>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#blogs">Blog</a></li>
-      <li><a href="#certificates">Certs</a></li>
-      <li><a href="#internships">Experience</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
-
-  <!-- ===== HERO ===== -->
-  <header id="hero">
-    <div class="hero-left">
-      <div class="hero-tag"><span class="dot"></span> Available for opportunities</div>
-      <h1 class="hero-name">Hi, I'm<br><span>Krishna Patel!</span></h1>
-      <div class="hero-typing-wrap">Passionate <span id="typing-text"></span><span class="cursor-blink"></span></div>
-      <p class="hero-desc">A detail-oriented <strong style="color:var(--pink-soft)">Data Science & Analyst</strong> passionate about transforming raw data into compelling stories that drive real business decisions.</p>
-      <div class="hero-buttons">
-        <a href="CV.pdf" download class="btn-primary"><span>&#8681; Download CV</span></a>
-        <a href="#contact" class="btn-outline">Let's Talk &rarr;</a>
-      </div>
-      <div class="hero-socials">
-        <a href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" class="social-icon" title="LinkedIn">
-          <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-        </a>
-        <a href="https://github.com/patelkrishna2025" target="_blank" class="social-icon" title="GitHub">
-          <svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-        </a>
-        <a href="mailto:krishnpatel6824@gmail.com" class="social-icon" title="Email">
-          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="profile-orbit">
-        <div class="orbit-ring orbit-ring-1"><div class="orbit-dot"></div></div>
-        <div class="orbit-ring orbit-ring-2"><div class="orbit-dot orbit-dot-2"></div></div>
-        <div class="orbit-ring orbit-ring-3"><div class="orbit-dot orbit-dot-3"></div></div>
-        <div class="profile-glow"></div>
-        <div class="profile-img-container" id="profile-3d">
-          <div class="profile-img-inner">
-            <img src="profile.jpeg" alt="Krishna Patel" onerror="this.parentElement.style.background='linear-gradient(135deg,#ff416c,#8e2de2)'">
-          </div>
-        </div>
-        <div class="hero-badge badge-1">📊 Data Science & Analyst</div>
-        <div class="hero-badge badge-2">📈 Power BI</div>
-        <div class="hero-badge badge-3">🐍 Python · SQL</div>
-      </div>
-    </div>
-  </header>
-
-  <!-- ===== ABOUT ===== -->
-  <section id="about">
-    <div class="bg-blob blob-purple" style="width:350px;height:350px;top:-80px;right:-60px;"></div>
-    <div class="section-label">Introduction</div>
-    <h2 class="section-title">About Me</h2>
-    <div class="section-divider"></div>
-    <div class="about-grid reveal">
-      <div class="about-glass">
-        <p class="about-text">
-          I am a <strong>detail-oriented Data Science & Analyst</strong> with a strong background in data analysis, process optimization, and stakeholder management. I specialize in transforming business requirements into actionable insights, identifying opportunities for efficiency, and supporting decision-making through data-driven solutions.<br><br>
-          With proficiency in tools like <strong>Excel, Python, SQL, Power BI, and Tableau</strong>, I aim to bridge the gap between business needs and technical solutions to drive measurable results.
-        </p>
-      </div>
-      <div class="about-stats">
-        <div class="stat-card reveal"><div class="stat-number">3+</div><div class="stat-label">Internships</div></div>
-        <div class="stat-card reveal"><div class="stat-number">6+</div><div class="stat-label">Projects</div></div>
-        <div class="stat-card reveal"><div class="stat-number">5+</div><div class="stat-label">Core Skills</div></div>
-        <div class="stat-card reveal"><div class="stat-number">∞</div><div class="stat-label">Curiosity</div></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SKILLS ===== -->
-  <section id="skills">
-    <div class="bg-blob blob-pink" style="width:300px;height:300px;bottom:-60px;left:-60px;"></div>
-    <div class="section-label">Expertise</div>
-    <h2 class="section-title">Skills & Technologies</h2>
-    <div class="section-divider"></div>
-    <div class="skills-container">
-      <div class="skill-box reveal"><h3>Programming</h3><p>HTML, CSS, JS, Python</p></div>
-      <div class="skill-box reveal"><h3>Libraries & Frameworks</h3><p>NumPy, Pandas, Matplotlib, Seaborn, Scikit-Learn</p></div>
-      <div class="skill-box reveal"><h3>Tools & Platforms</h3><p>Power BI, Jupyter Notebook, Google Colab, VS Code, GitHub</p></div>
-      <div class="skill-box reveal"><h3>Machine Learning & AI</h3><p>Supervised & Unsupervised Algorithms, Regression, Classification, Model Evaluation</p></div>
-      <div class="skill-box reveal"><h3>Technical</h3><p>MS-Excel, MS-Word, MS-PowerPoint, Google Sheets, Internet Research, Computer Knowledge</p></div>
-      <div class="skill-box reveal"><h3>Digital & Modern</h3><p>AI Tools (ChatGPT, Gemini, Claude AI, Perplexity) Canva Designing</p></div>
-    </div>
-  </section>
-
-  <!-- ===== PROJECTS ===== -->
-  <section id="projects">
-    <div class="section-label">Work</div>
-    <h2 class="section-title">Projects</h2>
-    <div class="section-divider"></div>
-    <div class="projects-grid">
-
-      <!-- 1 — Tourism -->
-      <div class="project-card reveal">
-        <div class="project-img-wrap">
-          <img src="tourism.webp" alt="Tourism" class="project-img">
-          <div class="project-img-overlay"></div>
-        </div>
-        <div class="project-body">
-          <span class="project-tag">Tableau · Data Viz</span>
-          <h3 class="project-title">Tourism 2023–2024</h3>
-          <p class="project-desc">A data visualization project using Tableau to explore tourism trends across India, uncover regional insights, and support data-driven planning.</p>
-          <div class="project-actions">
-            <a href="https://public.tableau.com/app/profile/krishna.patel" target="_blank" class="btn-live">
-              Live Demo
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-            <button class="btn-read-more" onclick="openModal('project',0)">Read More <span class="btn-arrow">→</span></button>
-            <a href="https://github.com/patelkrishna2025/Tourism-2023-2024.git" target="_blank" class="btn-github">
-              GitHub
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2 — Data Science Salaries -->
-      <div class="project-card reveal">
-        <div class="project-img-wrap">
-          <img src="dsj.jpg" alt="Data Science Salaries" class="project-img">
-          <div class="project-img-overlay"></div>
-        </div>
-        <div class="project-body">
-          <span class="project-tag">EDA · Salary Analysis</span>
-          <h3 class="project-title">Data Science Salaries</h3>
-          <p class="project-desc">Explored global Data Science salary trends using real-world data to understand the impact of roles, experience levels, and company size.</p>
-          <div class="project-actions">
-            <a href="https://github.com/patelkrishna2025/Data-Science-Salaries.git" target="_blank" class="btn-live">
-              Live Demo
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-            <button class="btn-read-more" onclick="openModal('project',1)">Read More <span class="btn-arrow">→</span></button>
-            <a href="https://github.com/patelkrishna2025/Data-Science-Salaries.git" target="_blank" class="btn-github">
-              GitHub
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3 — Economic Data Analysis -->
-      <div class="project-card reveal">
-        <div class="project-img-wrap">
-          <img src="eda.jpg" alt="Economic Data Analysis" class="project-img">
-          <div class="project-img-overlay"></div>
-        </div>
-        <div class="project-body">
-          <span class="project-tag">Python · Economic Data</span>
-          <h3 class="project-title">Economic Data Analysis</h3>
-          <p class="project-desc">Helps businesses identify market trends, understand customer behavior, and evaluate profitability using sales, cost, and revenue data.</p>
-          <div class="project-actions">
-            <a href="https://github.com/patelkrishna2025/Economic-Data-Analysis.git" target="_blank" class="btn-live">
-              Live Demo
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-            <button class="btn-read-more" onclick="openModal('project',2)">Read More <span class="btn-arrow">→</span></button>
-            <a href="https://github.com/patelkrishna2025/Economic-Data-Analysis.git" target="_blank" class="btn-github">
-              GitHub
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4 — Netflix -->
-      <div class="project-card reveal">
-        <div class="project-img-wrap">
-          <img src="nda.webp" alt="Netflix" class="project-img">
-          <div class="project-img-overlay"></div>
-        </div>
-        <div class="project-body">
-          <span class="project-tag">Python · ML · Viz</span>
-          <h3 class="project-title">Netflix Data Analysis</h3>
-          <p class="project-desc">Analyzed Netflix's global catalog to uncover trends in genres, countries, and release years using data cleaning, visualization, and a predictive model.</p>
-          <div class="project-actions">
-            <a href="https://github.com/patelkrishna2025/Netflix-Data.git" target="_blank" class="btn-live">
-              Live Demo
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-            <button class="btn-read-more" onclick="openModal('project',3)">Read More <span class="btn-arrow">→</span></button>
-            <a href="https://github.com/patelkrishna2025/Netflix-Data.git" target="_blank" class="btn-github">
-              GitHub
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5 — Olympics -->
-      <div class="project-card reveal">
-        <div class="project-img-wrap">
-          <img src="oda.png" alt="Olympics" class="project-img">
-          <div class="project-img-overlay"></div>
-        </div>
-        <div class="project-body">
-          <span class="project-tag">SQL · Power BI</span>
-          <h3 class="project-title">Olympics Data Analysis</h3>
-          <p class="project-desc">Reveals trends, top-performing countries, and athlete achievements over time using the Olympic Games global dataset.</p>
-          <div class="project-actions">
-            <a href="https://github.com/patelkrishna2025/Olympics-Data-Analysis.git" target="_blank" class="btn-live">
-              Live Demo
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-            <button class="btn-read-more" onclick="openModal('project',4)">Read More <span class="btn-arrow">→</span></button>
-            <a href="https://github.com/patelkrishna2025/Olympics-Data-Analysis.git" target="_blank" class="btn-github">
-              GitHub
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6 — Iris -->
-      <div class="project-card reveal">
-        <div class="project-img-wrap">
-          <img src="ifa.webp" alt="Iris" class="project-img">
-          <div class="project-img-overlay"></div>
-        </div>
-        <div class="project-body">
-          <span class="project-tag">ML · Scikit-learn</span>
-          <h3 class="project-title">Iris Flower Classification</h3>
-          <p class="project-desc">Predicts species (Setosa, Versicolor, Virginica) using sepal & petal measurements — includes visualization, model training, and evaluation.</p>
-          <div class="project-actions">
-            <a href="https://github.com/patelkrishna2025/Iris-Flower-Classification.git" target="_blank" class="btn-live">
-              Live Demo
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            </a>
-            <button class="btn-read-more" onclick="openModal('project',5)">Read More <span class="btn-arrow">→</span></button>
-            <a href="https://github.com/patelkrishna2025/Iris-Flower-Classification.git" target="_blank" class="btn-github">
-              GitHub
-              <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- /projects-grid -->
-
-    <div class="projects-btn-wrap">
-      <a href="https://github.com/patelkrishna2025" target="_blank" class="view-projects-btn">All Projects on GitHub →</a>
-    </div>
-  </section>
-
-  <!-- ===== BLOGS ===== -->
-  <section id="blogs">
-    <div class="bg-blob blob-pink" style="width:400px;height:400px;top:-80px;right:-120px;"></div>
-    <div class="section-label">Insights</div>
-    <h2 class="section-title">Latest Blogs</h2>
-    <div class="section-divider"></div>
-    <div class="blogs-grid">
-      <div class="blog-card reveal">
-        <div class="blog-img-wrap"><div class="blog-img blog-img-1"></div><div class="blog-img-overlay"></div><div class="blog-read-time">⏱ 5 min read</div></div>
-        <div class="blog-body">
-          <span class="blog-tag">Data Analytics</span>
-          <h3 class="blog-title">From Raw Data to Real Insights: A Practical Guide</h3>
-          <p class="blog-desc">Discover how to transform messy datasets into clear, compelling stories that help business leaders make smarter, faster decisions.</p>
-          <button class="btn-read-more blog-read-btn" onclick="openModal('blog',0)">Read More <span class="btn-arrow">→</span></button>
-        </div>
-      </div>
-      <div class="blog-card blog-hidden reveal">
-        <div class="blog-img-wrap"><div class="blog-img blog-img-2"></div><div class="blog-img-overlay"></div><div class="blog-read-time">⏱ 7 min read</div></div>
-        <div class="blog-body">
-          <span class="blog-tag">Machine Learning</span>
-          <h3 class="blog-title">Demystifying Machine Learning: Concepts Every Analyst Should Know</h3>
-          <p class="blog-desc">Break down supervised vs. unsupervised learning, model evaluation metrics, and why understanding ML is now a must-have skill.</p>
-          <button class="btn-read-more blog-read-btn" onclick="openModal('blog',1)">Read More <span class="btn-arrow">→</span></button>
-        </div>
-      </div>
-      <div class="blog-card blog-hidden reveal">
-        <div class="blog-img-wrap"><div class="blog-img blog-img-3"></div><div class="blog-img-overlay"></div><div class="blog-read-time">⏱ 6 min read</div></div>
-        <div class="blog-body">
-          <span class="blog-tag">Power BI Tips</span>
-          <h3 class="blog-title">10 Power BI Dashboard Tips That Will Impress Any Stakeholder</h3>
-          <p class="blog-desc">Elevate your Power BI dashboards from plain to professional with these design, performance, and storytelling techniques.</p>
-          <button class="btn-read-more blog-read-btn" onclick="openModal('blog',2)">Read More <span class="btn-arrow">→</span></button>
-        </div>
-      </div>
-    </div>
-    <div class="blogs-btn-wrap">
-      <button class="view-blogs-btn" id="blog-toggle-btn" onclick="toggleBlogs()">View All Blogs</button>
-    </div>
-  </section>
-
-  <!-- ===== CERTIFICATES ===== -->
-  <section id="certificates">
-    <div class="bg-blob blob-purple" style="width:380px;height:380px;bottom:-100px;left:-100px;"></div>
-    <div class="section-label">Credentials</div>
-    <h2 class="section-title">Certificates</h2>
-    <div class="section-divider"></div>
-    <div class="certs-grid">
-      <div class="cert-card reveal">
-        <div class="cert-icon-wrap"><div class="cert-icon">🏅</div><div class="cert-glow"></div></div>
-        <div class="cert-body">
-          <div class="cert-issuer">IBM SKILLSBUILD</div>
-          <h3 class="cert-title">Data Analysis Course</h3>
-          <p class="cert-desc">Completed 8-course series covering data cleaning, analysis, visualization, SQL, R, and Tableau.</p>
-          <div class="cert-footer"><span class="cert-year">2025</span><button class="btn-read-more cert-read-btn" onclick="openModal('cert',0)">Read More <span class="btn-arrow">→</span></button></div>
-        </div>
-      </div>
-      <div class="cert-card reveal">
-        <div class="cert-icon-wrap"><div class="cert-icon">🎓</div><div class="cert-glow"></div></div>
-        <div class="cert-body">
-          <div class="cert-issuer">CSRBOX</div>
-          <h3 class="cert-title">Data Analysis Intern</h3>
-          <p class="cert-desc">Learned Python, Tableau, Libraries, data modelling, data processing.</p>
-          <div class="cert-footer"><span class="cert-year">2025</span><button class="btn-read-more cert-read-btn" onclick="openModal('cert',2)">Read More <span class="btn-arrow">→</span></button></div>
-        </div>
-      </div>
-      <div class="cert-card reveal">
-        <div class="cert-icon-wrap"><div class="cert-icon">📊</div><div class="cert-glow"></div></div>
-        <div class="cert-body">
-          <div class="cert-issuer">UNIFIED MENTOR PVT. LTD</div>
-          <h3 class="cert-title">Data Analysis Intern</h3>
-          <p class="cert-desc">Certified in creating insightful visualizations, data blending, calculated fields, and publishing dashboards on Tableau Server.</p>
-          <div class="cert-footer"><span class="cert-year">2024</span><button class="btn-read-more cert-read-btn" onclick="openModal('cert',4)">Read More <span class="btn-arrow">→</span></button></div>
-        </div>
-      </div>
-      <div class="cert-card cert-hidden reveal">
-        <div class="cert-icon-wrap"><div class="cert-icon">🎓</div><div class="cert-glow cert-glow-purple"></div></div>
-        <div class="cert-body">
-          <div class="cert-issuer">Deloitte · Forage</div>
-          <h3 class="cert-title">Data Analytics Virtual Experience</h3>
-          <p class="cert-desc">Completed Deloitte's job simulation analyzing business datasets, building dashboards, and delivering data-driven recommendations.</p>
-          <div class="cert-footer"><span class="cert-year">2025</span><button class="btn-read-more cert-read-btn" onclick="openModal('cert',5)">Read More <span class="btn-arrow">→</span></button></div>
-        </div>
-      </div>
-      <div class="cert-card cert-hidden reveal">
-        <div class="cert-icon-wrap"><div class="cert-icon">🎓</div><div class="cert-glow cert-glow-purple"></div></div>
-        <div class="cert-body">
-          <div class="cert-issuer">MICROSOFT ELEVATE</div>
-          <h3 class="cert-title">Artificial Intelligence / Machine Learning Intern</h3>
-          <p class="cert-desc">Completed Artificial Intelligence and Machine Learning, Microsoft Copilot and other Emerging Technologies.</p>
-          <div class="cert-footer"><span class="cert-year">2026</span><button class="btn-read-more cert-read-btn" onclick="openModal('cert',5)">Read More <span class="btn-arrow">→</span></button></div>
-        </div>
-      </div>
-      <div class="cert-card cert-hidden reveal">
-        <div class="cert-icon-wrap"><div class="cert-icon">🎓</div><div class="cert-glow cert-glow-purple"></div></div>
-        <div class="cert-body">
-          <div class="cert-issuer">NULL CLASSES</div>
-          <h3 class="cert-title">Web Development</h3>
-          <p class="cert-desc">Completed HTML, CSS, JS, API.</p>
-          <div class="cert-footer"><span class="cert-year">2025</span><button class="btn-read-more cert-read-btn" onclick="openModal('cert',5)">Read More <span class="btn-arrow">→</span></button></div>
-        </div>
-      </div>
-    </div>
-    <div class="cert-btn-wrap">
-      <button class="view-cert-btn" id="cert-toggle-btn" onclick="toggleCerts()">View All Certificates</button>
-    </div>
-  </section>
-
-  <!-- ===== INTERNSHIPS ===== -->
-  <section id="internships">
-    <div class="bg-blob blob-purple" style="width:380px;height:380px;top:0;right:-150px;"></div>
-    <div class="section-label">Experience</div>
-    <h2 class="section-title">Internships</h2>
-    <div class="section-divider"></div>
-    <div class="timeline">
-      <div class="timeline-item reveal">
-        <div class="internship-company">CSRBOX</div>
-        <div class="internship-role">Data Analyst Intern</div>
-        <div class="internship-period">2 July 2025 — 19 July 2025</div>
-        <p class="internship-desc">Virtual Data Analysis internship gaining hands-on experience in data cleaning, analysis, and visualization using Excel, Tableau, and SQL. Built strong problem-solving, critical thinking, and industry-ready data skills.</p>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="internship-company">Deloitte</div>
-        <div class="internship-role">Data Analyst Job Simulation</div>
-        <div class="internship-period">12 July 2025 — 15 July 2025</div>
-        <p class="internship-desc">Participated in Deloitte's Data Analyst Job Simulation, gaining hands-on experience in data collection, cleaning, analysis, and visualization to solve real-world business problems and support data-driven decision-making.</p>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="internship-company">Unified Mentor Pvt. Ltd</div>
-        <div class="internship-role">Data Analyst</div>
-        <div class="internship-period">10 September 2025 — 10 December 2025</div>
-        <p class="internship-desc">Virtual Data Analysis internship developing skills in data cleaning, statistical analysis, and visualization using Excel and SQL. Strengthened problem-solving abilities and built industry-ready, data-driven decision-making skills.</p>
-      </div>
-      <div class="timeline-item reveal">
-        <div class="internship-company">Microsoft Elevate</div>
-        <div class="internship-role">AI/ML</div>
-        <div class="internship-period">21 January 2026 — 10 April 2026</div>
-        <p class="internship-desc">Artificial Intelligence and Machine Learning, Microsoft Copilot and other Emerging Technologies.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== CONTACT ===== -->
-  <section id="contact">
-    <div class="section-label">Get in touch</div>
-    <h2 class="section-title">Contact</h2>
-    <div class="section-divider"></div>
-    <div class="contact-grid reveal">
-      <div class="contact-info">
-        <h3 class="contact-info-title">Let's work together</h3>
-        <p class="contact-info-text">I'm currently open to new opportunities. Whether you have a project in mind, a question, or just want to say hello — my inbox is always open.</p>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">📧</div>
-          <div class="contact-detail-text">Email<br><a href="mailto:krishnpatel6824@gmail.com">krishnpatel6824@gmail.com</a></div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">🔗</div>
-          <div class="contact-detail-text">LinkedIn<br><a href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank">patel-krishna-u1111</a></div>
-        </div>
-        <div class="contact-detail">
-          <div class="contact-detail-icon">🐙</div>
-          <div class="contact-detail-text">GitHub<br><a href="https://github.com/patelkrishna2025" target="_blank">patelkrishna2025</a></div>
-        </div>
-      </div>
-      <div class="contact-form-wrap">
-        <form id="contact-form" action="https://formsubmit.co/krishnpatel6824@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="New Portfolio Contact Message">
-          <input type="hidden" name="_captcha" value="false">
-          <div class="form-group"><label class="form-label">Name</label><input type="text" name="name" class="form-input" placeholder="Your full name" required></div>
-          <div class="form-group"><label class="form-label">Email</label><input type="email" name="email" class="form-input" placeholder="your@email.com" required></div>
-          <div class="form-group"><label class="form-label">Message</label><textarea name="message" class="form-textarea" placeholder="Tell me about your project or just say hello..." required></textarea></div>
-          <button type="submit" class="form-submit" id="submit-btn">Send Message ✦</button>
-          <div class="form-success" id="form-success">✓ Message sent! I'll get back to you soon.</div>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== FOOTER ===== -->
-  <footer>
-    <div class="footer-copy">© <span id="year"></span> <span>Krishna Patel</span>. All rights reserved.</div>
-    <div class="footer-links">
-      <a href="https://github.com/patelkrishna2025" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank">LinkedIn</a>
-      <a href="CV.pdf" download>Resume</a>
-    </div>
-  </footer>
-
-  <!-- ===== MODAL ===== -->
-  <div id="universal-modal-overlay" class="modal-overlay" onclick="closeModal()">
-    <div class="modal-box" id="universal-modal-box" onclick="event.stopPropagation()">
-      <button class="modal-close-btn" onclick="closeModal()">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
+    <!-- ===== NAVBAR ===== -->
+    <nav id="navbar">
+      <a href="#" class="nav-logo">KP.</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#blogs">Blog</a></li>
+        <li><a href="#certificates">Certs</a></li>
+        <li><a href="#internships">Experience</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
       </button>
-      <div class="modal-header" id="universal-modal-header"></div>
-      <div class="modal-body" id="universal-modal-body"></div>
-    </div>
-  </div>
+    </nav>
 
-  <!-- ===== SCRIPTS ===== -->
-  <script>
+    <!-- ===== HERO ===== -->
+    <header id="hero">
+      <div class="hero-left">
+        <div class="hero-tag"><span class="dot"></span> Available for
+          opportunities</div>
+        <h1 class="hero-name">Hi, I'm<br><span>Krishna Patel!</span></h1>
+        <div class="hero-typing-wrap">Passionate <span
+            id="typing-text"></span><span class="cursor-blink"></span></div>
+        <p class="hero-desc">A detail-oriented <strong
+            style="color:var(--pink-soft)">Data Science & Analyst</strong>
+          passionate about transforming raw data into compelling stories that
+          drive real business decisions.</p>
+        <div class="hero-buttons">
+          <a href="CV.pdf" download class="btn-primary"><span>&#8681; Download
+              CV</span></a>
+          <a href="#contact" class="btn-outline">Let's Talk &rarr;</a>
+        </div>
+        <div class="hero-socials">
+          <a href="https://www.linkedin.com/in/patel-krishna-u1111"
+            target="_blank" class="social-icon" title="LinkedIn">
+            <svg width="17" height="17" fill="currentColor"
+              viewBox="0 0 24 24"><path
+                d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" /><circle
+                cx="4" cy="4" r="2" /></svg>
+          </a>
+          <a href="https://github.com/patelkrishna2025" target="_blank"
+            class="social-icon" title="GitHub">
+            <svg width="17" height="17" fill="currentColor"
+              viewBox="0 0 24 24"><path
+                d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" /></svg>
+          </a>
+          <a href="mailto:krishnpatel6824@gmail.com" class="social-icon"
+            title="Email">
+            <svg width="17" height="17" fill="none" stroke="currentColor"
+              stroke-width="2" viewBox="0 0 24 24"><path
+                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline
+                points="22,6 12,13 2,6" /></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="profile-orbit">
+          <div class="orbit-ring orbit-ring-1"><div
+              class="orbit-dot"></div></div>
+          <div class="orbit-ring orbit-ring-2"><div
+              class="orbit-dot orbit-dot-2"></div></div>
+          <div class="orbit-ring orbit-ring-3"><div
+              class="orbit-dot orbit-dot-3"></div></div>
+          <div class="profile-glow"></div>
+          <div class="profile-img-container" id="profile-3d">
+            <div class="profile-img-inner">
+              <img src="profile.jpeg" alt="Krishna Patel"
+                onerror="this.parentElement.style.background='linear-gradient(135deg,#ff416c,#8e2de2)'">
+            </div>
+          </div>
+          <div class="hero-badge badge-1">📊 Data Science & Analyst</div>
+          <div class="hero-badge badge-2">📈 Power BI</div>
+          <div class="hero-badge badge-3">🐍 Python · SQL</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+      <div class="bg-blob blob-purple"
+        style="width:350px;height:350px;top:-80px;right:-60px;"></div>
+      <div class="section-label">Introduction</div>
+      <h2 class="section-title">About Me</h2>
+      <div class="section-divider"></div>
+      <div class="about-grid reveal">
+        <div class="about-glass">
+          <p class="about-text">
+            I am a <strong>detail-oriented Data Science & Analyst</strong> with
+            a strong background in data analysis, process optimization, and
+            stakeholder management. I specialize in transforming business
+            requirements into actionable insights, identifying opportunities for
+            efficiency, and supporting decision-making through data-driven
+            solutions.<br><br>
+            With proficiency in tools like <strong>Excel, Python, SQL, Power BI,
+              and Tableau</strong>, I aim to bridge the gap between business
+            needs and technical solutions to drive measurable results.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card reveal"><div class="stat-number">3+</div><div
+              class="stat-label">Internships</div></div>
+          <div class="stat-card reveal"><div class="stat-number">6+</div><div
+              class="stat-label">Projects</div></div>
+          <div class="stat-card reveal"><div class="stat-number">5+</div><div
+              class="stat-label">Core Skills</div></div>
+          <div class="stat-card reveal"><div class="stat-number">∞</div><div
+              class="stat-label">Curiosity</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills">
+      <div class="bg-blob blob-pink"
+        style="width:300px;height:300px;bottom:-60px;left:-60px;"></div>
+      <div class="section-label">Expertise</div>
+      <h2 class="section-title">Skills & Technologies</h2>
+      <div class="section-divider"></div>
+      <div class="skills-container">
+        <div class="skill-box reveal"><h3>Programming</h3><p>HTML, CSS, JS,
+            Python</p></div>
+        <div class="skill-box reveal"><h3>Libraries & Frameworks</h3><p>NumPy,
+            Pandas, Matplotlib, Seaborn, Scikit-Learn</p></div>
+        <div class="skill-box reveal"><h3>Tools & Platforms</h3><p>Power BI,
+            Jupyter Notebook, Google Colab, VS Code, GitHub</p></div>
+        <div class="skill-box reveal"><h3>Machine Learning &
+            AI</h3><p>Supervised & Unsupervised Algorithms, Regression,
+            Classification, Model Evaluation</p></div>
+        <div class="skill-box reveal"><h3>Technical</h3><p>MS-Excel, MS-Word,
+            MS-PowerPoint, Google Sheets, Internet Research, Computer
+            Knowledge</p></div>
+        <div class="skill-box reveal"><h3>Digital & Modern</h3><p>AI Tools
+            (ChatGPT, Gemini, Claude AI, Perplexity) Canva Designing</p></div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+      <div class="section-label">Work</div>
+      <h2 class="section-title">Projects</h2>
+      <div class="section-divider"></div>
+      <div class="projects-grid">
+
+        <!-- 1 — Tourism -->
+        <div class="project-card reveal">
+          <div class="project-img-wrap">
+            <img src="tourism.webp" alt="Tourism" class="project-img">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Tableau · Data Viz</span>
+            <h3 class="project-title">Tourism 2023–2024</h3>
+            <p class="project-desc">A data visualization project using Tableau
+              to explore tourism trends across India, uncover regional insights,
+              and support data-driven planning.</p>
+            <div class="project-actions">
+              <a href="https://public.tableau.com/app/profile/krishna.patel"
+                target="_blank" class="btn-live">
+                Live Demo
+                <svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24"><path
+                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline
+                    points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21"
+                    y2="3" /></svg>
+              </a>
+              <button class="btn-read-more"
+                onclick="openModal('project',0)">Read More <span
+                  class="btn-arrow">→</span></button>
+              <a
+                href="https://github.com/patelkrishna2025/Tourism-2023-2024.git"
+                target="_blank" class="btn-github">
+                GitHub
+                <svg fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 — Data Science Salaries -->
+        <div class="project-card reveal">
+          <div class="project-img-wrap">
+            <img src="dsj.jpg" alt="Data Science Salaries" class="project-img">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">EDA · Salary Analysis</span>
+            <h3 class="project-title">Data Science Salaries</h3>
+            <p class="project-desc">Explored global Data Science salary trends
+              using real-world data to understand the impact of roles,
+              experience levels, and company size.</p>
+            <div class="project-actions">
+              <a
+                href="https://github.com/patelkrishna2025/Data-Science-Salaries.git"
+                target="_blank" class="btn-live">
+                Live Demo
+                <svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24"><path
+                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline
+                    points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21"
+                    y2="3" /></svg>
+              </a>
+              <button class="btn-read-more"
+                onclick="openModal('project',1)">Read More <span
+                  class="btn-arrow">→</span></button>
+              <a
+                href="https://github.com/patelkrishna2025/Data-Science-Salaries.git"
+                target="_blank" class="btn-github">
+                GitHub
+                <svg fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 — Economic Data Analysis -->
+        <div class="project-card reveal">
+          <div class="project-img-wrap">
+            <img src="eda.jpg" alt="Economic Data Analysis" class="project-img">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Python · Economic Data</span>
+            <h3 class="project-title">Economic Data Analysis</h3>
+            <p class="project-desc">Helps businesses identify market trends,
+              understand customer behavior, and evaluate profitability using
+              sales, cost, and revenue data.</p>
+            <div class="project-actions">
+              <a
+                href="https://github.com/patelkrishna2025/Economic-Data-Analysis.git"
+                target="_blank" class="btn-live">
+                Live Demo
+                <svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24"><path
+                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline
+                    points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21"
+                    y2="3" /></svg>
+              </a>
+              <button class="btn-read-more"
+                onclick="openModal('project',2)">Read More <span
+                  class="btn-arrow">→</span></button>
+              <a
+                href="https://github.com/patelkrishna2025/Economic-Data-Analysis.git"
+                target="_blank" class="btn-github">
+                GitHub
+                <svg fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 — Netflix -->
+        <div class="project-card reveal">
+          <div class="project-img-wrap">
+            <img src="nda.webp" alt="Netflix" class="project-img">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">Python · ML · Viz</span>
+            <h3 class="project-title">Netflix Data Analysis</h3>
+            <p class="project-desc">Analyzed Netflix's global catalog to uncover
+              trends in genres, countries, and release years using data
+              cleaning, visualization, and a predictive model.</p>
+            <div class="project-actions">
+              <a href="https://github.com/patelkrishna2025/Netflix-Data.git"
+                target="_blank" class="btn-live">
+                Live Demo
+                <svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24"><path
+                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline
+                    points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21"
+                    y2="3" /></svg>
+              </a>
+              <button class="btn-read-more"
+                onclick="openModal('project',3)">Read More <span
+                  class="btn-arrow">→</span></button>
+              <a href="https://github.com/patelkrishna2025/Netflix-Data.git"
+                target="_blank" class="btn-github">
+                GitHub
+                <svg fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 — Olympics -->
+        <div class="project-card reveal">
+          <div class="project-img-wrap">
+            <img src="oda.png" alt="Olympics" class="project-img">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">SQL · Power BI</span>
+            <h3 class="project-title">Olympics Data Analysis</h3>
+            <p class="project-desc">Reveals trends, top-performing countries,
+              and athlete achievements over time using the Olympic Games global
+              dataset.</p>
+            <div class="project-actions">
+              <a
+                href="https://github.com/patelkrishna2025/Olympics-Data-Analysis.git"
+                target="_blank" class="btn-live">
+                Live Demo
+                <svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24"><path
+                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline
+                    points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21"
+                    y2="3" /></svg>
+              </a>
+              <button class="btn-read-more"
+                onclick="openModal('project',4)">Read More <span
+                  class="btn-arrow">→</span></button>
+              <a
+                href="https://github.com/patelkrishna2025/Olympics-Data-Analysis.git"
+                target="_blank" class="btn-github">
+                GitHub
+                <svg fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 — Iris -->
+        <div class="project-card reveal">
+          <div class="project-img-wrap">
+            <img src="ifa.webp" alt="Iris" class="project-img">
+            <div class="project-img-overlay"></div>
+          </div>
+          <div class="project-body">
+            <span class="project-tag">ML · Scikit-learn</span>
+            <h3 class="project-title">Iris Flower Classification</h3>
+            <p class="project-desc">Predicts species (Setosa, Versicolor,
+              Virginica) using sepal & petal measurements — includes
+              visualization, model training, and evaluation.</p>
+            <div class="project-actions">
+              <a
+                href="https://github.com/patelkrishna2025/Iris-Flower-Classification.git"
+                target="_blank" class="btn-live">
+                Live Demo
+                <svg fill="none" stroke="currentColor" stroke-width="2"
+                  viewBox="0 0 24 24"><path
+                    d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6" /><polyline
+                    points="15 3 21 3 21 9" /><line x1="10" y1="14" x2="21"
+                    y2="3" /></svg>
+              </a>
+              <button class="btn-read-more"
+                onclick="openModal('project',5)">Read More <span
+                  class="btn-arrow">→</span></button>
+              <a
+                href="https://github.com/patelkrishna2025/Iris-Flower-Classification.git"
+                target="_blank" class="btn-github">
+                GitHub
+                <svg fill="currentColor" viewBox="0 0 24 24"><path
+                    d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /projects-grid -->
+
+      <div class="projects-btn-wrap">
+        <a href="https://github.com/patelkrishna2025" target="_blank"
+          class="view-projects-btn">All Projects on GitHub →</a>
+      </div>
+    </section>
+
+    <!-- ===== BLOGS ===== -->
+    <section id="blogs">
+      <div class="bg-blob blob-pink"
+        style="width:400px;height:400px;top:-80px;right:-120px;"></div>
+      <div class="section-label">Insights</div>
+      <h2 class="section-title">Latest Blogs</h2>
+      <div class="section-divider"></div>
+      <div class="blogs-grid">
+        <div class="blog-card reveal">
+          <div class="blog-img-wrap"><div class="blog-img blog-img-1"></div><div
+              class="blog-img-overlay"></div><div class="blog-read-time">⏱ 5 min
+              read</div></div>
+          <div class="blog-body">
+            <span class="blog-tag">Data Analytics</span>
+            <h3 class="blog-title">From Raw Data to Real Insights: A Practical
+              Guide</h3>
+            <p class="blog-desc">Discover how to transform messy datasets into
+              clear, compelling stories that help business leaders make smarter,
+              faster decisions.</p>
+            <button class="btn-read-more blog-read-btn"
+              onclick="openModal('blog',0)">Read More <span
+                class="btn-arrow">→</span></button>
+          </div>
+        </div>
+        <div class="blog-card blog-hidden reveal">
+          <div class="blog-img-wrap"><div class="blog-img blog-img-2"></div><div
+              class="blog-img-overlay"></div><div class="blog-read-time">⏱ 7 min
+              read</div></div>
+          <div class="blog-body">
+            <span class="blog-tag">Machine Learning</span>
+            <h3 class="blog-title">Demystifying Machine Learning: Concepts Every
+              Analyst Should Know</h3>
+            <p class="blog-desc">Break down supervised vs. unsupervised
+              learning, model evaluation metrics, and why understanding ML is
+              now a must-have skill.</p>
+            <button class="btn-read-more blog-read-btn"
+              onclick="openModal('blog',1)">Read More <span
+                class="btn-arrow">→</span></button>
+          </div>
+        </div>
+        <div class="blog-card blog-hidden reveal">
+          <div class="blog-img-wrap"><div class="blog-img blog-img-3"></div><div
+              class="blog-img-overlay"></div><div class="blog-read-time">⏱ 6 min
+              read</div></div>
+          <div class="blog-body">
+            <span class="blog-tag">Power BI Tips</span>
+            <h3 class="blog-title">10 Power BI Dashboard Tips That Will Impress
+              Any Stakeholder</h3>
+            <p class="blog-desc">Elevate your Power BI dashboards from plain to
+              professional with these design, performance, and storytelling
+              techniques.</p>
+            <button class="btn-read-more blog-read-btn"
+              onclick="openModal('blog',2)">Read More <span
+                class="btn-arrow">→</span></button>
+          </div>
+        </div>
+      </div>
+      <div class="blogs-btn-wrap">
+        <button class="view-blogs-btn" id="blog-toggle-btn"
+          onclick="toggleBlogs()">View All Blogs</button>
+      </div>
+    </section>
+
+    <!-- ===== CERTIFICATES ===== -->
+    <section id="certificates">
+      <div class="bg-blob blob-purple"
+        style="width:380px;height:380px;bottom:-100px;left:-100px;"></div>
+      <div class="section-label">Credentials</div>
+      <h2 class="section-title">Certificates</h2>
+      <div class="section-divider"></div>
+      <div class="certs-grid">
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><div class="cert-icon">🏅</div><div
+              class="cert-glow"></div></div>
+          <div class="cert-body">
+            <div class="cert-issuer">IBM SKILLSBUILD</div>
+            <h3 class="cert-title">Data Analysis Course</h3>
+            <p class="cert-desc">Completed 8-course series covering data
+              cleaning, analysis, visualization, SQL, R, and Tableau.</p>
+            <div class="cert-footer"><span class="cert-year">2025</span><button
+                class="btn-read-more cert-read-btn"
+                onclick="openModal('cert',0)">Read More <span
+                  class="btn-arrow">→</span></button></div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><div class="cert-icon">🎓</div><div
+              class="cert-glow"></div></div>
+          <div class="cert-body">
+            <div class="cert-issuer">CSRBOX</div>
+            <h3 class="cert-title">Data Analysis Intern</h3>
+            <p class="cert-desc">Learned Python, Tableau, Libraries, data
+              modelling, data processing.</p>
+            <div class="cert-footer"><span class="cert-year">2025</span><button
+                class="btn-read-more cert-read-btn"
+                onclick="openModal('cert',2)">Read More <span
+                  class="btn-arrow">→</span></button></div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-icon-wrap"><div class="cert-icon">📊</div><div
+              class="cert-glow"></div></div>
+          <div class="cert-body">
+            <div class="cert-issuer">UNIFIED MENTOR PVT. LTD</div>
+            <h3 class="cert-title">Data Analysis Intern</h3>
+            <p class="cert-desc">Certified in creating insightful
+              visualizations, data blending, calculated fields, and publishing
+              dashboards on Tableau Server.</p>
+            <div class="cert-footer"><span class="cert-year">2024</span><button
+                class="btn-read-more cert-read-btn"
+                onclick="openModal('cert',4)">Read More <span
+                  class="btn-arrow">→</span></button></div>
+          </div>
+        </div>
+        <div class="cert-card cert-hidden reveal">
+          <div class="cert-icon-wrap"><div class="cert-icon">🎓</div><div
+              class="cert-glow cert-glow-purple"></div></div>
+          <div class="cert-body">
+            <div class="cert-issuer">Deloitte · Forage</div>
+            <h3 class="cert-title">Data Analytics Virtual Experience</h3>
+            <p class="cert-desc">Completed Deloitte's job simulation analyzing
+              business datasets, building dashboards, and delivering data-driven
+              recommendations.</p>
+            <div class="cert-footer"><span class="cert-year">2025</span><button
+                class="btn-read-more cert-read-btn"
+                onclick="openModal('cert',5)">Read More <span
+                  class="btn-arrow">→</span></button></div>
+          </div>
+        </div>
+        <div class="cert-card cert-hidden reveal">
+          <div class="cert-icon-wrap"><div class="cert-icon">🎓</div><div
+              class="cert-glow cert-glow-purple"></div></div>
+          <div class="cert-body">
+            <div class="cert-issuer">MICROSOFT ELEVATE</div>
+            <h3 class="cert-title">Artificial Intelligence / Machine Learning
+              Intern</h3>
+            <p class="cert-desc">Completed Artificial Intelligence and Machine
+              Learning, Microsoft Copilot and other Emerging Technologies.</p>
+            <div class="cert-footer"><span class="cert-year">2026</span><button
+                class="btn-read-more cert-read-btn"
+                onclick="openModal('cert',5)">Read More <span
+                  class="btn-arrow">→</span></button></div>
+          </div>
+        </div>
+        <div class="cert-card cert-hidden reveal">
+          <div class="cert-icon-wrap"><div class="cert-icon">🎓</div><div
+              class="cert-glow cert-glow-purple"></div></div>
+          <div class="cert-body">
+            <div class="cert-issuer">NULL CLASSES</div>
+            <h3 class="cert-title">Web Development</h3>
+            <p class="cert-desc">Completed HTML, CSS, JS, API.</p>
+            <div class="cert-footer"><span class="cert-year">2025</span><button
+                class="btn-read-more cert-read-btn"
+                onclick="openModal('cert',5)">Read More <span
+                  class="btn-arrow">→</span></button></div>
+          </div>
+        </div>
+      </div>
+      <div class="cert-btn-wrap">
+        <button class="view-cert-btn" id="cert-toggle-btn"
+          onclick="toggleCerts()">View All Certificates</button>
+      </div>
+    </section>
+
+    <!-- ===== INTERNSHIPS ===== -->
+    <section id="internships">
+      <div class="bg-blob blob-purple"
+        style="width:380px;height:380px;top:0;right:-150px;"></div>
+      <div class="section-label">Experience</div>
+      <h2 class="section-title">Internships</h2>
+      <div class="section-divider"></div>
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="internship-company">CSRBOX</div>
+          <div class="internship-role">Data Analyst Intern</div>
+          <div class="internship-period">2 July 2025 — 19 July 2025</div>
+          <p class="internship-desc">Virtual Data Analysis internship gaining
+            hands-on experience in data cleaning, analysis, and visualization
+            using Excel, Tableau, and SQL. Built strong problem-solving,
+            critical thinking, and industry-ready data skills.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="internship-company">Deloitte</div>
+          <div class="internship-role">Data Analyst Job Simulation</div>
+          <div class="internship-period">12 July 2025 — 15 July 2025</div>
+          <p class="internship-desc">Participated in Deloitte's Data Analyst Job
+            Simulation, gaining hands-on experience in data collection,
+            cleaning, analysis, and visualization to solve real-world business
+            problems and support data-driven decision-making.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="internship-company">Unified Mentor Pvt. Ltd</div>
+          <div class="internship-role">Data Analyst</div>
+          <div class="internship-period">10 September 2025 — 10 December
+            2025</div>
+          <p class="internship-desc">Virtual Data Analysis internship developing
+            skills in data cleaning, statistical analysis, and visualization
+            using Excel and SQL. Strengthened problem-solving abilities and
+            built industry-ready, data-driven decision-making skills.</p>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="internship-company">Microsoft Elevate</div>
+          <div class="internship-role">AI/ML</div>
+          <div class="internship-period">21 January 2026 — 10 April 2026</div>
+          <p class="internship-desc">Artificial Intelligence and Machine
+            Learning, Microsoft Copilot and other Emerging Technologies.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+      <div class="section-label">Get in touch</div>
+      <h2 class="section-title">Contact</h2>
+      <div class="section-divider"></div>
+      <div class="contact-grid reveal">
+        <div class="contact-info">
+          <h3 class="contact-info-title">Let's work together</h3>
+          <p class="contact-info-text">I'm currently open to new opportunities.
+            Whether you have a project in mind, a question, or just want to say
+            hello — my inbox is always open.</p>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📧</div>
+            <div class="contact-detail-text">Email<br><a
+                href="mailto:krishnpatel6824@gmail.com">krishnpatel6824@gmail.com</a></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">🔗</div>
+            <div class="contact-detail-text">LinkedIn<br><a
+                href="https://www.linkedin.com/in/patel-krishna-u1111"
+                target="_blank">patel-krishna-u1111</a></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">🐙</div>
+            <div class="contact-detail-text">GitHub<br><a
+                href="https://github.com/patelkrishna2025"
+                target="_blank">patelkrishna2025</a></div>
+          </div>
+        </div>
+        <div class="contact-form-wrap">
+          <form id="contact-form"
+            action="https://formsubmit.co/krishnpatel6824@gmail.com"
+            method="POST">
+            <input type="hidden" name="_subject"
+              value="New Portfolio Contact Message">
+            <input type="hidden" name="_captcha" value="false">
+            <div class="form-group"><label class="form-label">Name</label><input
+                type="text" name="name" class="form-input"
+                placeholder="Your full name" required></div>
+            <div class="form-group"><label
+                class="form-label">Email</label><input type="email" name="email"
+                class="form-input" placeholder="your@email.com" required></div>
+            <div class="form-group"><label
+                class="form-label">Message</label><textarea name="message"
+                class="form-textarea"
+                placeholder="Tell me about your project or just say hello..."
+                required></textarea></div>
+            <button type="submit" class="form-submit" id="submit-btn">Send
+              Message ✦</button>
+            <div class="form-success" id="form-success">✓ Message sent! I'll get
+              back to you soon.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      <div class="footer-copy">© <span id="year"></span> <span>Krishna
+          Patel</span>. All rights reserved.</div>
+      <div class="footer-links">
+        <a href="https://github.com/patelkrishna2025" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/patel-krishna-u1111"
+          target="_blank">LinkedIn</a>
+        <a href="CV.pdf" download>Resume</a>
+      </div>
+    </footer>
+
+    <!-- ===== MODAL ===== -->
+    <div id="universal-modal-overlay" class="modal-overlay"
+      onclick="closeModal()">
+      <div class="modal-box" id="universal-modal-box"
+        onclick="event.stopPropagation()">
+        <button class="modal-close-btn" onclick="closeModal()">
+          <svg width="18" height="18" fill="none" stroke="currentColor"
+            stroke-width="2" viewBox="0 0 24 24">
+            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18"
+              y2="18" />
+          </svg>
+        </button>
+        <div class="modal-header" id="universal-modal-header"></div>
+        <div class="modal-body" id="universal-modal-body"></div>
+      </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
     /* --- GALAXY --- */
     (function(){
       const canvas=document.getElementById('galaxy'),ctx=canvas.getContext('2d');
@@ -1120,5 +1338,5 @@
     function closeModal(){document.getElementById('universal-modal-overlay').classList.remove('active');document.body.style.overflow='';}
     document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
   </script>
-</body>
+  </body>
 </html>
