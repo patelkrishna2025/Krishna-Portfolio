@@ -67,6 +67,9 @@
     }
 
     /* ============ SITE-WIDE SLOW ANIMATED BACKGROUND ============ */
+    /* FIX: heavy blurred layers were causing scroll/click lag & "ghost box" glitches on mobile.
+       They are now DISABLED by default on small/low-power screens (see media query below)
+       and use will-change + reduced blur to stay smooth on desktop. */
     body::before,
     body::after {
       content: "";
@@ -74,8 +77,10 @@
       inset: -20%;
       z-index: 0;
       pointer-events: none;
-      filter: blur(90px);
-      opacity: .55
+      filter: blur(60px);
+      opacity: .5;
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     body::before {
@@ -90,7 +95,7 @@
 
     [data-theme="dark"] body::before,
     [data-theme="dark"] body::after {
-      opacity: .4
+      opacity: .35
     }
 
     @keyframes bgDrift {
@@ -126,6 +131,16 @@
       body::before,
       body::after {
         animation: none
+      }
+    }
+
+    /* FIX: on phones/tablets, kill the blurred background layers entirely — 
+       this is the #1 cause of hang/jank on mobile Safari & Chrome */
+    @media (max-width: 860px) {
+
+      body::before,
+      body::after {
+        display: none;
       }
     }
 
@@ -180,7 +195,8 @@
 
     #loader.hide {
       opacity: 0;
-      visibility: hidden
+      visibility: hidden;
+      pointer-events: none;
     }
 
     .loader-logo {
@@ -238,10 +254,15 @@
       width: 0;
       background: var(--grad);
       z-index: 1000;
-      box-shadow: 0 0 12px rgba(96, 165, 250, .7)
+      box-shadow: 0 0 12px rgba(96, 165, 250, .7);
+      pointer-events: none;
     }
 
     /* ============ CURSOR GLOW ============ */
+    /* FIX: this floating div was the "transparent square box" appearing on tap —
+       on touch devices there is no real cursor, so leftover taps/clicks moved this
+       380px glow box to (0,0) or the last-tapped element and it looked like a stray
+       transparent square. It is now fully disabled on touch/mobile. */
     #cursor {
       position: fixed;
       width: 380px;
@@ -252,7 +273,14 @@
       background: radial-gradient(circle, rgba(96, 165, 250, .18), transparent 70%);
       transform: translate(-50%, -50%);
       transition: opacity .3s;
-      mix-blend-mode: screen
+      mix-blend-mode: screen;
+      opacity: 1;
+    }
+
+    @media (hover: none), (pointer: coarse), (max-width: 860px) {
+      #cursor {
+        display: none !important;
+      }
     }
 
     /* ============ NAV ============ */
@@ -376,7 +404,8 @@
 
     .icon-btn svg {
       width: 16px;
-      height: 16px
+      height: 16px;
+      pointer-events: none;
     }
 
     /* ============ MOBILE MENU ============ */
@@ -596,13 +625,6 @@
       align-items: center
     }
 
-    #hero-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      opacity: .9
-    }
-
     .hero-content {
       position: relative;
       z-index: 2
@@ -726,7 +748,8 @@
 
     .btn svg {
       width: 16px;
-      height: 16px
+      height: 16px;
+      pointer-events: none;
     }
 
     .btn.primary {
@@ -742,7 +765,8 @@
       inset: 0;
       background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, .35) 50%, transparent 70%);
       transform: translateX(-100%);
-      transition: transform .7s
+      transition: transform .7s;
+      pointer-events: none;
     }
 
     .btn.primary:hover::before {
@@ -758,6 +782,14 @@
       background: var(--grad);
       color: #fff;
       border-color: transparent
+    }
+
+    /* FIX: on touch devices, don't apply the JS "magnetic" transform / hover-lift —
+       this was causing buttons to visibly jump / leave a ghost outline right after tap */
+    @media (hover: none), (pointer: coarse) {
+      .btn:hover {
+        transform: none;
+      }
     }
 
     .hero-stats {
@@ -887,62 +919,6 @@
       letter-spacing: -2px
     }
 
-    .ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(96, 165, 250, .5);
-      inset: -14px;
-      animation: spin 8s linear infinite
-    }
-
-    .ring:nth-child(2) {
-      inset: -28px;
-      border-style: dashed;
-      animation-duration: 12s;
-      animation-direction: reverse;
-      opacity: .6
-    }
-
-    .ring:nth-child(3) {
-      inset: -42px;
-      border-color: rgba(147, 197, 253, .25);
-      animation-duration: 20s
-    }
-
-    .pcard-info {
-      text-align: center;
-      transform: translateZ(40px)
-    }
-
-    .pcard-info h3 {
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 4px
-    }
-
-    .pcard-info p {
-      font-size: 13px;
-      color: var(--fg-soft)
-    }
-
-    .pcard-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      justify-content: center;
-      transform: translateZ(30px)
-    }
-
-    .pcard-tags span {
-      padding: 5px 11px;
-      font-size: 11px;
-      font-weight: 500;
-      background: var(--grad-soft);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      color: var(--primary)
-    }
-
     .particles-float {
       position: absolute;
       inset: 0;
@@ -968,6 +944,23 @@
 
       .profile-wrap {
         order: -1
+      }
+    }
+
+    /* FIX: disable heavy 3D tilt + floating particles + spinning conic ring on touch
+       devices — these were prime suspects for the janky "hang" feeling on mobile */
+    @media (hover: none), (pointer: coarse) {
+      .profile-card {
+        animation: none;
+        transform: none !important;
+      }
+
+      .profile-card::before {
+        animation: none;
+      }
+
+      .particles-float {
+        display: none;
       }
     }
 
@@ -1173,6 +1166,12 @@
       border-color: rgba(96, 165, 250, .5)
     }
 
+    @media (hover: none), (pointer: coarse) {
+      .proj:hover {
+        transform: none;
+      }
+    }
+
     .proj-thumb {
       aspect-ratio: 16 / 10;
       overflow: hidden;
@@ -1197,7 +1196,8 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, .25), transparent 60%)
+      background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, .25), transparent 60%);
+      pointer-events: none;
     }
 
     .proj-body {
@@ -1286,7 +1286,8 @@
 
     .proj-links a svg {
       width: 14px;
-      height: 14px
+      height: 14px;
+      pointer-events: none;
     }
 
     .proj-links a:hover {
@@ -1323,6 +1324,12 @@
     .exp:hover {
       transform: translateX(8px);
       border-color: rgba(96, 165, 250, .5)
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .exp:hover {
+        transform: none;
+      }
     }
 
     .exp .yr {
@@ -1427,6 +1434,12 @@
       box-shadow: 0 25px 60px -20px rgba(37, 99, 235, .5)
     }
 
+    @media (hover: none), (pointer: coarse) {
+      .cert:hover {
+        transform: none;
+      }
+    }
+
     .cert:hover::before {
       opacity: 1
     }
@@ -1521,6 +1534,12 @@
     .blog-card:hover {
       transform: translateY(-6px);
       box-shadow: 0 30px 60px -20px rgba(37, 99, 235, .4)
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .blog-card:hover {
+        transform: none;
+      }
     }
 
     .btag {
@@ -1637,6 +1656,12 @@
       border-color: var(--accent)
     }
 
+    @media (hover: none), (pointer: coarse) {
+      .cl-item:hover {
+        transform: none;
+      }
+    }
+
     .cl-item .ic {
       width: 42px;
       height: 42px;
@@ -1650,7 +1675,8 @@
 
     .cl-item .ic svg {
       width: 18px;
-      height: 18px
+      height: 18px;
+      pointer-events: none;
     }
 
     .cl-item b {
@@ -1689,9 +1715,16 @@
       transform: translateY(-4px) rotate(-6deg)
     }
 
+    @media (hover: none), (pointer: coarse) {
+      .socials a:hover {
+        transform: none;
+      }
+    }
+
     .socials a svg {
       width: 18px;
-      height: 18px
+      height: 18px;
+      pointer-events: none;
     }
 
     form {
@@ -1987,7 +2020,7 @@
   <!-- SCROLL PROGRESS -->
   <div id="progress"></div>
 
-  <!-- CURSOR GLOW -->
+  <!-- CURSOR GLOW (desktop only, hidden on touch via CSS) -->
   <div id="cursor"></div>
 
   <!-- NAV -->
@@ -2183,7 +2216,7 @@
     <div class="proj-grid" id="projGrid">
       <div class="proj reveal">
         <div class="proj-thumb">
-          <img src="sustainability.webp" alt="AI Sustainability Project">
+          <img src="sustainability.webp" alt="AI Sustainability Project" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>Python</span><span>ML</span><span>AI</span></div>
@@ -2212,7 +2245,7 @@
       </div>
       <div class="proj reveal">
         <div class="proj-thumb">
-          <img src="dsj.jpg" alt="Data Science Salaries">
+          <img src="dsj.jpg" alt="Data Science Salaries" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>Python</span><span>Pandas</span><span>EDA</span></div>
@@ -2235,7 +2268,7 @@
       </div>
       <div class="proj reveal">
         <div class="proj-thumb">
-          <img src="nda.webp" alt="Netflix Data Analysis">
+          <img src="nda.webp" alt="Netflix Data Analysis" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>Python</span><span>ML</span><span>Viz</span></div>
@@ -2258,7 +2291,7 @@
       </div>
       <div class="proj reveal">
         <div class="proj-thumb">
-          <img src="oda.png" alt="Olympics Data Analysis">
+          <img src="oda.png" alt="Olympics Data Analysis" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>SQL</span><span>Power BI</span></div>
@@ -2281,7 +2314,7 @@
       </div>
       <div class="proj reveal">
         <div class="proj-thumb">
-          <img src="ifa.webp" alt="Iris Flower Classification">
+          <img src="ifa.webp" alt="Iris Flower Classification" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>ML</span><span>Scikit-learn</span></div>
@@ -2304,7 +2337,7 @@
       </div>
       <div class="proj reveal">
         <div class="proj-thumb">
-          <img src="sustainability.webp" alt="Tourism Data">
+          <img src="sustainability.webp" alt="Tourism Data" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>Tableau</span><span>Data Viz</span></div>
@@ -2598,24 +2631,35 @@
   </footer>
 
   <script>
+    /* Detect touch/coarse pointer once, reuse everywhere below */
+    const IS_TOUCH = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
     /* ============ LOADER ============ */
     window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hide'), 700) });
 
     /* ============ THEME ============ */
     const themeBtn = document.getElementById('themeBtn'), root = document.documentElement;
     const saved = localStorage.getItem('theme') || 'dark'; root.setAttribute('data-theme', saved);
-    themeBtn.onclick = () => { const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', cur); localStorage.setItem('theme', cur) };
+    themeBtn.addEventListener('click', () => { const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', cur); localStorage.setItem('theme', cur) });
 
-    /* ============ CURSOR GLOW ============ */
-    const cur = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px' });
+    /* ============ CURSOR GLOW (desktop only) ============ */
+    if (!IS_TOUCH) {
+      const cur = document.getElementById('cursor');
+      document.addEventListener('mousemove', e => { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px' });
+    }
 
     /* ============ SCROLL PROGRESS ============ */
     const prog = document.getElementById('progress');
+    let progTicking = false;
     document.addEventListener('scroll', () => {
-      const s = window.scrollY, h = document.documentElement.scrollHeight - innerHeight;
-      prog.style.width = (s / h * 100) + '%';
-    });
+      if (progTicking) return;
+      progTicking = true;
+      requestAnimationFrame(() => {
+        const s = window.scrollY, h = document.documentElement.scrollHeight - innerHeight;
+        prog.style.width = (h > 0 ? (s / h * 100) : 0) + '%';
+        progTicking = false;
+      });
+    }, { passive: true });
 
     /* ============ TYPEWRITER ============ */
     const roles = ['Data Analyst', 'Data Scientist', 'SQL Wizard', 'Insight Storyteller', 'Python Developer'];
@@ -2628,10 +2672,6 @@
     })();
 
     /* ============ PROFILE PHOTO LOADER ============ */
-    /* Put your photo file next to this HTML file and rename it "profile.jpg"
-       (or edit the filename below). If the image fails to load or doesn't
-       exist, the "KP" initials fallback (set above in HTML) stays visible
-       automatically — so the layout never breaks. */
     (function loadAvatar() {
       const box = document.getElementById('avatarBox');
       const img = new Image();
@@ -2644,14 +2684,16 @@
       img.src = 'profile.jpg'; // <-- change this filename/path if needed
     })();
 
-    /* ============ 3D PROFILE TILT ============ */
-    const pc = document.getElementById('pcard');
-    pc.addEventListener('mousemove', e => { const r = pc.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; pc.style.transform = `rotateY(${x * 18}deg) rotateX(${-y * 18}deg) translateZ(20px)` });
-    pc.addEventListener('mouseleave', () => pc.style.transform = '');
+    /* ============ 3D PROFILE TILT (desktop only) ============ */
+    if (!IS_TOUCH) {
+      const pc = document.getElementById('pcard');
+      pc.addEventListener('mousemove', e => { const r = pc.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; pc.style.transform = `rotateY(${x * 18}deg) rotateX(${-y * 18}deg) translateZ(20px)` });
+      pc.addEventListener('mouseleave', () => pc.style.transform = '');
 
-    /* Floating particles around profile */
-    const pf = document.getElementById('pfloat');
-    for (let i = 0; i < 12; i++) { const s = document.createElement('span'); s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%'; s.style.animationDelay = (Math.random() * 4) + 's'; s.style.animationDuration = (3 + Math.random() * 4) + 's'; pf.appendChild(s) }
+      /* Floating particles around profile — desktop only */
+      const pf = document.getElementById('pfloat');
+      for (let i = 0; i < 12; i++) { const s = document.createElement('span'); s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%'; s.style.animationDelay = (Math.random() * 4) + 's'; s.style.animationDuration = (3 + Math.random() * 4) + 's'; pf.appendChild(s) }
+    }
 
     /* ============ SKILLS DATA ============ */
     const skills = [
@@ -2672,11 +2714,13 @@
     <div class="lvl">${s.l}% proficiency</div>
   </div>`).join('');
 
-    /* 3D tilt for projects */
-    document.querySelectorAll('.proj').forEach(el => {
-      el.addEventListener('mousemove', e => { const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; el.style.transform = `translateY(-10px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)` });
-      el.addEventListener('mouseleave', () => el.style.transform = '');
-    });
+    /* 3D tilt for projects — desktop only */
+    if (!IS_TOUCH) {
+      document.querySelectorAll('.proj').forEach(el => {
+        el.addEventListener('mousemove', e => { const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; el.style.transform = `translateY(-10px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)` });
+        el.addEventListener('mouseleave', () => el.style.transform = '');
+      });
+    }
 
     /* ============ CERT FILTERS (static) ============ */
     (function () {
@@ -2712,7 +2756,15 @@
     /* ============ NAV ACTIVE ============ */
     const navL = document.querySelectorAll('.nav-link');
     const sects = [...navL].map(a => document.querySelector(a.getAttribute('href')));
-    document.addEventListener('scroll', () => { const y = scrollY + 120; let idx = 0; sects.forEach((s, i) => { if (s && s.offsetTop <= y) idx = i }); navL.forEach((a, i) => a.classList.toggle('active', i === idx)) });
+    let navTicking = false;
+    document.addEventListener('scroll', () => {
+      if (navTicking) return;
+      navTicking = true;
+      requestAnimationFrame(() => {
+        const y = scrollY + 120; let idx = 0; sects.forEach((s, i) => { if (s && s.offsetTop <= y) idx = i }); navL.forEach((a, i) => a.classList.toggle('active', i === idx));
+        navTicking = false;
+      });
+    }, { passive: true });
 
     /* ============ MOBILE MENU ============ */
     const mobileToggle = document.getElementById('mobileToggle');
@@ -2737,7 +2789,7 @@
     function renderCmd(q = '') { const list = cmdItems.filter(([n]) => n.toLowerCase().includes(q.toLowerCase())); cmdList.innerHTML = list.map(([n, h]) => `<div class="cmdk-item" data-h="${h}">${n}<kbd>↵</kbd></div>`).join('') }
     function openCmd() { cmd.classList.add('open'); cmdInput.value = ''; renderCmd(); setTimeout(() => cmdInput.focus(), 50) }
     function closeCmd() { cmd.classList.remove('open') }
-    document.getElementById('cmdBtn').onclick = openCmd;
+    document.getElementById('cmdBtn').addEventListener('click', openCmd);
     document.addEventListener('keydown', e => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); openCmd() } if (e.key === 'Escape') closeCmd() });
     cmd.addEventListener('click', e => { if (e.target === cmd) closeCmd() });
     cmdInput.addEventListener('input', e => renderCmd(e.target.value));
@@ -2747,11 +2799,16 @@
     const cf = document.getElementById('contact-form');
     if (cf) { cf.addEventListener('submit', async e => { e.preventDefault(); const btn = cf.querySelector('button[type=submit]'); const orig = btn.innerHTML; btn.textContent = 'Sending...'; try { const d = new FormData(cf); const r = await fetch(cf.action, { method: 'POST', body: d, headers: { 'Accept': 'application/json' } }); if (r.ok || r.redirected) { alert("Thanks — I'll be in touch!"); cf.reset(); } else throw 0; } catch { alert("Thanks — I'll be in touch!"); cf.reset(); } btn.innerHTML = orig; }) }
 
-    /* ============ MAGNETIC BUTTONS ============ */
-    document.querySelectorAll('.btn').forEach(b => {
-      b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .15}px,${(e.clientY - r.top - r.height / 2) * .15 - 3}px)` });
-      b.addEventListener('mouseleave', () => b.style.transform = '');
-    });
+    /* ============ MAGNETIC BUTTONS (desktop only) ============ */
+    /* FIX: this was the main cause of the "transparent square box" glitch on tap —
+       on mobile there's no mousemove before a click, so the button never resets its
+       transform and appears to jump/ghost. Now completely skipped on touch devices. */
+    if (!IS_TOUCH) {
+      document.querySelectorAll('.btn').forEach(b => {
+        b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .15}px,${(e.clientY - r.top - r.height / 2) * .15 - 3}px)` });
+        b.addEventListener('mouseleave', () => b.style.transform = '');
+      });
+    }
   </script>
 </body>
 
