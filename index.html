@@ -271,7 +271,9 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 10px 40px -10px rgba(15, 23, 42, .15)
+      box-shadow: 0 10px 40px -10px rgba(15, 23, 42, .15);
+      width: max-content;
+      max-width: 94vw
     }
 
     .brand {
@@ -287,7 +289,8 @@
       border-radius: 50%;
       overflow: hidden;
       box-shadow: 0 0 20px rgba(37, 99, 235, .6);
-      transition: transform .5s
+      transition: transform .5s;
+      flex-shrink: 0
     }
 
     .brand .logo img {
@@ -360,7 +363,8 @@
       border: 1px solid var(--border);
       cursor: pointer;
       color: var(--fg);
-      transition: all .3s
+      transition: all .3s;
+      flex-shrink: 0
     }
 
     .icon-btn:hover {
@@ -375,8 +379,50 @@
       height: 16px
     }
 
+    /* ============ MOBILE MENU ============ */
     .mobile-toggle {
       display: none
+    }
+
+    .nav-links.mobile-open {
+      display: flex !important;
+      position: fixed;
+      top: 74px;
+      left: 4vw;
+      right: 4vw;
+      width: 92vw;
+      flex-direction: column;
+      background: var(--nav-bg);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 10px;
+      gap: 4px;
+      box-shadow: 0 20px 50px -10px rgba(0, 0, 0, .35);
+      animation: menuDrop .25s ease
+    }
+
+    @keyframes menuDrop {
+      from {
+        opacity: 0;
+        transform: translateY(-10px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .nav-links.mobile-open a {
+      padding: 14px;
+      text-align: center;
+      border-radius: 12px
+    }
+
+    .nav-links.mobile-open a.active::before {
+      border-radius: 12px
     }
 
     @media(max-width:860px) {
@@ -384,9 +430,15 @@
         display: none
       }
 
+      .mobile-toggle {
+        display: grid
+      }
+
       nav {
-        top: 12px;
-        padding: 8px 10px
+        top: 14px;
+        padding: 8px 10px;
+        width: 92vw;
+        justify-content: space-between
       }
 
       .brand-name {
@@ -713,7 +765,8 @@
       gap: 36px;
       margin-top: 50px;
       padding-top: 30px;
-      border-top: 1px solid var(--border)
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap
     }
 
     .hstat b {
@@ -1591,7 +1644,8 @@
       background: var(--grad-soft);
       display: grid;
       place-items: center;
-      color: var(--primary)
+      color: var(--primary);
+      flex-shrink: 0
     }
 
     .cl-item .ic svg {
@@ -1601,7 +1655,8 @@
 
     .cl-item b {
       display: block;
-      font-size: 14px
+      font-size: 14px;
+      word-break: break-word
     }
 
     .cl-item span {
@@ -1694,7 +1749,8 @@
     .field textarea:not(:placeholder-shown)+label {
       top: -8px;
       font-size: 11px;
-      color: var(--primary)
+      color: var(--primary);
+      background: var(--bg)
     }
 
     form button {
@@ -1773,6 +1829,150 @@
         opacity: .9
       }
     }
+
+    /* ============ RESPONSIVE: TABLET ============ */
+    @media(min-width:769px) and (max-width:1024px) {
+      #hero {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .profile-wrap {
+        order: -1;
+      }
+
+      .proj-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .blog-card.feat {
+        grid-column: span 2;
+        grid-row: auto;
+        min-height: 340px;
+      }
+
+      section {
+        padding: 100px 5vw;
+      }
+    }
+
+    /* ============ RESPONSIVE: MOBILE ============ */
+    @media(max-width:768px) {
+      section {
+        padding: 80px 5vw;
+      }
+
+      .section-title {
+        font-size: clamp(1.6rem, 8vw, 2.4rem);
+        line-height: 1.15;
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        padding: 5px 12px;
+      }
+
+      .section-sub {
+        font-size: 15px;
+        margin-bottom: 40px;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 10vw, 3rem);
+      }
+
+      .hero-stats {
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+
+      .cta-row {
+        flex-direction: column;
+      }
+
+      .cta-row .btn {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .skills-grid,
+      .proj-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .exp {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .blog-card.feat {
+        grid-row: auto;
+        min-height: 300px;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cert {
+        flex: 0 0 85vw;
+      }
+
+      .profile-card {
+        width: min(300px, 85vw);
+      }
+    }
+
+    @media(max-width:480px) {
+      section {
+        padding: 60px 5vw;
+      }
+
+      .section-title {
+        font-size: clamp(1.4rem, 9vw, 2rem);
+      }
+
+      .hero-desc {
+        font-size: 15px;
+      }
+
+      .badge-live {
+        font-size: 11px;
+        padding: 6px 12px;
+      }
+
+      .proj-metrics {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .cl-item {
+        padding: 12px;
+      }
+
+      form {
+        padding: 20px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stats {
+        gap: 16px 26px;
+      }
+    }
   </style>
 </head>
 
@@ -1793,8 +1993,11 @@
   <!-- NAV -->
   <nav>
     <a href="#hero" class="brand">
-    <div class="logo" style="background:linear-gradient(145deg, #6366F1 0%, #8B5CF6 50%, #3B82F6 100%);display:grid;place-items:center;
-                             color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:15px;box-shadow:0 4px 12px rgba(99,102,241,.4);">KP</div>
+      <div class="logo"
+        style="background:linear-gradient(145deg, #6366F1 0%, #8B5CF6 50%, #3B82F6 100%);display:grid;place-items:center;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:15px;box-shadow:0 4px 12px rgba(99,102,241,.4);">
+        KP</div>
+      <span class="brand-name">Krishna Patel</span>
+    </a>
     <div class="nav-links">
       <a href="#about" class="nav-link">About</a>
       <a href="#skills" class="nav-link">Skills</a>
@@ -1815,6 +2018,10 @@
           <circle cx="12" cy="12" r="4" />
           <path
             d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+        </svg></button>
+      <button class="icon-btn mobile-toggle" id="mobileToggle" title="Menu"><svg viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2">
+          <path d="M3 12h18M3 6h18M3 18h18" />
         </svg></button>
     </div>
   </nav>
@@ -2014,8 +2221,8 @@
             real-world data to understand the impact of roles, experience
             levels, and company size.</p>
           <div class="proj-links">
-            <a href="https://data-science-salaries.streamlit.app" target="_blank"><svg viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
+            <a href="https://data-science-salaries.streamlit.app" target="_blank"><svg viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M15 3h6v6M10 14L21 3M18 14v7H4V7h7" />
               </svg>Live Demo</a>
             <a href="https://github.com/patelkrishna2025/Data-Science-Salaries.git" target="_blank"><svg
@@ -2037,8 +2244,8 @@
             trends in genres, countries, and release years using data cleaning,
             visualization, and a predictive model (87% accuracy).</p>
           <div class="proj-links">
-            <a href="https://netflix-data-dashboard.streamlit.app/" target="_blank"><svg viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
+            <a href="https://netflix-data-dashboard.streamlit.app/" target="_blank"><svg viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M15 3h6v6M10 14L21 3M18 14v7H4V7h7" />
               </svg>Live Demo</a>
             <a href="https://github.com/patelkrishna2025/Netflix-Data.git" target="_blank"><svg viewBox="0 0 24 24"
@@ -2083,8 +2290,8 @@
             using sepal & petal measurements — includes visualization, model
             training, and evaluation (98% accuracy with Random Forest).</p>
           <div class="proj-links">
-            <a href="https://iris-flower-analysis.streamlit.app/" target="_blank"><svg viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2">
+            <a href="https://iris-flower-analysis.streamlit.app/" target="_blank"><svg viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M15 3h6v6M10 14L21 3M18 14v7H4V7h7" />
               </svg>Live Demo</a>
             <a href="https://github.com/patelkrishna2025/Iris-Flower-Classification.git" target="_blank"><svg
@@ -2106,12 +2313,12 @@
             tourism landscape — visitor footfall, seasonal trends, and revenue
             contribution by region.</p>
           <div class="proj-links">
-            <a href="https://github.com/patelkrishna2025/Tourism-2023-2024.git" target="_blank"><svg viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2">
+            <a href="https://github.com/patelkrishna2025/Tourism-2023-2024.git" target="_blank"><svg
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M15 3h6v6M10 14L21 3M18 14v7H4V7h7" />
               </svg>Live Demo</a>
-            <a href="https://github.com/patelkrishna2025/Tourism-2023-2024.git" target="_blank"><svg viewBox="0 0 24 24"
-                fill="currentColor">
+            <a href="https://github.com/patelkrishna2025/Tourism-2023-2024.git" target="_blank"><svg
+                viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.08 1.84 2.83 1.3 3.52 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.94 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.63-5.48 5.93.43.38.82 1.11.82 2.24v3.32c0 .32.22.7.83.58A12 12 0 0 0 12 .5z" />
               </svg>GitHub</a>
@@ -2189,9 +2396,9 @@
       <p class="section-sub">Curriculum from IBM, Microsoft, Deloitte, and
         more.</p>
     </div>
-    <div class="cert-filters reveal" id="certFilters"><button class="active" data-c="All">All</button><button class=""
-        data-c="Analytics">Analytics</button><button class="" data-c="Data Science">Data Science</button><button
-        class="" data-c="BI">BI</button><button class="" data-c="Web">Web</button><button class=""
+    <div class="cert-filters reveal" id="certFilters"><button class="active" data-c="All">All</button><button
+        class="" data-c="Analytics">Analytics</button><button class="" data-c="Data Science">Data Science</button>
+      <button class="" data-c="BI">BI</button><button class="" data-c="Web">Web</button><button class=""
         data-c="AI/ML">AI/ML</button></div>
     <div class="cert-scroll" id="certScroll">
       <div class="cert reveal" data-cat="Data Science">
@@ -2375,7 +2582,7 @@
   <!-- FOOTER -->
   <footer>
     <div class="foot-logo">KP</div>
-    <p>© 2026 Krishna Patel</p>
+    <p>© 2026 Krishna Patel · Designed & built with obsession over detail.</p>
     <div class="socials" style="justify-content:center">
       <a href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" title="LinkedIn"><svg
           viewBox="0 0 24 24" fill="currentColor">
@@ -2506,6 +2713,23 @@
     const navL = document.querySelectorAll('.nav-link');
     const sects = [...navL].map(a => document.querySelector(a.getAttribute('href')));
     document.addEventListener('scroll', () => { const y = scrollY + 120; let idx = 0; sects.forEach((s, i) => { if (s && s.offsetTop <= y) idx = i }); navL.forEach((a, i) => a.classList.toggle('active', i === idx)) });
+
+    /* ============ MOBILE MENU ============ */
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinksEl = document.querySelector('.nav-links');
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        navLinksEl.classList.toggle('mobile-open');
+      });
+      navLinksEl.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => navLinksEl.classList.remove('mobile-open'));
+      });
+      document.addEventListener('click', (e) => {
+        if (!navLinksEl.contains(e.target) && !mobileToggle.contains(e.target)) {
+          navLinksEl.classList.remove('mobile-open');
+        }
+      });
+    }
 
     /* ============ COMMAND PALETTE ============ */
     const cmd = document.getElementById('cmdk'), cmdInput = document.getElementById('cmdkInput'), cmdList = document.getElementById('cmdkList');
