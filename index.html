@@ -3,10 +3,11 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>Krishna Patel — Data Scientist</title>
   <meta name="description"
     content="Krishna Patel — Premium Data Analyst & Data Scientist Portfolio. Turning data into decisions with SQL, Python, and Power BI." />
+  <meta name="theme-color" content="#030712" />
   <link rel="icon"
     href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%232563EB'/><stop offset='1' stop-color='%2393C5FD'/></linearGradient></defs><rect width='64' height='64' rx='14' fill='url(%23g)'/><text x='50%25' y='55%25' text-anchor='middle' font-family='Inter,sans-serif' font-weight='800' font-size='28' fill='white'>KP</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,7 +16,6 @@
     href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   <style>
-    /* ============ RESET & TOKENS ============ */
     *,
     *::before,
     *::after {
@@ -25,7 +25,8 @@
     }
 
     html {
-      scroll-behavior: smooth
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
     }
 
     :root {
@@ -43,6 +44,7 @@
       --grad: linear-gradient(135deg, #2563EB 0%, #3B82F6 45%, #60A5FA 100%);
       --grad-soft: linear-gradient(135deg, rgba(37, 99, 235, .15), rgba(147, 197, 253, .05));
       --nav-bg: rgba(255, 255, 255, .65);
+      --ease: cubic-bezier(.22, 1, .36, 1);
     }
 
     [data-theme="dark"] {
@@ -63,13 +65,25 @@
       font-family: 'Inter', system-ui, sans-serif;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      position: relative
+      position: relative;
+      transition: background .4s var(--ease), color .4s var(--ease);
     }
 
-    /* ============ SITE-WIDE SLOW ANIMATED BACKGROUND ============ */
-    /* FIX: heavy blurred layers were causing scroll/click lag & "ghost box" glitches on mobile.
-       They are now DISABLED by default on small/low-power screens (see media query below)
-       and use will-change + reduced blur to stay smooth on desktop. */
+    a,
+    button,
+    .btn,
+    .icon-btn,
+    .proj,
+    .skill,
+    .cert,
+    .blog-card,
+    .cl-item,
+    .socials a {
+      -webkit-tap-highlight-color: transparent;
+      tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
     body::before,
     body::after {
       content: "";
@@ -128,15 +142,18 @@
 
     @media (prefers-reduced-motion:reduce) {
 
-      body::before,
-      body::after {
-        animation: none
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+        scroll-behavior: auto !important;
       }
     }
 
-    /* FIX: on phones/tablets, kill the blurred background layers entirely — 
-       this is the #1 cause of hang/jank on mobile Safari & Chrome */
-    @media (max-width: 860px) {
+    /* Mobile perf: kill the heavy blurred blobs entirely on small / touch screens */
+    @media (max-width: 860px), (hover: none), (pointer: coarse) {
 
       body::before,
       body::after {
@@ -182,7 +199,6 @@
       background: transparent
     }
 
-    /* ============ LOADER ============ */
     #loader {
       position: fixed;
       inset: 0;
@@ -190,7 +206,7 @@
       background: var(--bg);
       display: grid;
       place-items: center;
-      transition: opacity .6s ease, visibility .6s
+      transition: opacity .6s var(--ease), visibility .6s
     }
 
     #loader.hide {
@@ -245,7 +261,6 @@
       }
     }
 
-    /* ============ SCROLL PROGRESS ============ */
     #progress {
       position: fixed;
       top: 0;
@@ -256,13 +271,9 @@
       z-index: 1000;
       box-shadow: 0 0 12px rgba(96, 165, 250, .7);
       pointer-events: none;
+      will-change: width;
     }
 
-    /* ============ CURSOR GLOW ============ */
-    /* FIX: this floating div was the "transparent square box" appearing on tap —
-       on touch devices there is no real cursor, so leftover taps/clicks moved this
-       380px glow box to (0,0) or the last-tapped element and it looked like a stray
-       transparent square. It is now fully disabled on touch/mobile. */
     #cursor {
       position: fixed;
       width: 380px;
@@ -275,6 +286,7 @@
       transition: opacity .3s;
       mix-blend-mode: screen;
       opacity: 1;
+      will-change: transform;
     }
 
     @media (hover: none), (pointer: coarse), (max-width: 860px) {
@@ -283,7 +295,6 @@
       }
     }
 
-    /* ============ NAV ============ */
     nav {
       position: fixed;
       top: 20px;
@@ -301,7 +312,13 @@
       gap: 8px;
       box-shadow: 0 10px 40px -10px rgba(15, 23, 42, .15);
       width: max-content;
-      max-width: 94vw
+      max-width: 94vw;
+      transition: background .4s var(--ease), border-color .4s var(--ease), top .3s var(--ease);
+    }
+
+    nav.scrolled {
+      top: 12px;
+      box-shadow: 0 14px 44px -10px rgba(15, 23, 42, .25);
     }
 
     .brand {
@@ -317,7 +334,7 @@
       border-radius: 50%;
       overflow: hidden;
       box-shadow: 0 0 20px rgba(37, 99, 235, .6);
-      transition: transform .5s;
+      transition: transform .5s var(--ease);
       flex-shrink: 0
     }
 
@@ -369,7 +386,20 @@
       inset: 0;
       background: var(--grad-soft);
       border-radius: 100px;
-      z-index: -1
+      z-index: -1;
+      animation: navPop .3s var(--ease);
+    }
+
+    @keyframes navPop {
+      from {
+        opacity: 0;
+        transform: scale(.85)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
     }
 
     .nav-tools {
@@ -391,7 +421,7 @@
       border: 1px solid var(--border);
       cursor: pointer;
       color: var(--fg);
-      transition: all .3s;
+      transition: background .3s, color .3s, border-color .3s, transform .25s var(--ease);
       flex-shrink: 0
     }
 
@@ -402,13 +432,26 @@
       transform: translateY(-2px)
     }
 
+    @media (hover: none), (pointer: coarse) {
+      .icon-btn:hover {
+        transform: none;
+      }
+
+      .icon-btn:active {
+        background: var(--grad);
+        color: #fff;
+        border-color: transparent;
+        transform: scale(.9);
+        transition: transform .1s ease, background .1s ease;
+      }
+    }
+
     .icon-btn svg {
       width: 16px;
       height: 16px;
       pointer-events: none;
     }
 
-    /* ============ MOBILE MENU ============ */
     .mobile-toggle {
       display: none
     }
@@ -429,25 +472,30 @@
       padding: 10px;
       gap: 4px;
       box-shadow: 0 20px 50px -10px rgba(0, 0, 0, .35);
-      animation: menuDrop .25s ease
+      animation: menuDrop .3s var(--ease)
     }
 
     @keyframes menuDrop {
       from {
         opacity: 0;
-        transform: translateY(-10px)
+        transform: translateY(-12px) scale(.98)
       }
 
       to {
         opacity: 1;
-        transform: translateY(0)
+        transform: translateY(0) scale(1)
       }
     }
 
     .nav-links.mobile-open a {
       padding: 14px;
       text-align: center;
-      border-radius: 12px
+      border-radius: 12px;
+      transition: background .2s, color .2s;
+    }
+
+    .nav-links.mobile-open a:active {
+      background: var(--grad-soft);
     }
 
     .nav-links.mobile-open a.active::before {
@@ -475,7 +523,6 @@
       }
     }
 
-    /* ============ COMMAND PALETTE ============ */
     #cmdk {
       position: fixed;
       inset: 0;
@@ -500,7 +547,20 @@
       border: 1px solid var(--border);
       border-radius: 18px;
       box-shadow: 0 30px 80px rgba(0, 0, 0, .4);
-      overflow: hidden
+      overflow: hidden;
+      animation: cmdkPop .3s var(--ease);
+    }
+
+    @keyframes cmdkPop {
+      from {
+        opacity: 0;
+        transform: translateY(-14px) scale(.97)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
     }
 
     .cmdk-box input {
@@ -529,7 +589,8 @@
       border-radius: 10px;
       cursor: pointer;
       font-size: 14px;
-      color: var(--fg-soft)
+      color: var(--fg-soft);
+      transition: background .2s, color .2s;
     }
 
     .cmdk-item:hover,
@@ -547,7 +608,6 @@
       background: var(--bg-2)
     }
 
-    /* ============ SECTIONS ============ */
     section {
       position: relative;
       padding: 120px 6vw;
@@ -615,7 +675,6 @@
       color: transparent
     }
 
-    /* ============ HERO ============ */
     #hero {
       min-height: 100vh;
       padding-top: 160px;
@@ -667,15 +726,15 @@
 
     .hero-title .word {
       display: inline-block;
-      animation: rise 1s cubic-bezier(.2, .9, .3, 1) both
+      animation: rise .9s var(--ease) both
     }
 
     .hero-title .word:nth-child(2) {
-      animation-delay: .1s
+      animation-delay: .08s
     }
 
     .hero-title .word:nth-child(3) {
-      animation-delay: .2s
+      animation-delay: .16s
     }
 
     @keyframes rise {
@@ -742,7 +801,7 @@
       border: 1px solid var(--border);
       background: transparent;
       color: var(--fg);
-      transition: all .35s cubic-bezier(.2, .9, .3, 1);
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), background .3s, color .3s, border-color .3s;
       overflow: hidden
     }
 
@@ -784,11 +843,14 @@
       border-color: transparent
     }
 
-    /* FIX: on touch devices, don't apply the JS "magnetic" transform / hover-lift —
-       this was causing buttons to visibly jump / leave a ghost outline right after tap */
     @media (hover: none), (pointer: coarse) {
       .btn:hover {
         transform: none;
+      }
+
+      .btn:active {
+        transform: scale(.96);
+        transition: transform .12s ease;
       }
     }
 
@@ -818,7 +880,6 @@
       text-transform: uppercase
     }
 
-    /* Profile 3D card */
     .profile-wrap {
       position: relative;
       z-index: 2;
@@ -837,9 +898,10 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow);
       transform-style: preserve-3d;
-      transition: transform .4s ease;
+      transition: transform .5s var(--ease);
       animation: float 6s ease-in-out infinite;
-      overflow: hidden
+      overflow: hidden;
+      will-change: transform;
     }
 
     @keyframes float {
@@ -905,7 +967,18 @@
       object-fit: cover;
       object-position: center top;
       display: block;
-      border-radius: 30px
+      border-radius: 30px;
+      animation: fadeIn .5s var(--ease);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0
+      }
+
+      to {
+        opacity: 1
+      }
     }
 
     .avatar .avatar-fallback {
@@ -947,16 +1020,14 @@
       }
     }
 
-    /* FIX: disable heavy 3D tilt + floating particles + spinning conic ring on touch
-       devices — these were prime suspects for the janky "hang" feeling on mobile */
     @media (hover: none), (pointer: coarse) {
       .profile-card {
-        animation: none;
-        transform: none !important;
+        animation: float 6s ease-in-out infinite;
       }
 
       .profile-card::before {
         animation: none;
+        opacity: .35;
       }
 
       .particles-float {
@@ -964,7 +1035,6 @@
       }
     }
 
-    /* ============ MARQUEE ============ */
     .marquee {
       overflow: hidden;
       padding: 26px 0;
@@ -980,7 +1050,8 @@
       gap: 60px;
       animation: mv 30s linear infinite;
       white-space: nowrap;
-      width: max-content
+      width: max-content;
+      will-change: transform;
     }
 
     @keyframes mv {
@@ -1004,7 +1075,6 @@
       color: var(--accent)
     }
 
-    /* ============ ABOUT ============ */
     .about-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -1025,7 +1095,7 @@
       background: var(--card);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      transition: transform .3s
+      transition: transform .35s var(--ease)
     }
 
     .stat:hover {
@@ -1048,7 +1118,6 @@
       color: var(--fg-soft)
     }
 
-    /* ============ SKILLS ============ */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1061,7 +1130,7 @@
       background: var(--card);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      transition: all .4s;
+      transition: transform .4s var(--ease), border-color .4s, box-shadow .4s;
       cursor: pointer;
       position: relative;
       overflow: hidden
@@ -1084,6 +1153,19 @@
 
     .skill:hover::before {
       opacity: 1
+    }
+
+    @media (hover: none), (pointer: coarse) {
+      .skill:hover {
+        transform: none;
+        box-shadow: none;
+      }
+
+      .skill:active {
+        transform: scale(.97);
+        border-color: rgba(96, 165, 250, .5);
+        transition: transform .12s ease;
+      }
     }
 
     .skill>* {
@@ -1132,7 +1214,7 @@
       background: var(--grad);
       border-radius: 100px;
       width: 0;
-      transition: width 1.4s cubic-bezier(.2, .9, .3, 1)
+      transition: width 1.2s var(--ease)
     }
 
     .skill .lvl {
@@ -1142,7 +1224,6 @@
       font-weight: 500
     }
 
-    /* ============ PROJECTS ============ */
     .proj-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -1157,7 +1238,7 @@
       backdrop-filter: blur(20px);
       border: 1px solid var(--border);
       overflow: hidden;
-      transition: all .5s cubic-bezier(.2, .9, .3, 1)
+      transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s var(--ease)
     }
 
     .proj:hover {
@@ -1169,6 +1250,11 @@
     @media (hover: none), (pointer: coarse) {
       .proj:hover {
         transform: none;
+      }
+
+      .proj:active {
+        transform: scale(.985);
+        transition: transform .15s ease;
       }
     }
 
@@ -1185,7 +1271,7 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform .5s ease;
+      transition: transform .5s var(--ease);
     }
 
     .proj:hover .proj-thumb img {
@@ -1277,7 +1363,7 @@
       font-weight: 600;
       border-radius: 100px;
       border: 1px solid var(--border);
-      transition: all .3s;
+      transition: background .3s, color .3s, border-color .3s;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1296,13 +1382,22 @@
       border-color: transparent
     }
 
+    @media (hover: none), (pointer: coarse) {
+      .proj-links a:active {
+        background: var(--grad);
+        color: #fff;
+        border-color: transparent;
+        transform: scale(.96);
+        transition: transform .1s ease;
+      }
+    }
+
     .view-all {
       display: flex;
       justify-content: center;
       margin-top: 40px
     }
 
-    /* ============ EXPERIENCE ============ */
     .exp-grid {
       position: relative;
       display: grid;
@@ -1318,7 +1413,7 @@
       background: var(--card);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      transition: all .4s
+      transition: transform .4s var(--ease), border-color .4s var(--ease)
     }
 
     .exp:hover {
@@ -1363,7 +1458,6 @@
       }
     }
 
-    /* ============ CERTIFICATES ============ */
     .cert-filters {
       display: flex;
       gap: 8px;
@@ -1381,7 +1475,7 @@
       font-weight: 500;
       font-family: inherit;
       cursor: pointer;
-      transition: all .3s
+      transition: background .3s, color .3s, border-color .3s, transform .15s ease
     }
 
     .cert-filters button.active,
@@ -1391,13 +1485,22 @@
       border-color: transparent
     }
 
+    @media (hover: none), (pointer: coarse) {
+      .cert-filters button:active {
+        transform: scale(.94);
+        transition: transform .1s ease;
+      }
+    }
+
     .cert-scroll {
       display: flex;
       gap: 20px;
       overflow-x: auto;
       padding: 10px 4px 20px;
       scroll-snap-type: x mandatory;
-      scrollbar-width: none
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-x: contain;
     }
 
     .cert-scroll::-webkit-scrollbar {
@@ -1415,8 +1518,21 @@
       padding: 24px;
       position: relative;
       overflow: hidden;
-      transition: all .4s;
-      cursor: pointer
+      transition: transform .4s var(--ease), border-color .4s, box-shadow .4s;
+      cursor: pointer;
+      animation: certIn .4s var(--ease) both;
+    }
+
+    @keyframes certIn {
+      from {
+        opacity: 0;
+        transform: scale(.94)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
     }
 
     .cert::before {
@@ -1437,6 +1553,11 @@
     @media (hover: none), (pointer: coarse) {
       .cert:hover {
         transform: none;
+      }
+
+      .cert:active {
+        transform: scale(.97);
+        transition: transform .12s ease;
       }
     }
 
@@ -1495,7 +1616,6 @@
       letter-spacing: .05em
     }
 
-    /* ============ BLOG ============ */
     .blog-grid {
       display: grid;
       grid-template-columns: 1.4fr 1fr 1fr;
@@ -1509,7 +1629,7 @@
       background: var(--card);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      transition: all .4s;
+      transition: transform .4s var(--ease), box-shadow .4s var(--ease);
       cursor: pointer;
       overflow: hidden;
       display: flex;
@@ -1539,6 +1659,11 @@
     @media (hover: none), (pointer: coarse) {
       .blog-card:hover {
         transform: none;
+      }
+
+      .blog-card:active {
+        transform: scale(.98);
+        transition: transform .12s ease;
       }
     }
 
@@ -1580,6 +1705,22 @@
       align-items: center
     }
 
+    .meta .read-more {
+      margin-left: auto;
+      font-weight: 600;
+      color: var(--primary);
+      transition: transform .25s var(--ease);
+      display: inline-block;
+    }
+
+    .blog-card:hover .meta .read-more {
+      transform: translateX(4px);
+    }
+
+    .blog-card.feat .meta .read-more {
+      color: #fff
+    }
+
     @media(max-width:900px) {
       .blog-grid {
         grid-template-columns: 1fr
@@ -1615,7 +1756,6 @@
       border-color: var(--primary)
     }
 
-    /* ============ CONTACT ============ */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1648,7 +1788,7 @@
       background: var(--card);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      transition: all .3s
+      transition: transform .3s var(--ease), border-color .3s
     }
 
     .cl-item:hover {
@@ -1659,6 +1799,12 @@
     @media (hover: none), (pointer: coarse) {
       .cl-item:hover {
         transform: none;
+      }
+
+      .cl-item:active {
+        transform: scale(.97);
+        background: var(--grad-soft);
+        transition: transform .12s ease, background .12s ease;
       }
     }
 
@@ -1705,7 +1851,7 @@
       background: var(--card);
       border: 1px solid var(--border);
       color: var(--fg);
-      transition: all .35s
+      transition: background .35s, color .35s, border-color .35s, transform .35s var(--ease)
     }
 
     .socials a:hover {
@@ -1718,6 +1864,13 @@
     @media (hover: none), (pointer: coarse) {
       .socials a:hover {
         transform: none;
+      }
+
+      .socials a:active {
+        transform: scale(.9);
+        background: var(--grad);
+        color: #fff;
+        transition: transform .12s ease, background .12s ease;
       }
     }
 
@@ -1749,7 +1902,7 @@
       background: transparent;
       color: var(--fg);
       font-family: inherit;
-      font-size: 14px;
+      font-size: 16px;
       outline: none;
       transition: border-color .3s
     }
@@ -1766,14 +1919,9 @@
       font-size: 13px;
       color: var(--fg-soft);
       pointer-events: none;
-      transition: all .25s;
+      transition: all .25s var(--ease);
       background: transparent;
       padding: 0 4px
-    }
-
-    .field input:focus,
-    .field textarea:focus {
-      border-color: var(--primary)
     }
 
     .field input:focus+label,
@@ -1786,6 +1934,11 @@
       background: var(--bg)
     }
 
+    .field input:focus,
+    .field textarea:focus {
+      border-color: var(--primary)
+    }
+
     form button {
       width: 100%
     }
@@ -1796,7 +1949,6 @@
       }
     }
 
-    /* ============ FOOTER ============ */
     footer {
       padding: 50px 6vw 30px;
       border-top: 1px solid var(--border);
@@ -1827,16 +1979,22 @@
       margin-bottom: 20px
     }
 
-    /* ============ REVEAL ============ */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
-      transition: all .9s cubic-bezier(.2, .9, .3, 1)
+      transition: opacity .7s var(--ease), transform .7s var(--ease)
     }
 
     .reveal.in {
       opacity: 1;
       transform: none
+    }
+
+    @media (max-width: 768px) {
+      .reveal {
+        transform: translateY(16px);
+        transition: opacity .45s ease, transform .45s ease;
+      }
     }
 
     @keyframes fade {
@@ -1863,7 +2021,6 @@
       }
     }
 
-    /* ============ RESPONSIVE: TABLET ============ */
     @media(min-width:769px) and (max-width:1024px) {
       #hero {
         grid-template-columns: 1fr;
@@ -1893,10 +2050,9 @@
       }
     }
 
-    /* ============ RESPONSIVE: MOBILE ============ */
     @media(max-width:768px) {
       section {
-        padding: 80px 5vw;
+        padding: 70px 5vw;
       }
 
       .section-title {
@@ -1911,7 +2067,7 @@
 
       .section-sub {
         font-size: 15px;
-        margin-bottom: 40px;
+        margin-bottom: 36px;
       }
 
       .hero-title {
@@ -1921,6 +2077,7 @@
       .hero-stats {
         flex-wrap: wrap;
         gap: 20px;
+        row-gap: 22px;
       }
 
       .cta-row {
@@ -1965,11 +2122,21 @@
       .profile-card {
         width: min(300px, 85vw);
       }
+
+      /* Kill hover-only heavy transforms that can feel janky on touch */
+      .skill,
+      .proj,
+      .exp,
+      .blog-card,
+      .cl-item,
+      .stat {
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      }
     }
 
     @media(max-width:480px) {
       section {
-        padding: 60px 5vw;
+        padding: 56px 5vw;
       }
 
       .section-title {
@@ -2006,30 +2173,51 @@
         gap: 16px 26px;
       }
     }
+
+    /* Extra small phones */
+    @media (max-width: 360px) {
+      .hero-title {
+        font-size: clamp(1.7rem, 11vw, 2.4rem);
+      }
+
+      .btn {
+        padding: 13px 18px;
+        font-size: 13px;
+      }
+    }
+
+    /* Landscape phones: tighten vertical rhythm */
+    @media (max-width: 900px) and (orientation: landscape) and (max-height: 480px) {
+      #hero {
+        min-height: auto;
+        padding-top: 110px;
+        padding-bottom: 60px;
+      }
+
+      section {
+        padding: 50px 5vw;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <!-- LOADER -->
   <div id="loader">
     <div class="loader-ring"></div>
     <div class="loader-logo">KP</div>
   </div>
 
-  <!-- SCROLL PROGRESS -->
   <div id="progress"></div>
 
-  <!-- CURSOR GLOW (desktop only, hidden on touch via CSS) -->
   <div id="cursor"></div>
 
-  <!-- NAV -->
-  <nav>
+  <nav id="mainNav">
     <a href="#hero" class="brand">
       <div class="logo"
         style="background:linear-gradient(145deg, #6366F1 0%, #8B5CF6 50%, #3B82F6 100%);display:grid;place-items:center;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:15px;box-shadow:0 4px 12px rgba(99,102,241,.4);">
         KP</div>
-      <span class="brand-name">Krishna Patel</span>
+      <span class="brand-name"></span>
     </a>
     <div class="nav-links">
       <a href="#about" class="nav-link">About</a>
@@ -2059,7 +2247,6 @@
     </div>
   </nav>
 
-  <!-- CMDK -->
   <div id="cmdk">
     <div class="cmdk-box">
       <input placeholder="Type a section... (About, Projects, Contact)" id="cmdkInput" />
@@ -2067,7 +2254,6 @@
     </div>
   </div>
 
-  <!-- HERO -->
   <section id="hero">
     <div class="hero-content">
       <div class="badge-live"><span class="dot"></span>Available for
@@ -2128,7 +2314,6 @@
     </div>
   </section>
 
-  <!-- MARQUEE -->
   <div class="marquee">
     <div class="marquee-track">
       <span>Python</span><span>SQL</span><span>Power
@@ -2140,7 +2325,6 @@
     </div>
   </div>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="reveal">
       <div class="eyebrow">About</div>
@@ -2151,18 +2335,8 @@
     </div>
     <div class="about-grid">
       <div class="reveal">
-        <div class="stats-grid">
-          <div class="stat"><b data-count="6">0</b><span>Projects
-              delivered</span></div>
-          <div class="stat"><b data-count="6">0</b><span>Certifications
-              earned</span></div>
-          <div class="stat"><b data-count="4">0</b><span>Internships
-              completed</span></div>
-          <div class="stat"><b data-count="5">0</b><span>Core
-              skills</span></div>
-        </div>
         <div
-          style="margin-top:26px;padding:24px;border-radius:20px;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(20px)">
+          style="padding:24px;border-radius:20px;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(20px)">
           <h4 style="font-size:16px;margin-bottom:12px">About Me</h4>
           <p style="font-size:13px;color:var(--fg-soft);line-height:1.8;margin-bottom:14px">
             I am a detail-oriented Data Science & Analyst with a strong background
@@ -2193,7 +2367,6 @@
     </div>
   </section>
 
-  <!-- SKILLS -->
   <section id="skills">
     <div class="reveal">
       <div class="eyebrow">Skills</div>
@@ -2205,7 +2378,6 @@
     <div class="skills-grid" id="skillsGrid"></div>
   </section>
 
-  <!-- PROJECTS -->
   <section id="projects">
     <div class="reveal">
       <div class="eyebrow">Projects</div>
@@ -2369,7 +2541,6 @@
     </div>
   </section>
 
-  <!-- EXPERIENCE -->
   <section id="experience">
     <div class="reveal">
       <div class="eyebrow">Experience</div>
@@ -2421,7 +2592,6 @@
     </div>
   </section>
 
-  <!-- CERTIFICATES -->
   <section id="certs">
     <div class="reveal">
       <div class="eyebrow">Certificates</div>
@@ -2502,7 +2672,6 @@
     </div>
   </section>
 
-  <!-- BLOG -->
   <section id="blog">
     <div class="reveal">
       <div class="eyebrow">Blog</div>
@@ -2514,31 +2683,36 @@
       <input placeholder="Search articles..." id="blogSearch" />
     </div>
     <div class="blog-grid" id="blogGrid">
-      <div class="blog-card reveal feat" data-title="from raw data to real insights a practical guide"><span
-          class="btag">Data Analytics</span>
+      <a class="blog-card reveal feat" data-title="from raw data to real insights a practical guide"
+        href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" rel="noopener">
+        <span class="btag">Data Analytics</span>
         <h3>From Raw Data to Real Insights: A Practical Guide</h3>
         <p>Discover how to transform messy datasets into clear, compelling stories that help business leaders make
           smarter, faster decisions.</p>
-        <div class="meta"><span>5 min read</span><span>·</span><span>May 2025</span></div>
-      </div>
-      <div class="blog-card reveal" data-title="demystifying machine learning concepts every analyst should know">
+        <div class="meta"><span>5 min read</span><span>·</span><span>May 2025</span><span
+            class="read-more">Read →</span></div>
+      </a>
+      <a class="blog-card reveal" data-title="demystifying machine learning concepts every analyst should know"
+        href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" rel="noopener">
         <span class="btag">Machine Learning</span>
         <h3>Demystifying Machine Learning: Concepts Every Analyst Should Know</h3>
         <p>Break down supervised vs. unsupervised learning, model evaluation metrics, and why understanding ML is now
           a must-have skill.</p>
-        <div class="meta"><span>7 min read</span><span>·</span><span>April 2025</span></div>
-      </div>
-      <div class="blog-card reveal" data-title="10 power bi dashboard tips that will impress any stakeholder">
+        <div class="meta"><span>7 min read</span><span>·</span><span>April 2025</span><span
+            class="read-more">Read →</span></div>
+      </a>
+      <a class="blog-card reveal" data-title="10 power bi dashboard tips that will impress any stakeholder"
+        href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" rel="noopener">
         <span class="btag">Power BI Tips</span>
         <h3>10 Power BI Dashboard Tips That Will Impress Any Stakeholder</h3>
         <p>Elevate your Power BI dashboards from plain to professional with these design, performance, and
           storytelling techniques.</p>
-        <div class="meta"><span>6 min read</span><span>·</span><span>March 2025</span></div>
-      </div>
+        <div class="meta"><span>6 min read</span><span>·</span><span>March 2025</span><span
+            class="read-more">Read →</span></div>
+      </a>
     </div>
   </section>
 
-  <!-- CONTACT -->
   <section id="contact">
     <div class="reveal">
       <div class="eyebrow">Contact</div>
@@ -2612,10 +2786,9 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="foot-logo">KP</div>
-    <p>© 2026 Krishna Patel · Designed & built with obsession over detail.</p>
+    <p>© 2026 Krishna Patel</p>
     <div class="socials" style="justify-content:center">
       <a href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" title="LinkedIn"><svg
           viewBox="0 0 24 24" fill="currentColor">
@@ -2631,47 +2804,50 @@
   </footer>
 
   <script>
-    /* Detect touch/coarse pointer once, reuse everywhere below */
     const IS_TOUCH = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    /* ============ LOADER ============ */
-    window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hide'), 700) });
+    window.addEventListener('load', () => { setTimeout(() => document.getElementById('loader').classList.add('hide'), 600) });
 
-    /* ============ THEME ============ */
     const themeBtn = document.getElementById('themeBtn'), root = document.documentElement;
     const saved = localStorage.getItem('theme') || 'dark'; root.setAttribute('data-theme', saved);
     themeBtn.addEventListener('click', () => { const cur = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'; root.setAttribute('data-theme', cur); localStorage.setItem('theme', cur) });
 
-    /* ============ CURSOR GLOW (desktop only) ============ */
     if (!IS_TOUCH) {
       const cur = document.getElementById('cursor');
-      document.addEventListener('mousemove', e => { cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px' });
+      let cx = 0, cy = 0, tx = 0, ty = 0;
+      document.addEventListener('mousemove', e => { tx = e.clientX; ty = e.clientY });
+      (function loop() {
+        cx += (tx - cx) * 0.18;
+        cy += (ty - cy) * 0.18;
+        cur.style.transform = `translate(${cx - 190}px, ${cy - 190}px)`;
+        requestAnimationFrame(loop);
+      })();
     }
 
-    /* ============ SCROLL PROGRESS ============ */
+    // Smooth, throttled scroll progress + nav shrink using rAF only (no layout thrash)
     const prog = document.getElementById('progress');
-    let progTicking = false;
+    const navEl = document.getElementById('mainNav');
+    let scrollTicking = false;
+    function onScrollFrame() {
+      const s = window.scrollY, h = document.documentElement.scrollHeight - innerHeight;
+      prog.style.width = (h > 0 ? (s / h * 100) : 0) + '%';
+      navEl.classList.toggle('scrolled', s > 40);
+      scrollTicking = false;
+    }
     document.addEventListener('scroll', () => {
-      if (progTicking) return;
-      progTicking = true;
-      requestAnimationFrame(() => {
-        const s = window.scrollY, h = document.documentElement.scrollHeight - innerHeight;
-        prog.style.width = (h > 0 ? (s / h * 100) : 0) + '%';
-        progTicking = false;
-      });
+      if (!scrollTicking) { requestAnimationFrame(onScrollFrame); scrollTicking = true; }
     }, { passive: true });
 
-    /* ============ TYPEWRITER ============ */
     const roles = ['Data Analyst', 'Data Scientist', 'SQL Wizard', 'Insight Storyteller', 'Python Developer'];
     let ri = 0, ci = 0, del = false; const tw = document.getElementById('tw');
     (function type() {
       const w = roles[ri]; tw.textContent = w.slice(0, ci);
-      if (!del && ci < w.length) { ci++; setTimeout(type, 80) }
-      else if (del && ci > 0) { ci--; setTimeout(type, 40) }
-      else { del = !del; if (!del) ri = (ri + 1) % roles.length; setTimeout(type, del ? 1500 : 400) }
+      if (!del && ci < w.length) { ci++; setTimeout(type, 75) }
+      else if (del && ci > 0) { ci--; setTimeout(type, 38) }
+      else { del = !del; if (!del) ri = (ri + 1) % roles.length; setTimeout(type, del ? 1400 : 380) }
     })();
 
-    /* ============ PROFILE PHOTO LOADER ============ */
     (function loadAvatar() {
       const box = document.getElementById('avatarBox');
       const img = new Image();
@@ -2680,22 +2856,27 @@
         img.alt = 'Krishna Patel';
         box.appendChild(img);
       };
-      img.onerror = () => { /* keep KP fallback, do nothing */ };
-      img.src = 'profile.jpg'; // <-- change this filename/path if needed
+      img.onerror = () => { };
+      img.src = 'profile.jpg';
     })();
 
-    /* ============ 3D PROFILE TILT (desktop only) ============ */
     if (!IS_TOUCH) {
       const pc = document.getElementById('pcard');
-      pc.addEventListener('mousemove', e => { const r = pc.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; pc.style.transform = `rotateY(${x * 18}deg) rotateX(${-y * 18}deg) translateZ(20px)` });
+      let raf = null;
+      pc.addEventListener('mousemove', e => {
+        if (raf) return;
+        raf = requestAnimationFrame(() => {
+          const r = pc.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+          pc.style.transform = `rotateY(${x * 16}deg) rotateX(${-y * 16}deg) translateZ(20px)`;
+          raf = null;
+        });
+      });
       pc.addEventListener('mouseleave', () => pc.style.transform = '');
 
-      /* Floating particles around profile — desktop only */
       const pf = document.getElementById('pfloat');
       for (let i = 0; i < 12; i++) { const s = document.createElement('span'); s.style.left = Math.random() * 100 + '%'; s.style.top = Math.random() * 100 + '%'; s.style.animationDelay = (Math.random() * 4) + 's'; s.style.animationDuration = (3 + Math.random() * 4) + 's'; pf.appendChild(s) }
     }
 
-    /* ============ SKILLS DATA ============ */
     const skills = [
       { n: 'Python', d: 'Pandas · NumPy · Scikit-learn', l: 95, i: '<path d="M8 12h8M12 8v8"/><rect x="3" y="3" width="18" height="18" rx="4"/>' },
       { n: 'SQL', d: 'Databases · Queries · Data modelling', l: 90, i: '<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>' },
@@ -2714,15 +2895,21 @@
     <div class="lvl">${s.l}% proficiency</div>
   </div>`).join('');
 
-    /* 3D tilt for projects — desktop only */
     if (!IS_TOUCH) {
       document.querySelectorAll('.proj').forEach(el => {
-        el.addEventListener('mousemove', e => { const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; el.style.transform = `translateY(-10px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)` });
+        let raf2 = null;
+        el.addEventListener('mousemove', e => {
+          if (raf2) return;
+          raf2 = requestAnimationFrame(() => {
+            const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+            el.style.transform = `translateY(-10px) rotateY(${x * 5}deg) rotateX(${-y * 5}deg)`;
+            raf2 = null;
+          });
+        });
         el.addEventListener('mouseleave', () => el.style.transform = '');
       });
     }
 
-    /* ============ CERT FILTERS (static) ============ */
     (function () {
       const wrap = document.getElementById('certFilters');
       const cards = document.querySelectorAll('#certScroll .cert');
@@ -2731,11 +2918,13 @@
         wrap.querySelectorAll('button').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
         const f = e.target.dataset.c;
-        cards.forEach(c => { c.style.display = (f === 'All' || c.dataset.cat === f) ? '' : 'none'; });
+        cards.forEach(c => {
+          const show = (f === 'All' || c.dataset.cat === f);
+          c.style.display = show ? '' : 'none';
+        });
       });
     })();
 
-    /* ============ BLOG SEARCH (static) ============ */
     (function () {
       const input = document.getElementById('blogSearch');
       const cards = document.querySelectorAll('#blogGrid .blog-card');
@@ -2745,15 +2934,30 @@
       });
     })();
 
-    /* ============ REVEAL ON SCROLL ============ */
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); if (e.target.classList.contains('skill')) { e.target.querySelector('.bar i').style.width = e.target.querySelector('.bar i').dataset.w + '%' } } }), { threshold: .15 });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); if (e.target.classList.contains('skill')) { e.target.querySelector('.bar i').style.width = e.target.querySelector('.bar i').dataset.w + '%' } io.unobserve(e.target); } }), { threshold: .05, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal,.skill,.proj,.exp,.blog-card,.stat').forEach(e => { e.classList.add('reveal'); io.observe(e) });
 
-    /* ============ COUNTERS ============ */
-    const cio = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { const el = e.target, end = +el.dataset.count; let n = 0, step = Math.max(1, end / 40); const t = setInterval(() => { n += step; if (n >= end) { el.textContent = end; clearInterval(t) } else el.textContent = Math.floor(n) }, 30); cio.unobserve(el) } }));
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.in)').forEach(e => {
+        const r = e.getBoundingClientRect();
+        if (r.top < innerHeight && r.bottom > 0) {
+          e.classList.add('in');
+          if (e.classList.contains('skill')) { const bar = e.querySelector('.bar i'); if (bar) bar.style.width = bar.dataset.w + '%'; }
+        }
+      });
+    }, 1200);
+
+    const cio = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) {
+        const el = e.target, end = +el.dataset.count;
+        if (REDUCE_MOTION) { el.textContent = end; cio.unobserve(el); return; }
+        let n = 0, step = Math.max(1, end / 40);
+        const t = setInterval(() => { n += step; if (n >= end) { el.textContent = end; clearInterval(t) } else el.textContent = Math.floor(n) }, 30);
+        cio.unobserve(el)
+      }
+    }));
     document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
 
-    /* ============ NAV ACTIVE ============ */
     const navL = document.querySelectorAll('.nav-link');
     const sects = [...navL].map(a => document.querySelector(a.getAttribute('href')));
     let navTicking = false;
@@ -2766,24 +2970,27 @@
       });
     }, { passive: true });
 
-    /* ============ MOBILE MENU ============ */
     const mobileToggle = document.getElementById('mobileToggle');
     const navLinksEl = document.querySelector('.nav-links');
     if (mobileToggle) {
       mobileToggle.addEventListener('click', () => {
         navLinksEl.classList.toggle('mobile-open');
+        document.body.style.overflow = navLinksEl.classList.contains('mobile-open') ? 'hidden' : '';
       });
       navLinksEl.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => navLinksEl.classList.remove('mobile-open'));
+        a.addEventListener('click', () => {
+          navLinksEl.classList.remove('mobile-open');
+          document.body.style.overflow = '';
+        });
       });
       document.addEventListener('click', (e) => {
         if (!navLinksEl.contains(e.target) && !mobileToggle.contains(e.target)) {
           navLinksEl.classList.remove('mobile-open');
+          document.body.style.overflow = '';
         }
       });
     }
 
-    /* ============ COMMAND PALETTE ============ */
     const cmd = document.getElementById('cmdk'), cmdInput = document.getElementById('cmdkInput'), cmdList = document.getElementById('cmdkList');
     const cmdItems = [['About', '#about'], ['Skills', '#skills'], ['Projects', '#projects'], ['Experience', '#experience'], ['Certificates', '#certs'], ['Blog', '#blog'], ['Contact', '#contact'], ['Toggle Theme', '__theme'], ['Download Resume', '#']];
     function renderCmd(q = '') { const list = cmdItems.filter(([n]) => n.toLowerCase().includes(q.toLowerCase())); cmdList.innerHTML = list.map(([n, h]) => `<div class="cmdk-item" data-h="${h}">${n}<kbd>↵</kbd></div>`).join('') }
@@ -2795,17 +3002,20 @@
     cmdInput.addEventListener('input', e => renderCmd(e.target.value));
     cmdList.addEventListener('click', e => { const it = e.target.closest('.cmdk-item'); if (!it) return; const h = it.dataset.h; if (h === '__theme') themeBtn.click(); else if (h.startsWith('#')) document.querySelector(h).scrollIntoView({ behavior: 'smooth' }); closeCmd() });
 
-    /* ============ CONTACT FORM ============ */
     const cf = document.getElementById('contact-form');
     if (cf) { cf.addEventListener('submit', async e => { e.preventDefault(); const btn = cf.querySelector('button[type=submit]'); const orig = btn.innerHTML; btn.textContent = 'Sending...'; try { const d = new FormData(cf); const r = await fetch(cf.action, { method: 'POST', body: d, headers: { 'Accept': 'application/json' } }); if (r.ok || r.redirected) { alert("Thanks — I'll be in touch!"); cf.reset(); } else throw 0; } catch { alert("Thanks — I'll be in touch!"); cf.reset(); } btn.innerHTML = orig; }) }
 
-    /* ============ MAGNETIC BUTTONS (desktop only) ============ */
-    /* FIX: this was the main cause of the "transparent square box" glitch on tap —
-       on mobile there's no mousemove before a click, so the button never resets its
-       transform and appears to jump/ghost. Now completely skipped on touch devices. */
     if (!IS_TOUCH) {
       document.querySelectorAll('.btn').forEach(b => {
-        b.addEventListener('mousemove', e => { const r = b.getBoundingClientRect(); b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .15}px,${(e.clientY - r.top - r.height / 2) * .15 - 3}px)` });
+        let raf3 = null;
+        b.addEventListener('mousemove', e => {
+          if (raf3) return;
+          raf3 = requestAnimationFrame(() => {
+            const r = b.getBoundingClientRect();
+            b.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .15}px,${(e.clientY - r.top - r.height / 2) * .15 - 3}px)`;
+            raf3 = null;
+          });
+        });
         b.addEventListener('mouseleave', () => b.style.transform = '');
       });
     }
