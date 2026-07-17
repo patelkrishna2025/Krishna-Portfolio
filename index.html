@@ -1756,6 +1756,181 @@
       border-color: var(--primary)
     }
 
+    /* ===== Blog Article Modal (added) ===== */
+    .blog-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 3000;
+      background: rgba(3, 7, 18, .65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 6vh 4vw;
+      overflow-y: auto;
+    }
+
+    .blog-modal-overlay.open {
+      display: flex;
+      animation: fade .25s ease;
+    }
+
+    .blog-modal {
+      width: min(760px, 100%);
+      max-height: none;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, .5);
+      overflow: hidden;
+      animation: cmdkPop .35s var(--ease);
+      margin-bottom: 6vh;
+    }
+
+    .blog-modal-head {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .blog-modal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .3s, color .3s, border-color .3s;
+    }
+
+    .blog-modal-back:hover {
+      background: var(--grad);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .blog-modal-back svg {
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+    }
+
+    .blog-modal-close {
+      margin-left: auto;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--fg);
+      cursor: pointer;
+      transition: background .3s, color .3s, border-color .3s, transform .25s var(--ease);
+      flex-shrink: 0;
+    }
+
+    .blog-modal-close:hover {
+      background: var(--grad);
+      color: #fff;
+      border-color: transparent;
+      transform: rotate(90deg);
+    }
+
+    .blog-modal-close svg {
+      width: 16px;
+      height: 16px;
+      pointer-events: none;
+    }
+
+    .blog-modal-body {
+      padding: 36px 40px 46px;
+    }
+
+    .blog-modal-body .btag {
+      margin-bottom: 14px;
+    }
+
+    .blog-modal-body h1 {
+      font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+      margin-bottom: 14px;
+    }
+
+    .blog-modal-meta {
+      font-size: 12px;
+      color: var(--fg-soft);
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .blog-modal-content {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--fg-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .blog-modal-content h3 {
+      font-size: 18px;
+      color: var(--fg);
+      margin-top: 10px;
+    }
+
+    .blog-modal-content strong {
+      color: var(--fg);
+    }
+
+    .blog-modal-content ul {
+      padding-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    body.modal-open {
+      overflow: hidden;
+    }
+
+    @media(max-width:640px) {
+      .blog-modal-overlay {
+        padding: 0;
+      }
+
+      .blog-modal {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        margin-bottom: 0;
+      }
+
+      .blog-modal-body {
+        padding: 26px 20px 40px;
+      }
+    }
+
+    /* ===== end Blog Article Modal ===== */
+
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -2683,35 +2858,56 @@
       <input placeholder="Search articles..." id="blogSearch" />
     </div>
     <div class="blog-grid" id="blogGrid">
-      <a class="blog-card reveal feat" data-title="from raw data to real insights a practical guide"
-        href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" rel="noopener">
+      <div class="blog-card reveal feat" data-title="from raw data to real insights a practical guide"
+        data-article="raw-data-insights" role="button" tabindex="0">
         <span class="btag">Data Analytics</span>
         <h3>From Raw Data to Real Insights: A Practical Guide</h3>
         <p>Discover how to transform messy datasets into clear, compelling stories that help business leaders make
           smarter, faster decisions.</p>
         <div class="meta"><span>5 min read</span><span>·</span><span>May 2025</span><span
             class="read-more">Read →</span></div>
-      </a>
-      <a class="blog-card reveal" data-title="demystifying machine learning concepts every analyst should know"
-        href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" rel="noopener">
+      </div>
+      <div class="blog-card reveal" data-title="demystifying machine learning concepts every analyst should know"
+        data-article="demystifying-ml" role="button" tabindex="0">
         <span class="btag">Machine Learning</span>
         <h3>Demystifying Machine Learning: Concepts Every Analyst Should Know</h3>
         <p>Break down supervised vs. unsupervised learning, model evaluation metrics, and why understanding ML is now
           a must-have skill.</p>
         <div class="meta"><span>7 min read</span><span>·</span><span>April 2025</span><span
             class="read-more">Read →</span></div>
-      </a>
-      <a class="blog-card reveal" data-title="10 power bi dashboard tips that will impress any stakeholder"
-        href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" rel="noopener">
+      </div>
+      <div class="blog-card reveal" data-title="10 power bi dashboard tips that will impress any stakeholder"
+        data-article="powerbi-tips" role="button" tabindex="0">
         <span class="btag">Power BI Tips</span>
         <h3>10 Power BI Dashboard Tips That Will Impress Any Stakeholder</h3>
         <p>Elevate your Power BI dashboards from plain to professional with these design, performance, and
           storytelling techniques.</p>
         <div class="meta"><span>6 min read</span><span>·</span><span>March 2025</span><span
             class="read-more">Read →</span></div>
-      </a>
+      </div>
     </div>
   </section>
+
+  <!-- Blog Article Modal (in-page reader, no external navigation) -->
+  <div class="blog-modal-overlay" id="blogModalOverlay">
+    <div class="blog-modal" id="blogModal" role="dialog" aria-modal="true" aria-labelledby="blogModalTitle">
+      <div class="blog-modal-head">
+        <button class="blog-modal-back" id="blogModalBack" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>Back
+        </button>
+        <button class="blog-modal-close" id="blogModalClose" type="button" title="Close" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="blog-modal-body" id="blogModalBody">
+        <!-- article content injected here -->
+      </div>
+    </div>
+  </div>
 
   <section id="contact">
     <div class="reveal">
@@ -2933,6 +3129,115 @@
         cards.forEach(c => { c.style.display = c.dataset.title.includes(q) ? '' : 'none'; });
       });
     })();
+
+    /* ===== Blog article data + in-page modal reader (added) ===== */
+    const blogArticles = {
+      'raw-data-insights': {
+        tag: 'Data Analytics',
+        title: 'From Raw Data to Real Insights: A Practical Guide',
+        meta: '5 min read · May 2025',
+        body: `
+          <p>Every dataset arrives messy. Missing values, inconsistent formats, duplicate rows — the raw material of analytics is rarely ready to use. The real work of a data analyst begins long before a single chart is drawn.</p>
+          <h3>Start with the question, not the data</h3>
+          <p>It's tempting to dive straight into cleaning and exploring, but the most useful analyses start by clarifying what decision the business actually needs to make. A well-framed question keeps the entire workflow focused and prevents wasted effort on interesting but irrelevant patterns.</p>
+          <h3>Clean deliberately</h3>
+          <p>Cleaning isn't just about removing errors — it's about making informed choices on how to handle them. Should missing values be imputed or excluded? Should outliers be capped or investigated? Each decision shapes the final insight, so documenting the reasoning matters as much as the cleaning itself.</p>
+          <h3>Turn numbers into a narrative</h3>
+          <p>A table full of statistics rarely moves a stakeholder to action. The final and most important step is translating findings into a narrative: what changed, why it matters, and what should happen next. Clear visuals paired with a concise storyline are what separate a report that gets read from one that gets ignored.</p>
+          <ul>
+            <li><strong>Define the question</strong> before touching the dataset.</li>
+            <li><strong>Document cleaning decisions</strong> so results are reproducible.</li>
+            <li><strong>Lead with the story</strong>, then support it with the data.</li>
+          </ul>
+          <p>Insight isn't found in the data alone — it's built through the discipline of asking the right questions, cleaning with intent, and communicating with clarity.</p>
+        `
+      },
+      'demystifying-ml': {
+        tag: 'Machine Learning',
+        title: 'Demystifying Machine Learning: Concepts Every Analyst Should Know',
+        meta: '7 min read · April 2025',
+        body: `
+          <p>Machine learning can feel intimidating from the outside, but most of its core ideas are approachable once broken into plain language. Analysts don't need to build models from scratch to benefit from understanding how they work.</p>
+          <h3>Supervised vs. unsupervised learning</h3>
+          <p>Supervised learning uses labeled examples — historical data where the outcome is already known — to teach a model to predict future outcomes, like forecasting churn or sales. Unsupervised learning, on the other hand, looks for hidden structure in data without predefined labels, such as grouping customers into segments based on behavior.</p>
+          <h3>Why evaluation metrics matter</h3>
+          <p>A model's accuracy alone rarely tells the full story. Precision and recall reveal how well a model performs on the outcomes that matter most, especially when classes are imbalanced. Choosing the right metric depends entirely on the business cost of false positives versus false negatives.</p>
+          <h3>From model to decision</h3>
+          <p>A trained model is only useful once its output influences a real decision. That means analysts need to think beyond model performance and consider how predictions will be interpreted, trusted, and acted upon by the people using them.</p>
+          <ul>
+            <li><strong>Supervised learning</strong> predicts known outcomes from labeled data.</li>
+            <li><strong>Unsupervised learning</strong> finds patterns without labels.</li>
+            <li><strong>Metrics should match</strong> the real-world cost of errors.</li>
+          </ul>
+          <p>Understanding these fundamentals equips analysts to collaborate confidently with data science teams and to know when machine learning is — and isn't — the right tool for the job.</p>
+        `
+      },
+      'powerbi-tips': {
+        tag: 'Power BI Tips',
+        title: '10 Power BI Dashboard Tips That Will Impress Any Stakeholder',
+        meta: '6 min read · March 2025',
+        body: `
+          <p>A Power BI dashboard is often the only artifact a stakeholder ever sees from an entire analysis. Getting the design and performance right can be the difference between a dashboard that drives decisions and one that gets closed after a single glance.</p>
+          <h3>Design with intent</h3>
+          <p>Group related visuals together, keep a consistent color palette tied to meaning (not decoration), and use whitespace generously. A dashboard that feels calm is easier to trust than one crammed with every possible chart.</p>
+          <h3>Optimize for performance</h3>
+          <p>Slow dashboards lose stakeholders before the insight even loads. Reducing the number of visuals per page, using aggregated tables instead of raw row-level data, and applying query folding where possible all keep reports responsive.</p>
+          <h3>Guide the eye, guide the story</h3>
+          <p>Placing the most important KPI in the top-left corner, using bookmarks for guided walkthroughs, and adding tooltips with context all help stakeholders find the insight without needing a live explanation.</p>
+          <ul>
+            <li><strong>Consistency</strong> in color and layout builds trust.</li>
+            <li><strong>Performance</strong> is part of the user experience.</li>
+            <li><strong>Guided storytelling</strong> beats a wall of charts.</li>
+          </ul>
+          <p>Small refinements — a cleaner layout, faster load times, a clearer visual hierarchy — compound into a dashboard stakeholders actually want to open.</p>
+        `
+      }
+    };
+
+    (function () {
+      const overlay = document.getElementById('blogModalOverlay');
+      const modal = document.getElementById('blogModal');
+      const body = document.getElementById('blogModalBody');
+      const closeBtn = document.getElementById('blogModalClose');
+      const backBtn = document.getElementById('blogModalBack');
+      let lastFocused = null;
+
+      function openArticle(key) {
+        const a = blogArticles[key];
+        if (!a) return;
+        body.innerHTML = `
+          <span class="btag">${a.tag}</span>
+          <h1 id="blogModalTitle">${a.title}</h1>
+          <div class="blog-modal-meta">${a.meta}</div>
+          <div class="blog-modal-content">${a.body}</div>
+        `;
+        lastFocused = document.activeElement;
+        overlay.classList.add('open');
+        document.body.classList.add('modal-open');
+        modal.scrollTop = 0;
+        overlay.scrollTop = 0;
+        closeBtn.focus();
+      }
+
+      function closeArticle() {
+        overlay.classList.remove('open');
+        document.body.classList.remove('modal-open');
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+      }
+
+      document.querySelectorAll('#blogGrid .blog-card').forEach(card => {
+        card.addEventListener('click', () => openArticle(card.dataset.article));
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openArticle(card.dataset.article); }
+        });
+      });
+
+      closeBtn.addEventListener('click', closeArticle);
+      backBtn.addEventListener('click', closeArticle);
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeArticle(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeArticle(); });
+    })();
+    /* ===== end blog modal reader ===== */
 
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); if (e.target.classList.contains('skill')) { e.target.querySelector('.bar i').style.width = e.target.querySelector('.bar i').dataset.w + '%' } io.unobserve(e.target); } }), { threshold: .05, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal,.skill,.proj,.exp,.blog-card,.stat').forEach(e => { e.classList.add('reveal'); io.observe(e) });
