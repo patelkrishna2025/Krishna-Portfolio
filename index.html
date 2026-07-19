@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Krishna Patel — Data Scientist</title>
+  <title>Krishna Patel — Data Scientist & Analyst</title>
   <meta name="description"
     content="Krishna Patel — Premium Data Analyst & Data Scientist Portfolio. Turning data into decisions with SQL, Python, and Power BI." />
   <meta name="theme-color" content="#030712" />
@@ -2373,6 +2373,326 @@
         padding: 50px 5vw;
       }
     }
+
+    /* ========================================================================
+       ADMIN EDIT MODE — added styles
+       Everything below is scoped so it never appears for regular visitors.
+       Nothing here touches or overrides existing visitor-facing rules above.
+       ======================================================================== */
+
+    /* Hidden by default. Only unhidden by JS after correct password. */
+    #adminLoginOverlay,
+    #adminBar,
+    .admin-edit-icon,
+    #adminPhotoInput {
+      display: none;
+    }
+
+    /* --- Admin Login Overlay (opened via Ctrl+Shift+E or #admin) --- */
+    #adminLoginOverlay.open {
+      display: flex;
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      background: rgba(3, 7, 18, .75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fade .25s ease;
+    }
+
+    .admin-login-box {
+      width: min(380px, 100%);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, .6);
+      animation: cmdkPop .3s var(--ease);
+    }
+
+    .admin-login-box h3 {
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .admin-login-box p {
+      font-size: 13px;
+      color: var(--fg-soft);
+      margin-bottom: 20px;
+    }
+
+    .admin-login-box input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      margin-bottom: 12px;
+      transition: border-color .3s;
+    }
+
+    .admin-login-box input:focus {
+      border-color: var(--primary);
+    }
+
+    .admin-login-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .admin-login-actions .btn {
+      flex: 1;
+      justify-content: center;
+    }
+
+    .admin-login-error {
+      font-size: 12px;
+      color: #ef4444;
+      margin: -4px 0 12px;
+      min-height: 14px;
+    }
+
+    /* --- Floating Admin Bar (visible only in edit mode, to the admin) --- */
+    #adminBar.open {
+      display: flex;
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4500;
+      background: var(--nav-bg);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 10px 12px;
+      gap: 8px;
+      align-items: center;
+      box-shadow: 0 20px 60px -10px rgba(0, 0, 0, .4);
+    }
+
+    #adminBar .admin-tag {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      padding: 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #adminBar .admin-tag .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      animation: pulse 1.5s infinite;
+    }
+
+    /* Small edit-mode-only pencil icon shown on editable blocks */
+    .admin-editing [data-editable] {
+      outline: 1.5px dashed rgba(37, 99, 235, .5);
+      outline-offset: 4px;
+      border-radius: 8px;
+      position: relative;
+      transition: outline-color .2s;
+    }
+
+    .admin-editing [data-editable]:hover {
+      outline-color: rgba(37, 99, 235, .9);
+    }
+
+    .admin-editing [data-editable][contenteditable="true"]:focus {
+      outline: 2px solid var(--primary);
+      background: rgba(37, 99, 235, .06);
+    }
+
+    /* Small clickable pencil for photo replace / structured items */
+    .admin-editing .admin-edit-icon {
+      display: grid;
+      place-items: center;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--grad);
+      color: #fff;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, .5);
+      border: none;
+    }
+
+    .admin-editing .admin-edit-icon svg {
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+    }
+
+    .admin-editing .profile-card {
+      position: relative;
+    }
+
+    /* Editable message board shown in Contact section only in edit mode / normally hidden if empty */
+    #contactMessageBlock {
+      margin-top: 20px;
+    }
+
+    #contactMessageBlock .cmb-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--fg-soft);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    /* ========================================================================
+       ADMIN ADD/DELETE — new styles for Projects, Experience, Certificates, Blog
+       Hidden by default; only shown while .admin-editing is on <body>.
+       ======================================================================== */
+
+    .admin-add-btn {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 28px;
+    }
+
+    .admin-editing .admin-add-btn {
+      display: inline-flex;
+    }
+
+    .admin-delete-icon {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      z-index: 12;
+      box-shadow: 0 6px 16px rgba(239, 68, 68, .5);
+      transition: transform .2s var(--ease), background .2s;
+    }
+
+    .admin-delete-icon:hover {
+      background: #dc2626;
+      transform: scale(1.08);
+    }
+
+    .admin-editing .admin-delete-icon {
+      display: flex;
+    }
+
+    .admin-delete-icon svg {
+      width: 15px;
+      height: 15px;
+      pointer-events: none;
+    }
+
+    .admin-editing .proj,
+    .admin-editing .exp,
+    .admin-editing .cert,
+    .admin-editing .blog-card {
+      position: relative;
+    }
+
+    /* Small modal used to collect fields for a new item */
+    #adminAddModalOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 5200;
+      background: rgba(3, 7, 18, .75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    #adminAddModalOverlay.open {
+      display: flex;
+      animation: fade .25s ease;
+    }
+
+    .admin-add-box {
+      width: min(480px, 100%);
+      max-height: 86vh;
+      overflow-y: auto;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 40px 100px -20px rgba(0, 0, 0, .6);
+      animation: cmdkPop .3s var(--ease);
+    }
+
+    .admin-add-box h3 {
+      font-size: 19px;
+      margin-bottom: 18px;
+    }
+
+    .admin-add-box label {
+      display: block;
+      font-size: 12px;
+      color: var(--fg-soft);
+      margin: 14px 0 6px;
+      font-weight: 500;
+    }
+
+    .admin-add-box input,
+    .admin-add-box textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 13px;
+      outline: none;
+      transition: border-color .3s;
+    }
+
+    .admin-add-box textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .admin-add-box input:focus,
+    .admin-add-box textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .admin-add-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .admin-add-actions .btn {
+      flex: 1;
+      justify-content: center;
+    }
   </style>
 </head>
 
@@ -2392,7 +2712,7 @@
       <div class="logo"
         style="background:linear-gradient(145deg, #6366F1 0%, #8B5CF6 50%, #3B82F6 100%);display:grid;place-items:center;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:15px;box-shadow:0 4px 12px rgba(99,102,241,.4);">
         KP</div>
-      <span class="brand-name"></span>
+      <span class="brand-name" data-editable="brandName"></span>
     </a>
     <div class="nav-links">
       <a href="#about" class="nav-link">About</a>
@@ -2434,13 +2754,14 @@
       <div class="badge-live"><span class="dot"></span>Available for
         opportunities</div>
       <h1 class="hero-title">
-        <span class="line"><span class="word">Krishna</span> <span class="word grad-text">Patel.</span></span>
-        <span class="line"><span class="word">Data into
+        <span class="line"><span class="word" data-editable="firstName">Krishna</span> <span
+            class="word grad-text" data-editable="lastName">Patel.</span></span>
+        <span class="line"><span class="word" data-editable="heroTagline">Data into
             decisions.</span></span>
       </h1>
       <div style="font-family:'Space Grotesk';font-size:clamp(1.1rem,2vw,1.5rem);font-weight:500;margin-top:6px">I'm
         a <span class="typewrite" id="tw"></span></div>
-      <p class="hero-desc">Data Science & Analyst with expertise in SQL, Python, and Power BI.
+      <p class="hero-desc" data-editable="professionalSummary">Data Science & Analyst with expertise in SQL, Python, and Power BI.
         I transform complex datasets into clear, actionable insights that empower organizations to make informed
         decisions, optimize processes,
         and achieve measurable business outcomes.</p>
@@ -2485,9 +2806,18 @@
             </div>
           </div>
         </div>
+        <!-- Admin-only pencil icon to replace profile photo. Hidden unless .admin-editing is on <body> -->
+        <button type="button" class="admin-edit-icon" id="photoEditBtn" title="Change profile photo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+          </svg>
+        </button>
       </div>
     </div>
   </section>
+
+  <!-- Hidden native file input used to pick a new profile photo. Never shown to visitors. -->
+  <input type="file" id="adminPhotoInput" accept="image/*" />
 
   <div class="marquee">
     <div class="marquee-track">
@@ -2513,7 +2843,7 @@
         <div
           style="padding:24px;border-radius:20px;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(20px)">
           <h4 style="font-size:16px;margin-bottom:12px">About Me</h4>
-          <p style="font-size:13px;color:var(--fg-soft);line-height:1.8;margin-bottom:14px">
+          <p data-editable="aboutMe" style="font-size:13px;color:var(--fg-soft);line-height:1.8;margin-bottom:14px">
             I am a detail-oriented Data Science & Analyst with a strong background
             in data analysis, process optimization, and stakeholder management.
             I specialize in transforming business requirements into actionable
@@ -2523,19 +2853,19 @@
             the gap between business needs and technical solutions to drive
             measurable results.
           </p>
-          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px" data-editable-list="aboutHighlights">
             <li style="font-size:13px;color:var(--fg-soft);display:flex;gap:10px"><span
-                style="color:var(--primary)">▸</span> IBM SkillsBuild Data
-              Analysis certified (8-course series)</li>
+                style="color:var(--primary)">▸</span> <span data-editable-item>IBM SkillsBuild Data
+              Analysis certified (8-course series)</span></li>
             <li style="font-size:13px;color:var(--fg-soft);display:flex;gap:10px"><span
-                style="color:var(--primary)">▸</span> Completed Deloitte Data
-              Analytics Job Simulation</li>
+                style="color:var(--primary)">▸</span> <span data-editable-item>Completed Deloitte Data
+              Analytics Job Simulation</span></li>
             <li style="font-size:13px;color:var(--fg-soft);display:flex;gap:10px"><span
-                style="color:var(--primary)">▸</span> AI/ML Intern at Microsoft
-              Elevate</li>
+                style="color:var(--primary)">▸</span> <span data-editable-item>AI/ML Intern at Microsoft
+              Elevate</span></li>
             <li style="font-size:13px;color:var(--fg-soft);display:flex;gap:10px"><span
-                style="color:var(--primary)">▸</span> Active on AI tools: ChatGPT,
-              Gemini, Claude AI, Perplexity</li>
+                style="color:var(--primary)">▸</span> <span data-editable-item>Active on AI tools: ChatGPT,
+              Gemini, Claude AI, Perplexity</span></li>
           </ul>
         </div>
       </div>
@@ -2560,16 +2890,22 @@
       <p class="section-sub">Real problems, measurable impact. Every project
         links to code and case study.</p>
     </div>
+    <button type="button" class="btn primary admin-add-btn" id="addProjectBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12h14" />
+      </svg>Add Project
+    </button>
     <div class="proj-grid" id="projGrid">
       <div class="proj reveal">
+        <button type="button" class="admin-delete-icon" title="Delete this project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="proj-thumb">
           <img src="sustainability.webp" alt="AI Sustainability Project" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>Python</span><span>ML</span><span>AI</span></div>
-          <h3>AI-Powered Sustainability Intelligence
+          <h3 data-editable-item>AI-Powered Sustainability Intelligence
             System</h3>
-          <p class="proj-desc">This project is developed in the domain of
+          <p class="proj-desc" data-editable-item>This project is developed in the domain of
             Artificial Intelligence (AI)
             and Machine Learning (ML), focusing on sustainability and
             environmental data analysis.
@@ -2591,13 +2927,14 @@
         </div>
       </div>
       <div class="proj reveal">
+        <button type="button" class="admin-delete-icon" title="Delete this project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="proj-thumb">
           <img src="dsj.jpg" alt="Data Science Salaries" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>Python</span><span>Pandas</span><span>EDA</span></div>
-          <h3>Data Science Salaries</h3>
-          <p class="proj-desc">Explored global Data Science salary trends using
+          <h3 data-editable-item>Data Science Salaries</h3>
+          <p class="proj-desc" data-editable-item>Explored global Data Science salary trends using
             real-world data to understand the impact of roles, experience
             levels, and company size.</p>
           <div class="proj-links">
@@ -2614,13 +2951,14 @@
         </div>
       </div>
       <div class="proj reveal">
+        <button type="button" class="admin-delete-icon" title="Delete this project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="proj-thumb">
           <img src="nda.webp" alt="Netflix Data Analysis" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>Python</span><span>ML</span><span>Viz</span></div>
-          <h3>Netflix Data Analysis</h3>
-          <p class="proj-desc">Analyzed Netflix's global catalog to uncover
+          <h3 data-editable-item>Netflix Data Analysis</h3>
+          <p class="proj-desc" data-editable-item>Analyzed Netflix's global catalog to uncover
             trends in genres, countries, and release years using data cleaning,
             visualization, and a predictive model (87% accuracy).</p>
           <div class="proj-links">
@@ -2637,13 +2975,14 @@
         </div>
       </div>
       <div class="proj reveal">
+        <button type="button" class="admin-delete-icon" title="Delete this project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="proj-thumb">
           <img src="oda.png" alt="Olympics Data Analysis" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>SQL</span><span>Power BI</span></div>
-          <h3>Olympics Data Analysis</h3>
-          <p class="proj-desc">Reveals trends, top-performing countries, and
+          <h3 data-editable-item>Olympics Data Analysis</h3>
+          <p class="proj-desc" data-editable-item>Reveals trends, top-performing countries, and
             athlete achievements over time using the Olympic Games global
             dataset (120 years, 271k+ athlete records).</p>
           <div class="proj-links">
@@ -2660,13 +2999,14 @@
         </div>
       </div>
       <div class="proj reveal">
+        <button type="button" class="admin-delete-icon" title="Delete this project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="proj-thumb">
           <img src="ifa.webp" alt="Iris Flower Classification" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>ML</span><span>Scikit-learn</span></div>
-          <h3>Iris Flower Classification</h3>
-          <p class="proj-desc">Predicts species (Setosa, Versicolor, Virginica)
+          <h3 data-editable-item>Iris Flower Classification</h3>
+          <p class="proj-desc" data-editable-item>Predicts species (Setosa, Versicolor, Virginica)
             using sepal & petal measurements — includes visualization, model
             training, and evaluation (98% accuracy with Random Forest).</p>
           <div class="proj-links">
@@ -2683,13 +3023,14 @@
         </div>
       </div>
       <div class="proj reveal">
+        <button type="button" class="admin-delete-icon" title="Delete this project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="proj-thumb">
           <img src="sustainability.webp" alt="Tourism Data" loading="lazy">
         </div>
         <div class="proj-body">
           <div class="proj-tags"><span>Tableau</span><span>Data Viz</span></div>
-          <h3>Tourism 2023–2024</h3>
-          <p class="proj-desc">Interactive Tableau story-board analyzing India's
+          <h3 data-editable-item>Tourism 2023–2024</h3>
+          <p class="proj-desc" data-editable-item>Interactive Tableau story-board analyzing India's
             tourism landscape — visitor footfall, seasonal trends, and revenue
             contribution by region.</p>
           <div class="proj-links">
@@ -2723,43 +3064,52 @@
       <p class="section-sub">A quiet timeline of internships, tools, and
         outcomes.</p>
     </div>
+    <button type="button" class="btn primary admin-add-btn" id="addExperienceBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12h14" />
+      </svg>Add Experience
+    </button>
     <div class="exp-grid" id="expGrid">
       <div class="exp reveal">
-        <div class="yr">Jan 2026 — Apr 2026</div>
+        <button type="button" class="admin-delete-icon" title="Delete this experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
+        <div class="yr" data-editable-item>Jan 2026 — Apr 2026</div>
         <div>
-          <h4>AI/ML Intern</h4>
-          <div class="co">Microsoft Elevate · Remote</div>
-          <p>Worked on Artificial Intelligence and Machine Learning, Microsoft
+          <h4 data-editable-item>AI/ML Intern</h4>
+          <div class="co" data-editable-item>Microsoft Elevate · Remote</div>
+          <p data-editable-item>Worked on Artificial Intelligence and Machine Learning, Microsoft
             Copilot and other Emerging Technologies.</p>
         </div>
       </div>
       <div class="exp reveal">
-        <div class="yr">Sep 2025 — Dec 2025</div>
+        <button type="button" class="admin-delete-icon" title="Delete this experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
+        <div class="yr" data-editable-item>Sep 2025 — Dec 2025</div>
         <div>
-          <h4>Data Analyst</h4>
-          <div class="co">Unified Mentor Pvt. Ltd · Remote</div>
-          <p>Virtual Data Analysis internship developing skills in data
+          <h4 data-editable-item>Data Analyst</h4>
+          <div class="co" data-editable-item>Unified Mentor Pvt. Ltd · Remote</div>
+          <p data-editable-item>Virtual Data Analysis internship developing skills in data
             cleaning, statistical analysis, and visualization using Excel and
             SQL. Strengthened problem-solving and industry-ready
             decision-making skills.</p>
         </div>
       </div>
       <div class="exp reveal">
-        <div class="yr">Jul 2025</div>
+        <button type="button" class="admin-delete-icon" title="Delete this experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
+        <div class="yr" data-editable-item>Jul 2025</div>
         <div>
-          <h4>Data Analyst Job Simulation</h4>
-          <div class="co">Deloitte · Forage</div>
-          <p>Participated in Deloitte's Data Analyst Job Simulation, gaining
+          <h4 data-editable-item>Data Analyst Job Simulation</h4>
+          <div class="co" data-editable-item>Deloitte · Forage</div>
+          <p data-editable-item>Participated in Deloitte's Data Analyst Job Simulation, gaining
             hands-on experience in data collection, cleaning, analysis, and
             visualization to solve real-world business problems.</p>
         </div>
       </div>
       <div class="exp reveal">
-        <div class="yr">Jul 2025</div>
+        <button type="button" class="admin-delete-icon" title="Delete this experience"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
+        <div class="yr" data-editable-item>Jul 2025</div>
         <div>
-          <h4>Data Analyst Intern</h4>
-          <div class="co">CSRBOX · Remote</div>
-          <p>Virtual Data Analysis internship gaining hands-on experience in
+          <h4 data-editable-item>Data Analyst Intern</h4>
+          <div class="co" data-editable-item>CSRBOX · Remote</div>
+          <p data-editable-item>Virtual Data Analysis internship gaining hands-on experience in
             data cleaning, analysis, and visualization using Excel, Tableau,
             and SQL.</p>
         </div>
@@ -2774,69 +3124,80 @@
       <p class="section-sub">Curriculum from IBM, Microsoft, Deloitte, and
         more.</p>
     </div>
+    <button type="button" class="btn primary admin-add-btn" id="addCertBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12h14" />
+      </svg>Add Certificate
+    </button>
     <div class="cert-filters reveal" id="certFilters"><button class="active" data-c="All">All</button><button
         class="" data-c="Analytics">Analytics</button><button class="" data-c="Data Science">Data Science</button>
       <button class="" data-c="BI">BI</button><button class="" data-c="Web">Web</button><button class=""
         data-c="AI/ML">AI/ML</button></div>
     <div class="cert-scroll" id="certScroll">
       <div class="cert reveal" data-cat="Data Science">
+        <button type="button" class="admin-delete-icon" title="Delete this certificate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
             stroke-width="2">
             <circle cx="12" cy="8" r="6" />
             <path d="m9 14-2 8 5-3 5 3-2-8" />
           </svg></div>
-        <h4>Data Analysis Course</h4>
-        <div class="issuer">Issued by IBM SkillsBuild</div>
+        <h4 data-editable-item>Data Analysis Course</h4>
+        <div class="issuer" data-editable-item>Issued by IBM SkillsBuild</div>
         <span class="cat">Data Science</span><span class="yr">2025</span>
       </div>
       <div class="cert reveal" data-cat="Analytics">
+        <button type="button" class="admin-delete-icon" title="Delete this certificate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
             stroke-width="2">
             <circle cx="12" cy="8" r="6" />
             <path d="m9 14-2 8 5-3 5 3-2-8" />
           </svg></div>
-        <h4>Data Analyst Intern</h4>
-        <div class="issuer">Issued by CSRBOX</div>
+        <h4 data-editable-item>Data Analyst Intern</h4>
+        <div class="issuer" data-editable-item>Issued by CSRBOX</div>
         <span class="cat">Analytics</span><span class="yr">2025</span>
       </div>
       <div class="cert reveal" data-cat="BI">
+        <button type="button" class="admin-delete-icon" title="Delete this certificate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
             stroke-width="2">
             <circle cx="12" cy="8" r="6" />
             <path d="m9 14-2 8 5-3 5 3-2-8" />
           </svg></div>
-        <h4>Data Analysis Intern</h4>
-        <div class="issuer">Issued by Unified Mentor Pvt. Ltd</div>
+        <h4 data-editable-item>Data Analysis Intern</h4>
+        <div class="issuer" data-editable-item>Issued by Unified Mentor Pvt. Ltd</div>
         <span class="cat">BI</span><span class="yr">2024</span>
       </div>
       <div class="cert reveal" data-cat="Analytics">
+        <button type="button" class="admin-delete-icon" title="Delete this certificate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
             stroke-width="2">
             <circle cx="12" cy="8" r="6" />
             <path d="m9 14-2 8 5-3 5 3-2-8" />
           </svg></div>
-        <h4>Data Analytics Virtual Experience</h4>
-        <div class="issuer">Issued by Deloitte · Forage</div>
+        <h4 data-editable-item>Data Analytics Virtual Experience</h4>
+        <div class="issuer" data-editable-item>Issued by Deloitte · Forage</div>
         <span class="cat">Analytics</span><span class="yr">2025</span>
       </div>
       <div class="cert reveal" data-cat="AI/ML">
+        <button type="button" class="admin-delete-icon" title="Delete this certificate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
             stroke-width="2">
             <circle cx="12" cy="8" r="6" />
             <path d="m9 14-2 8 5-3 5 3-2-8" />
           </svg></div>
-        <h4>AI/ML Intern</h4>
-        <div class="issuer">Issued by Microsoft Elevate</div>
+        <h4 data-editable-item>AI/ML Intern</h4>
+        <div class="issuer" data-editable-item>Issued by Microsoft Elevate</div>
         <span class="cat">AI/ML</span><span class="yr">2026</span>
       </div>
       <div class="cert reveal" data-cat="Web">
+        <button type="button" class="admin-delete-icon" title="Delete this certificate"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <div class="badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor"
             stroke-width="2">
             <circle cx="12" cy="8" r="6" />
             <path d="m9 14-2 8 5-3 5 3-2-8" />
           </svg></div>
-        <h4>Web Development</h4>
-        <div class="issuer">Issued by Null Classes</div>
+        <h4 data-editable-item>Web Development</h4>
+        <div class="issuer" data-editable-item>Issued by Null Classes</div>
         <span class="cat">Web</span><span class="yr">2025</span>
       </div>
     </div>
@@ -2854,12 +3215,18 @@
       <p class="section-sub">Long-form essays and short reads on analytics,
         ML, and career.</p>
     </div>
+    <button type="button" class="btn primary admin-add-btn" id="addBlogBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 5v14M5 12h14" />
+      </svg>Add Article
+    </button>
     <div class="blog-search reveal">
       <input placeholder="Search articles..." id="blogSearch" />
     </div>
     <div class="blog-grid" id="blogGrid">
       <div class="blog-card reveal feat" data-title="from raw data to real insights a practical guide"
         data-article="raw-data-insights" role="button" tabindex="0">
+        <button type="button" class="admin-delete-icon" title="Delete this article"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <span class="btag">Data Analytics</span>
         <h3>From Raw Data to Real Insights: A Practical Guide</h3>
         <p>Discover how to transform messy datasets into clear, compelling stories that help business leaders make
@@ -2869,6 +3236,7 @@
       </div>
       <div class="blog-card reveal" data-title="demystifying machine learning concepts every analyst should know"
         data-article="demystifying-ml" role="button" tabindex="0">
+        <button type="button" class="admin-delete-icon" title="Delete this article"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <span class="btag">Machine Learning</span>
         <h3>Demystifying Machine Learning: Concepts Every Analyst Should Know</h3>
         <p>Break down supervised vs. unsupervised learning, model evaluation metrics, and why understanding ML is now
@@ -2878,6 +3246,7 @@
       </div>
       <div class="blog-card reveal" data-title="10 power bi dashboard tips that will impress any stakeholder"
         data-article="powerbi-tips" role="button" tabindex="0">
+        <button type="button" class="admin-delete-icon" title="Delete this article"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg></button>
         <span class="btag">Power BI Tips</span>
         <h3>10 Power BI Dashboard Tips That Will Impress Any Stakeholder</h3>
         <p>Elevate your Power BI dashboards from plain to professional with these design, performance, and
@@ -2919,16 +3288,16 @@
     </div>
     <div class="contact-grid">
       <div class="contact-info reveal">
-        <h3>Reach out anywhere.</h3>
-        <p>Prefer email or LinkedIn — I'm most active there. Always happy to
+        <h3 data-editable="contactHeading">Reach out anywhere.</h3>
+        <p data-editable="contactIntro">Prefer email or LinkedIn — I'm most active there. Always happy to
           talk about analytics, ML pipelines, and career moves.</p>
         <div class="contact-list">
-          <a class="cl-item" href="mailto:krishnpatel6824@gmail.com">
+          <a class="cl-item" href="mailto:krishnpatel6824@gmail.com" id="contactEmailLink">
             <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="3" y="5" width="18" height="14" rx="2" />
                 <path d="m3 7 9 6 9-6" />
               </svg></div>
-            <div><b>krishnpatel6824@gmail.com</b><span>Drop
+            <div><b data-editable="contactEmail">krishnpatel6824@gmail.com</b><span>Drop
                 a line</span></div>
           </a>
           <a class="cl-item" href="#">
@@ -2936,30 +3305,43 @@
                 <path d="M21 10c0 6-9 13-9 13S3 16 3 10a9 9 0 1 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg></div>
-            <div><b>Surat,
-                India</b><span>Remote , Onsite , Hybrid-friendly</span></div>
+            <div><b data-editable="contactLocation">Surat,
+                India</b><span data-editable="contactAvailability">Remote , Onsite , Hybrid-friendly</span></div>
           </a>
-          <a class="cl-item" href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank">
+          <a class="cl-item" href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank"
+            id="contactLinkedinLink">
             <div class="ic"><svg viewBox="0 0 24 24" fill="currentColor">
                 <path
                   d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.4 0h4.37v1.9h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 6.99V22h-4.55v-6.16c0-1.47-.03-3.36-2.05-3.36-2.05 0-2.37 1.6-2.37 3.25V22H7.62V8z" />
               </svg></div>
-            <div><b>linkedin.com/in/patel-krishna-u1111</b><span>Let's
+            <div><b data-editable="contactLinkedinText">linkedin.com/in/patel-krishna-u1111</b><span>Let's
                 connect</span></div>
           </a>
         </div>
+
+        <!-- Editable Contact Message block (added). Visible to everyone as a note under contact info;
+             the text itself is editable only in Admin Edit Mode. -->
+        <div id="contactMessageBlock">
+          <span class="cmb-label">A note from me</span>
+          <p data-editable="contactMessage" style="font-size:13px;color:var(--fg-soft);line-height:1.7">
+            Thanks for stopping by my portfolio! Feel free to reach out for collaborations,
+            opportunities, or just to say hi.
+          </p>
+        </div>
+
         <div class="socials">
-          <a href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" title="LinkedIn"><svg
+          <a href="https://www.linkedin.com/in/patel-krishna-u1111" target="_blank" title="LinkedIn"
+            id="socialLinkedin"><svg
               viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8h4.56v14H.22V8zm7.4 0h4.37v1.9h.06c.61-1.15 2.1-2.36 4.32-2.36 4.62 0 5.47 3.04 5.47 6.99V22h-4.55v-6.16c0-1.47-.03-3.36-2.05-3.36-2.05 0-2.37 1.6-2.37 3.25V22H7.62V8z" />
             </svg></a>
-          <a href="https://github.com/patelkrishna2025" target="_blank" title="GitHub"><svg viewBox="0 0 24 24"
-              fill="currentColor">
+          <a href="https://github.com/patelkrishna2025" target="_blank" title="GitHub" id="socialGithub"><svg
+              viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.08 1.84 2.83 1.3 3.52 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.94 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.63-5.48 5.93.43.38.82 1.11.82 2.24v3.32c0 .32.22.7.83.58A12 12 0 0 0 12 .5z" />
             </svg></a>
-          <a href="mailto:krishnpatel6824@gmail.com" title="Email"><svg viewBox="0 0 24 24" fill="none"
+          <a href="mailto:krishnpatel6824@gmail.com" title="Email" id="socialEmail"><svg viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2">
               <rect x="3" y="5" width="18" height="14" rx="2" />
               <path d="m3 7 9 6 9-6" />
@@ -2998,6 +3380,51 @@
         </svg></a>
     </div>
   </footer>
+
+  <!-- ========================================================================
+       ADMIN EDIT MODE — hidden UI elements
+       These stay display:none for every regular visitor. JS only reveals
+       them after the correct password is entered via Ctrl+Shift+E or #admin.
+       ======================================================================== -->
+
+  <!-- Admin Login Overlay -->
+  <div id="adminLoginOverlay">
+    <div class="admin-login-box">
+      <h3>Admin Login</h3>
+      <p>Enter the admin password to enable Edit Mode.</p>
+      <input type="password" id="adminPasswordInput" placeholder="Password" autocomplete="off" />
+      <div class="admin-login-error" id="adminLoginError"></div>
+      <div class="admin-login-actions">
+        <button class="btn ghost" type="button" id="adminLoginCancel">Cancel</button>
+        <button class="btn primary" type="button" id="adminLoginSubmit">Login</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Admin Bar: shown only after successful login -->
+  <div id="adminBar">
+    <span class="admin-tag"><span class="dot"></span>Admin</span>
+    <button class="btn ghost" type="button" id="editModeToggleBtn">Edit Mode</button>
+    <button class="btn primary" type="button" id="adminSaveBtn" style="display:none">Save</button>
+    <button class="btn ghost" type="button" id="adminCancelBtn" style="display:none">Cancel</button>
+    <button class="icon-btn" type="button" id="adminLogoutBtn" title="Log out of admin">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Add-item modal used by all four "Add" buttons -->
+  <div id="adminAddModalOverlay">
+    <div class="admin-add-box">
+      <h3 id="adminAddModalTitle">Add Item</h3>
+      <div id="adminAddModalFields"></div>
+      <div class="admin-add-actions">
+        <button class="btn ghost" type="button" id="adminAddCancelBtn">Cancel</button>
+        <button class="btn primary" type="button" id="adminAddConfirmBtn">Add</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     const IS_TOUCH = window.matchMedia('(hover: none), (pointer: coarse)').matches;
@@ -3046,6 +3473,16 @@
 
     (function loadAvatar() {
       const box = document.getElementById('avatarBox');
+      // Admin edit: if a custom photo was saved to Local Storage, prefer that.
+      const savedPhoto = localStorage.getItem('admin_profilePhoto');
+      if (savedPhoto) {
+        box.innerHTML = '';
+        const img = new Image();
+        img.alt = 'Krishna Patel';
+        img.src = savedPhoto;
+        box.appendChild(img);
+        return;
+      }
       const img = new Image();
       img.onload = () => {
         box.innerHTML = '';
@@ -3083,10 +3520,10 @@
       { n: 'Web Development', d: 'HTML · CSS · JS · APIs', l: 78, i: '<path d="M3 3v18h18"/><path d="M3 15c4-6 8 2 12-4s6 2 6 2"/>' },
       { n: 'Git & GitHub', d: 'Version control · Collaboration', l: 80, i: '<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="12" r="3"/><path d="M6 9v6M9 6h6a3 3 0 0 1 3 3v0"/>' }
     ];
-    document.getElementById('skillsGrid').innerHTML = skills.map(s => `
+    document.getElementById('skillsGrid').innerHTML = skills.map((s, idx) => `
   <div class="skill reveal">
     <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">${s.i}</svg></div>
-    <h4>${s.n}</h4><p>${s.d}</p>
+    <h4 data-editable-item data-skill-idx="${idx}" data-skill-field="name">${s.n}</h4><p data-editable-item data-skill-idx="${idx}" data-skill-field="desc">${s.d}</p>
     <div class="bar"><i data-w="${s.l}"></i></div>
     <div class="lvl">${s.l}% proficiency</div>
   </div>`).join('');
@@ -3225,12 +3662,21 @@
         if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
       }
 
-      document.querySelectorAll('#blogGrid .blog-card').forEach(card => {
-        card.addEventListener('click', () => openArticle(card.dataset.article));
-        card.addEventListener('keydown', e => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openArticle(card.dataset.article); }
+      function bindCardClicks() {
+        document.querySelectorAll('#blogGrid .blog-card').forEach(card => {
+          if (card.dataset.boundClick === '1') return;
+          card.dataset.boundClick = '1';
+          card.addEventListener('click', (e) => {
+            if (e.target.closest('.admin-delete-icon')) return;
+            openArticle(card.dataset.article);
+          });
+          card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openArticle(card.dataset.article); }
+          });
         });
-      });
+      }
+      bindCardClicks();
+      window.__rebindBlogCards = bindCardClicks;
 
       closeBtn.addEventListener('click', closeArticle);
       backBtn.addEventListener('click', closeArticle);
@@ -3324,6 +3770,551 @@
         b.addEventListener('mouseleave', () => b.style.transform = '');
       });
     }
+
+    /* ========================================================================
+       ADMIN EDIT MODE — core logic
+       -------------------------------------------------------------------
+       Design summary:
+       - ADMIN_PASSWORD is checked client-side only. This is NOT real
+         security (anyone can read this file's source and see the
+         password). It's a convenience gate to stop casual visitors from
+         opening edit mode, not a defense against a determined attacker.
+       - The login overlay only ever opens via Ctrl+Shift+E or #admin,
+         and is `display:none` otherwise so it never renders in the DOM
+         visually for normal visitors.
+       - Once logged in this browser session, an "Edit Mode" button
+         appears in a floating Admin Bar. Turning Edit Mode on makes all
+         [data-editable] / [data-editable-item] elements contentEditable
+         and reveals the photo-change pencil icon, plus Add/Delete
+         controls for Projects, Experience, Certificates and Blog.
+       - Save serializes all editable text (and the profile photo as a
+         base64 data URL), the full projects/experience/certs/blog HTML,
+         into localStorage. On every page load, saved values (if any)
+         are applied automatically, replacing defaults.
+       - Cancel reverts any unsaved DOM edits back to the last saved
+         (or default) state.
+       ======================================================================== */
+    (function adminEditSystem() {
+      // --- Configuration ---
+      // CHANGE THIS PASSWORD before publishing your site.
+      const ADMIN_PASSWORD = 'krishna@admin2026';
+      const SESSION_KEY = 'admin_session_active'; // sessionStorage: cleared when tab closes
+      const DATA_KEY = 'admin_portfolio_data';    // localStorage: persists across visits
+      const PHOTO_KEY = 'admin_profilePhoto';     // localStorage: base64 photo
+      const SECTIONS_KEY = 'admin_sections_html'; // localStorage: innerHTML for add/delete-capable grids
+
+      // --- Element references ---
+      const loginOverlay = document.getElementById('adminLoginOverlay');
+      const passwordInput = document.getElementById('adminPasswordInput');
+      const loginError = document.getElementById('adminLoginError');
+      const loginSubmit = document.getElementById('adminLoginSubmit');
+      const loginCancel = document.getElementById('adminLoginCancel');
+
+      const adminBar = document.getElementById('adminBar');
+      const editModeToggleBtn = document.getElementById('editModeToggleBtn');
+      const saveBtn = document.getElementById('adminSaveBtn');
+      const cancelBtn = document.getElementById('adminCancelBtn');
+      const logoutBtn = document.getElementById('adminLogoutBtn');
+
+      const photoEditBtn = document.getElementById('photoEditBtn');
+      const photoInput = document.getElementById('adminPhotoInput');
+
+      let editModeOn = false;
+      let preEditSnapshot = null; // used by Cancel to discard unsaved changes
+      let preEditSectionsSnapshot = null;
+
+      // Grids that support Add/Delete
+      const GRID_IDS = ['projGrid', 'expGrid', 'certScroll', 'blogGrid'];
+
+      // ---------- Utility: gather every editable node on the page ----------
+      function getEditableNodes() {
+        const keyed = Array.from(document.querySelectorAll('[data-editable]'));
+        const itemized = Array.from(document.querySelectorAll('[data-editable-item]'));
+        return { keyed, itemized };
+      }
+
+      function getGridsHTML() {
+        const out = {};
+        GRID_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el) out[id] = el.innerHTML;
+        });
+        return out;
+      }
+      function setGridsHTML(map) {
+        if (!map) return;
+        GRID_IDS.forEach(id => {
+          if (map[id] === undefined) return;
+          const el = document.getElementById(id);
+          if (el) el.innerHTML = map[id];
+        });
+      }
+
+      // ---------- Load saved data on every page load (auto-apply) ----------
+      function applySavedData() {
+        try {
+          const raw = localStorage.getItem(DATA_KEY);
+          if (raw) {
+            const data = JSON.parse(raw);
+            if (data.keyed) {
+              Object.keys(data.keyed).forEach(key => {
+                const el = document.querySelector(`[data-editable="${key}"]`);
+                if (el) el.innerHTML = data.keyed[key];
+              });
+            }
+          }
+        } catch (err) {
+          console.error('Admin: failed to load saved data', err);
+        }
+
+        // Restore full grids (projects/experience/certs/blog) BEFORE itemized
+        // text restoration below, so newly-added / deleted cards persist.
+        try {
+          const rawGrids = localStorage.getItem(SECTIONS_KEY);
+          if (rawGrids) {
+            setGridsHTML(JSON.parse(rawGrids));
+          }
+        } catch (err) {
+          console.error('Admin: failed to load saved grids', err);
+        }
+
+        // Itemized fields (matched by index in document order) — applied
+        // after grids are restored so indices line up with saved content.
+        try {
+          const raw = localStorage.getItem(DATA_KEY);
+          if (raw) {
+            const data = JSON.parse(raw);
+            if (data.itemized) {
+              const nodes = document.querySelectorAll('[data-editable-item]');
+              data.itemized.forEach((html, idx) => {
+                if (nodes[idx] !== undefined && html !== null && html !== undefined) {
+                  nodes[idx].innerHTML = html;
+                }
+              });
+            }
+          }
+        } catch (err) {
+          console.error('Admin: failed to re-apply itemized data', err);
+        }
+
+        // Profile photo
+        const savedPhoto = localStorage.getItem(PHOTO_KEY);
+        if (savedPhoto) {
+          const box = document.getElementById('avatarBox');
+          if (box && !box.querySelector('img')) {
+            box.innerHTML = '';
+            const img = new Image();
+            img.alt = 'Krishna Patel';
+            img.src = savedPhoto;
+            box.appendChild(img);
+          }
+        }
+
+        if (window.__rebindBlogCards) window.__rebindBlogCards();
+        rebindDeleteButtons();
+      }
+      applySavedData();
+
+      // ---------- Snapshot / restore whole editable DOM (for Cancel) ----------
+      function takeSnapshot() {
+        const { keyed, itemized } = getEditableNodes();
+        return {
+          keyed: keyed.map(el => el.innerHTML),
+          itemized: itemized.map(el => el.innerHTML)
+        };
+      }
+      function restoreSnapshot(snapshot) {
+        if (!snapshot) return;
+        const { keyed, itemized } = getEditableNodes();
+        keyed.forEach((el, i) => { if (snapshot.keyed[i] !== undefined) el.innerHTML = snapshot.keyed[i]; });
+        itemized.forEach((el, i) => { if (snapshot.itemized[i] !== undefined) el.innerHTML = snapshot.itemized[i]; });
+      }
+
+      // ---------- Save current DOM state to localStorage ----------
+      function saveAllData() {
+        const keyedEls = Array.from(document.querySelectorAll('[data-editable]'));
+        const itemizedEls = Array.from(document.querySelectorAll('[data-editable-item]'));
+
+        const keyedData = {};
+        keyedEls.forEach(el => { keyedData[el.getAttribute('data-editable')] = el.innerHTML; });
+
+        const itemizedData = itemizedEls.map(el => el.innerHTML);
+
+        const payload = { keyed: keyedData, itemized: itemizedData };
+        try {
+          localStorage.setItem(DATA_KEY, JSON.stringify(payload));
+          localStorage.setItem(SECTIONS_KEY, JSON.stringify(getGridsHTML()));
+        } catch (err) {
+          console.error('Admin: failed to save data', err);
+          alert('Save failed — your browser storage may be full or blocked.');
+          return false;
+        }
+        return true;
+      }
+
+      // ---------- Admin login flow ----------
+      function openLogin() {
+        loginError.textContent = '';
+        passwordInput.value = '';
+        loginOverlay.classList.add('open');
+        setTimeout(() => passwordInput.focus(), 50);
+      }
+      function closeLogin() {
+        loginOverlay.classList.remove('open');
+        if (location.hash === '#admin') {
+          history.replaceState(null, '', location.pathname + location.search);
+        }
+      }
+      function attemptLogin() {
+        if (passwordInput.value === ADMIN_PASSWORD) {
+          sessionStorage.setItem(SESSION_KEY, '1');
+          closeLogin();
+          showAdminBar();
+        } else {
+          loginError.textContent = 'Incorrect password. Try again.';
+          passwordInput.value = '';
+          passwordInput.focus();
+        }
+      }
+
+      loginSubmit.addEventListener('click', attemptLogin);
+      passwordInput.addEventListener('keydown', e => { if (e.key === 'Enter') attemptLogin(); if (e.key === 'Escape') closeLogin(); });
+      loginCancel.addEventListener('click', closeLogin);
+      loginOverlay.addEventListener('click', e => { if (e.target === loginOverlay) closeLogin(); });
+
+      document.addEventListener('keydown', e => {
+        if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'e') {
+          e.preventDefault();
+          if (sessionStorage.getItem(SESSION_KEY) === '1') {
+            showAdminBar();
+          } else {
+            openLogin();
+          }
+        }
+      });
+      function checkHashForAdmin() {
+        if (location.hash === '#admin') {
+          if (sessionStorage.getItem(SESSION_KEY) === '1') {
+            showAdminBar();
+          } else {
+            openLogin();
+          }
+        }
+      }
+      window.addEventListener('hashchange', checkHashForAdmin);
+      checkHashForAdmin();
+
+      // ---------- Admin bar / edit mode ----------
+      function showAdminBar() {
+        adminBar.classList.add('open');
+      }
+      function hideAdminBar() {
+        adminBar.classList.remove('open');
+        if (editModeOn) exitEditMode(false);
+      }
+
+      function enterEditMode() {
+        editModeOn = true;
+        preEditSnapshot = takeSnapshot();
+        preEditSectionsSnapshot = getGridsHTML();
+        document.body.classList.add('admin-editing');
+
+        document.querySelectorAll('[data-editable], [data-editable-item]').forEach(el => {
+          el.setAttribute('contenteditable', 'true');
+          el.setAttribute('spellcheck', 'false');
+        });
+
+        editModeToggleBtn.textContent = 'Editing…';
+        editModeToggleBtn.style.display = 'none';
+        saveBtn.style.display = '';
+        cancelBtn.style.display = '';
+      }
+
+      function exitEditMode(restore) {
+        editModeOn = false;
+        document.body.classList.remove('admin-editing');
+
+        document.querySelectorAll('[data-editable], [data-editable-item]').forEach(el => {
+          el.removeAttribute('contenteditable');
+        });
+
+        if (restore) {
+          if (preEditSectionsSnapshot) setGridsHTML(preEditSectionsSnapshot);
+          if (preEditSnapshot) restoreSnapshot(preEditSnapshot);
+          if (window.__rebindBlogCards) window.__rebindBlogCards();
+          rebindDeleteButtons();
+        }
+        preEditSnapshot = null;
+        preEditSectionsSnapshot = null;
+
+        editModeToggleBtn.textContent = 'Edit Mode';
+        editModeToggleBtn.style.display = '';
+        saveBtn.style.display = 'none';
+        cancelBtn.style.display = 'none';
+      }
+
+      editModeToggleBtn.addEventListener('click', () => {
+        if (!editModeOn) enterEditMode();
+      });
+
+      cancelBtn.addEventListener('click', () => {
+        exitEditMode(true);
+      });
+
+      logoutBtn.addEventListener('click', () => {
+        if (editModeOn) exitEditMode(true);
+        sessionStorage.removeItem(SESSION_KEY);
+        hideAdminBar();
+      });
+
+      // ---------- Profile photo replacement ----------
+      photoEditBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!editModeOn) return;
+        photoInput.click();
+      });
+
+      photoInput.addEventListener('change', () => {
+        const file = photoInput.files && photoInput.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+          alert('Please choose an image file.');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          const box = document.getElementById('avatarBox');
+          box.innerHTML = '';
+          const img = new Image();
+          img.alt = 'Krishna Patel';
+          img.src = dataUrl;
+          box.appendChild(img);
+          box.dataset.pendingPhoto = dataUrl;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      function saveAllDataWithPhoto() {
+        const ok = saveAllData();
+        if (!ok) return false;
+        const box = document.getElementById('avatarBox');
+        if (box && box.dataset.pendingPhoto) {
+          try {
+            localStorage.setItem(PHOTO_KEY, box.dataset.pendingPhoto);
+            delete box.dataset.pendingPhoto;
+          } catch (err) {
+            console.error('Admin: failed to save photo (it may be too large)', err);
+            alert('Photo could not be saved — try a smaller image.');
+          }
+        }
+        return true;
+      }
+      saveBtn.onclick = () => {
+        const ok = saveAllDataWithPhoto();
+        if (ok) {
+          exitEditMode(false);
+          const original = saveBtn.textContent;
+          saveBtn.textContent = 'Saved ✓';
+          setTimeout(() => { saveBtn.textContent = original; }, 1200);
+        }
+      };
+
+      // ========================================================================
+      // ADD / DELETE — Projects, Experience, Certificates, Blog
+      // ========================================================================
+      const delIconSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg>';
+
+      function rebindDeleteButtons() {
+        document.querySelectorAll('.admin-delete-icon').forEach(btn => {
+          if (btn.dataset.bound === '1') return;
+          btn.dataset.bound = '1';
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!editModeOn) return;
+            const card = btn.closest('.proj, .exp, .cert, .blog-card');
+            if (card && confirm('Delete this item? This cannot be undone after you Save.')) {
+              card.remove();
+            }
+          });
+        });
+      }
+      rebindDeleteButtons();
+
+      // ---- Generic small modal for collecting new-item fields ----
+      const addOverlay = document.getElementById('adminAddModalOverlay');
+      const addTitle = document.getElementById('adminAddModalTitle');
+      const addFieldsWrap = document.getElementById('adminAddModalFields');
+      const addCancelBtn = document.getElementById('adminAddCancelBtn');
+      const addConfirmBtn = document.getElementById('adminAddConfirmBtn');
+      let currentAddHandler = null;
+
+      function openAddModal(title, fields, onConfirm) {
+        addTitle.textContent = title;
+        addFieldsWrap.innerHTML = fields.map(f => {
+          if (f.type === 'textarea') {
+            return `<label>${f.label}</label><textarea data-field="${f.key}" placeholder="${f.placeholder || ''}"></textarea>`;
+          }
+          return `<label>${f.label}</label><input type="text" data-field="${f.key}" placeholder="${f.placeholder || ''}" />`;
+        }).join('');
+        currentAddHandler = onConfirm;
+        addOverlay.classList.add('open');
+        setTimeout(() => { const first = addFieldsWrap.querySelector('input,textarea'); if (first) first.focus(); }, 50);
+      }
+      function closeAddModal() {
+        addOverlay.classList.remove('open');
+        currentAddHandler = null;
+      }
+      addCancelBtn.addEventListener('click', closeAddModal);
+      addOverlay.addEventListener('click', e => { if (e.target === addOverlay) closeAddModal(); });
+      addConfirmBtn.addEventListener('click', () => {
+        if (!currentAddHandler) return;
+        const values = {};
+        addFieldsWrap.querySelectorAll('[data-field]').forEach(el => { values[el.dataset.field] = el.value.trim(); });
+        currentAddHandler(values);
+        closeAddModal();
+      });
+
+      function makeEditableItemsEditable(container) {
+        if (!editModeOn) return;
+        container.querySelectorAll('[data-editable-item]').forEach(el => {
+          el.setAttribute('contenteditable', 'true');
+          el.setAttribute('spellcheck', 'false');
+        });
+      }
+
+      // ---- Add Project ----
+      const addProjectBtn = document.getElementById('addProjectBtn');
+      if (addProjectBtn) {
+        addProjectBtn.addEventListener('click', () => {
+          openAddModal('Add Project', [
+            { key: 'title', label: 'Project title', placeholder: 'e.g. Customer Churn Predictor' },
+            { key: 'tags', label: 'Tags (comma separated)', placeholder: 'Python, ML, EDA' },
+            { key: 'desc', label: 'Description', type: 'textarea', placeholder: 'Short project description' },
+            { key: 'demo', label: 'Live demo URL', placeholder: 'https://...' },
+            { key: 'github', label: 'GitHub URL', placeholder: 'https://github.com/...' }
+          ], (v) => {
+            const tags = (v.tags || '').split(',').map(t => t.trim()).filter(Boolean);
+            const tagsHTML = tags.length ? tags.map(t => `<span>${t}</span>`).join('') : '<span>New</span>';
+            const card = document.createElement('div');
+            card.className = 'proj reveal in';
+            card.innerHTML = `
+              <button type="button" class="admin-delete-icon" title="Delete this project">${delIconSVG}</button>
+              <div class="proj-thumb"><img src="https://via.placeholder.com/640x400?text=Project" alt="${v.title || 'New Project'}" loading="lazy"></div>
+              <div class="proj-body">
+                <div class="proj-tags">${tagsHTML}</div>
+                <h3 data-editable-item>${v.title || 'New Project'}</h3>
+                <p class="proj-desc" data-editable-item>${v.desc || 'Project description goes here.'}</p>
+                <div class="proj-links">
+                  ${v.demo ? `<a href="${v.demo}" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M10 14L21 3M18 14v7H4V7h7"/></svg>Live Demo</a>` : ''}
+                  ${v.github ? `<a href="${v.github}" target="_blank"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2c-3.34.72-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.08 1.84 2.83 1.3 3.52 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.47-1.33-5.47-5.94 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.11-3.17 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.65.25 2.87.12 3.17.77.84 1.24 1.91 1.24 3.22 0 4.62-2.81 5.63-5.48 5.93.43.38.82 1.11.82 2.24v3.32c0 .32.22.7.83.58A12 12 0 0 0 12 .5z"/></svg>GitHub</a>` : ''}
+                </div>
+              </div>`;
+            document.getElementById('projGrid').appendChild(card);
+            makeEditableItemsEditable(card);
+            rebindDeleteButtons();
+          });
+        });
+      }
+
+      // ---- Add Experience ----
+      const addExperienceBtn = document.getElementById('addExperienceBtn');
+      if (addExperienceBtn) {
+        addExperienceBtn.addEventListener('click', () => {
+          openAddModal('Add Experience', [
+            { key: 'range', label: 'Date range', placeholder: 'e.g. May 2026 — Jul 2026' },
+            { key: 'role', label: 'Role title', placeholder: 'e.g. Data Analyst Intern' },
+            { key: 'company', label: 'Company · Location', placeholder: 'e.g. Acme Corp · Remote' },
+            { key: 'desc', label: 'Description', type: 'textarea', placeholder: 'What you worked on' }
+          ], (v) => {
+            const card = document.createElement('div');
+            card.className = 'exp reveal in';
+            card.innerHTML = `
+              <button type="button" class="admin-delete-icon" title="Delete this experience">${delIconSVG}</button>
+              <div class="yr" data-editable-item>${v.range || 'New Role'}</div>
+              <div>
+                <h4 data-editable-item>${v.role || 'Role title'}</h4>
+                <div class="co" data-editable-item>${v.company || 'Company · Location'}</div>
+                <p data-editable-item>${v.desc || 'Description goes here.'}</p>
+              </div>`;
+            document.getElementById('expGrid').appendChild(card);
+            makeEditableItemsEditable(card);
+            rebindDeleteButtons();
+          });
+        });
+      }
+
+      // ---- Add Certificate ----
+      const addCertBtn = document.getElementById('addCertBtn');
+      if (addCertBtn) {
+        addCertBtn.addEventListener('click', () => {
+          openAddModal('Add Certificate', [
+            { key: 'title', label: 'Certificate title', placeholder: 'e.g. Advanced SQL' },
+            { key: 'issuer', label: 'Issued by', placeholder: 'e.g. Coursera' },
+            { key: 'cat', label: 'Category', placeholder: 'Analytics / Data Science / BI / Web / AI/ML' },
+            { key: 'year', label: 'Year', placeholder: '2026' }
+          ], (v) => {
+            const cat = v.cat || 'Analytics';
+            const card = document.createElement('div');
+            card.className = 'cert reveal in';
+            card.setAttribute('data-cat', cat);
+            card.innerHTML = `
+              <button type="button" class="admin-delete-icon" title="Delete this certificate">${delIconSVG}</button>
+              <div class="badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="m9 14-2 8 5-3 5 3-2-8"/></svg></div>
+              <h4 data-editable-item>${v.title || 'New Certificate'}</h4>
+              <div class="issuer" data-editable-item>Issued by ${v.issuer || 'Issuer'}</div>
+              <span class="cat">${cat}</span><span class="yr">${v.year || '2026'}</span>`;
+            document.getElementById('certScroll').appendChild(card);
+            makeEditableItemsEditable(card);
+            rebindDeleteButtons();
+          });
+        });
+      }
+
+      // ---- Add Blog Article ----
+      const addBlogBtn = document.getElementById('addBlogBtn');
+      if (addBlogBtn) {
+        addBlogBtn.addEventListener('click', () => {
+          openAddModal('Add Article', [
+            { key: 'tag', label: 'Category tag', placeholder: 'e.g. Data Analytics' },
+            { key: 'title', label: 'Article title', placeholder: 'e.g. Why Clean Data Matters' },
+            { key: 'excerpt', label: 'Short excerpt', type: 'textarea', placeholder: 'One or two sentence summary' },
+            { key: 'readtime', label: 'Read time', placeholder: 'e.g. 5 min read' },
+            { key: 'date', label: 'Date', placeholder: 'e.g. July 2026' }
+          ], (v) => {
+            const key = 'article-' + Date.now();
+            const titleSafe = v.title || 'New Article';
+            blogArticles[key] = {
+              tag: v.tag || 'Blog',
+              title: titleSafe,
+              meta: `${v.readtime || '5 min read'} · ${v.date || ''}`,
+              body: `<p>${v.excerpt || 'Full article content coming soon.'}</p>`
+            };
+            const card = document.createElement('div');
+            card.className = 'blog-card reveal in';
+            card.setAttribute('data-title', titleSafe.toLowerCase());
+            card.setAttribute('data-article', key);
+            card.setAttribute('role', 'button');
+            card.setAttribute('tabindex', '0');
+            card.innerHTML = `
+              <button type="button" class="admin-delete-icon" title="Delete this article">${delIconSVG}</button>
+              <span class="btag">${v.tag || 'Blog'}</span>
+              <h3>${titleSafe}</h3>
+              <p>${v.excerpt || ''}</p>
+              <div class="meta"><span>${v.readtime || '5 min read'}</span><span>·</span><span>${v.date || ''}</span><span class="read-more">Read →</span></div>`;
+            document.getElementById('blogGrid').appendChild(card);
+            rebindDeleteButtons();
+            if (window.__rebindBlogCards) window.__rebindBlogCards();
+          });
+        });
+      }
+
+      // ---------- Auto-reopen admin bar if already logged in this session ----------
+      if (sessionStorage.getItem(SESSION_KEY) === '1') {
+        showAdminBar();
+      }
+    })();
+    /* ===== end Admin Edit Mode ===== */
   </script>
 </body>
 
