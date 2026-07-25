@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Krishna Patel — Data Scientist & Analyst</title>
+  <title>Krishna Patel — Data Scientist</title>
   <meta name="description"
     content="Krishna Patel — Premium Data Analyst & Data Scientist Portfolio. Turning data into decisions with SQL, Python, and Power BI." />
   <meta name="theme-color" content="#030712" />
@@ -152,7 +152,6 @@
       }
     }
 
-    /* Mobile perf: kill the heavy blurred blobs entirely on small / touch screens */
     @media (max-width: 860px), (hover: none), (pointer: coarse) {
 
       body::before,
@@ -1237,7 +1236,7 @@
       background: var(--card);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border);
-      overflow: hidden;
+      overflow: visible;
       transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s var(--ease)
     }
 
@@ -1405,6 +1404,7 @@
     }
 
     .exp {
+      position: relative;
       display: grid;
       grid-template-columns: 150px 1fr;
       gap: 30px;
@@ -1508,6 +1508,7 @@
     }
 
     .cert {
+      position: relative;
       flex: 0 0 320px;
       scroll-snap-align: start;
       aspect-ratio: 4/3;
@@ -1516,8 +1517,7 @@
       backdrop-filter: blur(20px);
       border: 1px solid var(--border);
       padding: 24px;
-      position: relative;
-      overflow: hidden;
+      overflow: visible;
       transition: transform .4s var(--ease), border-color .4s, box-shadow .4s;
       cursor: pointer;
       animation: certIn .4s var(--ease) both;
@@ -1541,7 +1541,9 @@
       inset: 0;
       background: var(--grad-soft);
       opacity: 0;
-      transition: opacity .4s
+      transition: opacity .4s;
+      border-radius: 22px;
+      pointer-events: none;
     }
 
     .cert:hover {
@@ -1631,7 +1633,7 @@
       border: 1px solid var(--border);
       transition: transform .4s var(--ease), box-shadow .4s var(--ease);
       cursor: pointer;
-      overflow: hidden;
+      overflow: visible;
       display: flex;
       flex-direction: column;
       gap: 14px;
@@ -1756,7 +1758,6 @@
       border-color: var(--primary)
     }
 
-    /* ===== Blog Article Modal (added) ===== */
     .blog-modal-overlay {
       position: fixed;
       inset: 0;
@@ -1928,8 +1929,6 @@
         padding: 26px 20px 40px;
       }
     }
-
-    /* ===== end Blog Article Modal ===== */
 
     .contact-grid {
       display: grid;
@@ -2298,7 +2297,6 @@
         width: min(300px, 85vw);
       }
 
-      /* Kill hover-only heavy transforms that can feel janky on touch */
       .skill,
       .proj,
       .exp,
@@ -2349,7 +2347,6 @@
       }
     }
 
-    /* Extra small phones */
     @media (max-width: 360px) {
       .hero-title {
         font-size: clamp(1.7rem, 11vw, 2.4rem);
@@ -2361,7 +2358,6 @@
       }
     }
 
-    /* Landscape phones: tighten vertical rhythm */
     @media (max-width: 900px) and (orientation: landscape) and (max-height: 480px) {
       #hero {
         min-height: auto;
@@ -2374,13 +2370,6 @@
       }
     }
 
-    /* ========================================================================
-       ADMIN EDIT MODE — added styles
-       Everything below is scoped so it never appears for regular visitors.
-       Nothing here touches or overrides existing visitor-facing rules above.
-       ======================================================================== */
-
-    /* Hidden by default. Only unhidden by JS after correct password. */
     #adminLoginOverlay,
     #adminBar,
     .admin-edit-icon,
@@ -2388,7 +2377,6 @@
       display: none;
     }
 
-    /* --- Admin Login Overlay (opened via Ctrl+Shift+E or #admin) --- */
     #adminLoginOverlay.open {
       display: flex;
       position: fixed;
@@ -2460,7 +2448,6 @@
       min-height: 14px;
     }
 
-    /* --- Floating Admin Bar (visible only in edit mode, to the admin) --- */
     #adminBar.open {
       display: flex;
       position: fixed;
@@ -2498,7 +2485,6 @@
       animation: pulse 1.5s infinite;
     }
 
-    /* Small edit-mode-only pencil icon shown on editable blocks */
     .admin-editing [data-editable] {
       outline: 1.5px dashed rgba(37, 99, 235, .5);
       outline-offset: 4px;
@@ -2516,7 +2502,6 @@
       background: rgba(37, 99, 235, .06);
     }
 
-    /* Small clickable pencil for photo replace / structured items */
     .admin-editing .admin-edit-icon {
       display: grid;
       place-items: center;
@@ -2529,9 +2514,10 @@
       background: var(--grad);
       color: #fff;
       cursor: pointer;
-      z-index: 10;
+      z-index: 30;
       box-shadow: 0 6px 16px rgba(37, 99, 235, .5);
       border: none;
+      pointer-events: auto;
     }
 
     .admin-editing .admin-edit-icon svg {
@@ -2544,7 +2530,6 @@
       position: relative;
     }
 
-    /* Editable message board shown in Contact section only in edit mode / normally hidden if empty */
     #contactMessageBlock {
       margin-top: 20px;
     }
@@ -2558,11 +2543,6 @@
       display: block;
     }
 
-    /* ========================================================================
-       ADMIN ADD/DELETE — new styles for Projects, Experience, Certificates, Blog
-       Hidden by default; only shown while .admin-editing is on <body>.
-       ======================================================================== */
-
     .admin-add-btn {
       display: none;
       align-items: center;
@@ -2570,10 +2550,9 @@
       margin: 0 0 28px;
     }
 
-    .admin-editing .admin-add-btn {
-      display: inline-flex;
-    }
-
+    /* Delete icon: always rendered in the DOM (not display:none) so it can
+       receive pointer events reliably; visibility is controlled via
+       opacity/pointer-events which are toggled by JS on edit mode. */
     .admin-delete-icon {
       display: none;
       align-items: center;
@@ -2588,18 +2567,15 @@
       color: #fff;
       border: none;
       cursor: pointer;
-      z-index: 12;
+      z-index: 40;
       box-shadow: 0 6px 16px rgba(239, 68, 68, .5);
       transition: transform .2s var(--ease), background .2s;
+      pointer-events: auto;
     }
 
     .admin-delete-icon:hover {
       background: #dc2626;
       transform: scale(1.08);
-    }
-
-    .admin-editing .admin-delete-icon {
-      display: flex;
     }
 
     .admin-delete-icon svg {
@@ -2615,7 +2591,6 @@
       position: relative;
     }
 
-    /* Small modal used to collect fields for a new item */
     #adminAddModalOverlay {
       display: none;
       position: fixed;
@@ -2712,7 +2687,7 @@
       <div class="logo"
         style="background:linear-gradient(145deg, #6366F1 0%, #8B5CF6 50%, #3B82F6 100%);display:grid;place-items:center;color:#fff;font-family:'Space Grotesk';font-weight:700;font-size:15px;box-shadow:0 4px 12px rgba(99,102,241,.4);">
         KP</div>
-      <span class="brand-name" data-editable="brandName"></span>
+      <span class="brand-name" data-editable="brandName">Krishna Patel</span>
     </a>
     <div class="nav-links">
       <a href="#about" class="nav-link">About</a>
@@ -2806,7 +2781,6 @@
             </div>
           </div>
         </div>
-        <!-- Admin-only pencil icon to replace profile photo. Hidden unless .admin-editing is on <body> -->
         <button type="button" class="admin-edit-icon" id="photoEditBtn" title="Change profile photo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
@@ -2816,7 +2790,6 @@
     </div>
   </section>
 
-  <!-- Hidden native file input used to pick a new profile photo. Never shown to visitors. -->
   <input type="file" id="adminPhotoInput" accept="image/*" />
 
   <div class="marquee">
@@ -3257,7 +3230,6 @@
     </div>
   </section>
 
-  <!-- Blog Article Modal (in-page reader, no external navigation) -->
   <div class="blog-modal-overlay" id="blogModalOverlay">
     <div class="blog-modal" id="blogModal" role="dialog" aria-modal="true" aria-labelledby="blogModalTitle">
       <div class="blog-modal-head">
@@ -3272,9 +3244,7 @@
           </svg>
         </button>
       </div>
-      <div class="blog-modal-body" id="blogModalBody">
-        <!-- article content injected here -->
-      </div>
+      <div class="blog-modal-body" id="blogModalBody"></div>
     </div>
   </div>
 
@@ -3319,8 +3289,6 @@
           </a>
         </div>
 
-        <!-- Editable Contact Message block (added). Visible to everyone as a note under contact info;
-             the text itself is editable only in Admin Edit Mode. -->
         <div id="contactMessageBlock">
           <span class="cmb-label">A note from me</span>
           <p data-editable="contactMessage" style="font-size:13px;color:var(--fg-soft);line-height:1.7">
@@ -3381,13 +3349,6 @@
     </div>
   </footer>
 
-  <!-- ========================================================================
-       ADMIN EDIT MODE — hidden UI elements
-       These stay display:none for every regular visitor. JS only reveals
-       them after the correct password is entered via Ctrl+Shift+E or #admin.
-       ======================================================================== -->
-
-  <!-- Admin Login Overlay -->
   <div id="adminLoginOverlay">
     <div class="admin-login-box">
       <h3>Admin Login</h3>
@@ -3401,7 +3362,6 @@
     </div>
   </div>
 
-  <!-- Floating Admin Bar: shown only after successful login -->
   <div id="adminBar">
     <span class="admin-tag"><span class="dot"></span>Admin</span>
     <button class="btn ghost" type="button" id="editModeToggleBtn">Edit Mode</button>
@@ -3414,7 +3374,6 @@
     </button>
   </div>
 
-  <!-- Add-item modal used by all four "Add" buttons -->
   <div id="adminAddModalOverlay">
     <div class="admin-add-box">
       <h3 id="adminAddModalTitle">Add Item</h3>
@@ -3448,7 +3407,6 @@
       })();
     }
 
-    // Smooth, throttled scroll progress + nav shrink using rAF only (no layout thrash)
     const prog = document.getElementById('progress');
     const navEl = document.getElementById('mainNav');
     let scrollTicking = false;
@@ -3473,7 +3431,6 @@
 
     (function loadAvatar() {
       const box = document.getElementById('avatarBox');
-      // Admin edit: if a custom photo was saved to Local Storage, prefer that.
       const savedPhoto = localStorage.getItem('admin_profilePhoto');
       if (savedPhoto) {
         box.innerHTML = '';
@@ -3545,13 +3502,12 @@
 
     (function () {
       const wrap = document.getElementById('certFilters');
-      const cards = document.querySelectorAll('#certScroll .cert');
       wrap.addEventListener('click', e => {
         if (e.target.tagName !== 'BUTTON') return;
         wrap.querySelectorAll('button').forEach(b => b.classList.remove('active'));
         e.target.classList.add('active');
         const f = e.target.dataset.c;
-        cards.forEach(c => {
+        document.querySelectorAll('#certScroll .cert').forEach(c => {
           const show = (f === 'All' || c.dataset.cat === f);
           c.style.display = show ? '' : 'none';
         });
@@ -3560,14 +3516,12 @@
 
     (function () {
       const input = document.getElementById('blogSearch');
-      const cards = document.querySelectorAll('#blogGrid .blog-card');
       input.addEventListener('input', e => {
         const q = e.target.value.toLowerCase();
-        cards.forEach(c => { c.style.display = c.dataset.title.includes(q) ? '' : 'none'; });
+        document.querySelectorAll('#blogGrid .blog-card').forEach(c => { c.style.display = (c.dataset.title || '').includes(q) ? '' : 'none'; });
       });
     })();
 
-    /* ===== Blog article data + in-page modal reader (added) ===== */
     const blogArticles = {
       'raw-data-insights': {
         tag: 'Data Analytics',
@@ -3668,9 +3622,12 @@
           card.dataset.boundClick = '1';
           card.addEventListener('click', (e) => {
             if (e.target.closest('.admin-delete-icon')) return;
+            if (window.__adminEditModeOn) return;
             openArticle(card.dataset.article);
           });
           card.addEventListener('keydown', e => {
+            if (e.target.closest('.admin-delete-icon')) return;
+            if (window.__adminEditModeOn) return;
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openArticle(card.dataset.article); }
           });
         });
@@ -3683,9 +3640,8 @@
       overlay.addEventListener('click', e => { if (e.target === overlay) closeArticle(); });
       document.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('open')) closeArticle(); });
     })();
-    /* ===== end blog modal reader ===== */
 
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); if (e.target.classList.contains('skill')) { e.target.querySelector('.bar i').style.width = e.target.querySelector('.bar i').dataset.w + '%' } io.unobserve(e.target); } }), { threshold: .05, rootMargin: '0px 0px -40px 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); if (e.target.classList.contains('skill')) { const bar = e.target.querySelector('.bar i'); if (bar) bar.style.width = bar.dataset.w + '%' } io.unobserve(e.target); } }), { threshold: .05, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal,.skill,.proj,.exp,.blog-card,.stat').forEach(e => { e.classList.add('reveal'); io.observe(e) });
 
     setTimeout(() => {
@@ -3771,39 +3727,27 @@
       });
     }
 
-    /* ========================================================================
-       ADMIN EDIT MODE — core logic
-       -------------------------------------------------------------------
-       Design summary:
-       - ADMIN_PASSWORD is checked client-side only. This is NOT real
-         security (anyone can read this file's source and see the
-         password). It's a convenience gate to stop casual visitors from
-         opening edit mode, not a defense against a determined attacker.
-       - The login overlay only ever opens via Ctrl+Shift+E or #admin,
-         and is `display:none` otherwise so it never renders in the DOM
-         visually for normal visitors.
-       - Once logged in this browser session, an "Edit Mode" button
-         appears in a floating Admin Bar. Turning Edit Mode on makes all
-         [data-editable] / [data-editable-item] elements contentEditable
-         and reveals the photo-change pencil icon, plus Add/Delete
-         controls for Projects, Experience, Certificates and Blog.
-       - Save serializes all editable text (and the profile photo as a
-         base64 data URL), the full projects/experience/certs/blog HTML,
-         into localStorage. On every page load, saved values (if any)
-         are applied automatically, replacing defaults.
-       - Cancel reverts any unsaved DOM edits back to the last saved
-         (or default) state.
-       ======================================================================== */
+    /* ================= ADMIN EDIT SYSTEM (FIXED) =================
+       Key fixes vs previous version:
+       1. Delete/Add buttons are bound using event delegation on
+          document (capture phase) so they always fire regardless of
+          any other click handlers on parent cards (.proj/.exp/.cert/
+          .blog-card) or hover/tilt mousemove listeners.
+       2. Buttons use stopPropagation + stopImmediatePropagation so a
+          card's own "open article" / tilt click logic never intercepts.
+       3. window.__adminEditModeOn flag lets other handlers (blog card
+          click-to-open) bail out while editing.
+       4. Visibility of add/delete controls forced via inline style by
+          JS (not just CSS class) so there is zero ambiguity about
+          whether they are clickable.
+    ================================================================= */
     (function adminEditSystem() {
-      // --- Configuration ---
-      // CHANGE THIS PASSWORD before publishing your site.
       const ADMIN_PASSWORD = 'krishna@7777';
-      const SESSION_KEY = 'admin_session_active'; // sessionStorage: cleared when tab closes
-      const DATA_KEY = 'admin_portfolio_data';    // localStorage: persists across visits
-      const PHOTO_KEY = 'admin_profilePhoto';     // localStorage: base64 photo
-      const SECTIONS_KEY = 'admin_sections_html'; // localStorage: innerHTML for add/delete-capable grids
+      const SESSION_KEY = 'admin_session_active';
+      const DATA_KEY = 'admin_portfolio_data';
+      const PHOTO_KEY = 'admin_profilePhoto';
+      const SECTIONS_KEY = 'admin_sections_html';
 
-      // --- Element references ---
       const loginOverlay = document.getElementById('adminLoginOverlay');
       const passwordInput = document.getElementById('adminPasswordInput');
       const loginError = document.getElementById('adminLoginError');
@@ -3820,16 +3764,30 @@
       const photoInput = document.getElementById('adminPhotoInput');
 
       let editModeOn = false;
-      let preEditSnapshot = null; // used by Cancel to discard unsaved changes
+      window.__adminEditModeOn = false;
+      let preEditSnapshot = null;
       let preEditSectionsSnapshot = null;
 
-      // Grids that support Add/Delete
       const GRID_IDS = ['projGrid', 'expGrid', 'certScroll', 'blogGrid'];
+      const delIconSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg>';
 
-      // ---------- Utility: gather every editable node on the page ----------
+      function setAddDeleteVisible(visible) {
+        document.querySelectorAll('.admin-add-btn').forEach(b => {
+          b.style.display = visible ? 'inline-flex' : 'none';
+        });
+        document.querySelectorAll('.admin-delete-icon').forEach(b => {
+          b.style.display = visible ? 'flex' : 'none';
+          b.style.pointerEvents = visible ? 'auto' : 'none';
+        });
+      }
+
+      function isInsideDynamicGrid(el) {
+        return !!el.closest('#projGrid, #expGrid, #certScroll, #blogGrid');
+      }
+
       function getEditableNodes() {
         const keyed = Array.from(document.querySelectorAll('[data-editable]'));
-        const itemized = Array.from(document.querySelectorAll('[data-editable-item]'));
+        const itemized = Array.from(document.querySelectorAll('[data-editable-item]')).filter(el => !isInsideDynamicGrid(el));
         return { keyed, itemized };
       }
 
@@ -3850,7 +3808,6 @@
         });
       }
 
-      // ---------- Load saved data on every page load (auto-apply) ----------
       function applySavedData() {
         try {
           const raw = localStorage.getItem(DATA_KEY);
@@ -3867,8 +3824,6 @@
           console.error('Admin: failed to load saved data', err);
         }
 
-        // Restore full grids (projects/experience/certs/blog) BEFORE itemized
-        // text restoration below, so newly-added / deleted cards persist.
         try {
           const rawGrids = localStorage.getItem(SECTIONS_KEY);
           if (rawGrids) {
@@ -3878,14 +3833,12 @@
           console.error('Admin: failed to load saved grids', err);
         }
 
-        // Itemized fields (matched by index in document order) — applied
-        // after grids are restored so indices line up with saved content.
         try {
           const raw = localStorage.getItem(DATA_KEY);
           if (raw) {
             const data = JSON.parse(raw);
             if (data.itemized) {
-              const nodes = document.querySelectorAll('[data-editable-item]');
+              const nodes = Array.from(document.querySelectorAll('[data-editable-item]')).filter(el => !isInsideDynamicGrid(el));
               data.itemized.forEach((html, idx) => {
                 if (nodes[idx] !== undefined && html !== null && html !== undefined) {
                   nodes[idx].innerHTML = html;
@@ -3897,7 +3850,6 @@
           console.error('Admin: failed to re-apply itemized data', err);
         }
 
-        // Profile photo
         const savedPhoto = localStorage.getItem(PHOTO_KEY);
         if (savedPhoto) {
           const box = document.getElementById('avatarBox');
@@ -3911,11 +3863,11 @@
         }
 
         if (window.__rebindBlogCards) window.__rebindBlogCards();
-        rebindDeleteButtons();
+        // Ensure add/delete controls stay hidden for visitors on load
+        setAddDeleteVisible(false);
       }
       applySavedData();
 
-      // ---------- Snapshot / restore whole editable DOM (for Cancel) ----------
       function takeSnapshot() {
         const { keyed, itemized } = getEditableNodes();
         return {
@@ -3930,10 +3882,9 @@
         itemized.forEach((el, i) => { if (snapshot.itemized[i] !== undefined) el.innerHTML = snapshot.itemized[i]; });
       }
 
-      // ---------- Save current DOM state to localStorage ----------
       function saveAllData() {
         const keyedEls = Array.from(document.querySelectorAll('[data-editable]'));
-        const itemizedEls = Array.from(document.querySelectorAll('[data-editable-item]'));
+        const itemizedEls = Array.from(document.querySelectorAll('[data-editable-item]')).filter(el => !isInsideDynamicGrid(el));
 
         const keyedData = {};
         keyedEls.forEach(el => { keyedData[el.getAttribute('data-editable')] = el.innerHTML; });
@@ -3952,7 +3903,6 @@
         return true;
       }
 
-      // ---------- Admin login flow ----------
       function openLogin() {
         loginError.textContent = '';
         passwordInput.value = '';
@@ -4004,7 +3954,6 @@
       window.addEventListener('hashchange', checkHashForAdmin);
       checkHashForAdmin();
 
-      // ---------- Admin bar / edit mode ----------
       function showAdminBar() {
         adminBar.classList.add('open');
       }
@@ -4015,6 +3964,7 @@
 
       function enterEditMode() {
         editModeOn = true;
+        window.__adminEditModeOn = true;
         preEditSnapshot = takeSnapshot();
         preEditSectionsSnapshot = getGridsHTML();
         document.body.classList.add('admin-editing');
@@ -4024,6 +3974,8 @@
           el.setAttribute('spellcheck', 'false');
         });
 
+        setAddDeleteVisible(true);
+
         editModeToggleBtn.textContent = 'Editing…';
         editModeToggleBtn.style.display = 'none';
         saveBtn.style.display = '';
@@ -4032,17 +3984,19 @@
 
       function exitEditMode(restore) {
         editModeOn = false;
+        window.__adminEditModeOn = false;
         document.body.classList.remove('admin-editing');
 
         document.querySelectorAll('[data-editable], [data-editable-item]').forEach(el => {
           el.removeAttribute('contenteditable');
         });
 
+        setAddDeleteVisible(false);
+
         if (restore) {
           if (preEditSectionsSnapshot) setGridsHTML(preEditSectionsSnapshot);
           if (preEditSnapshot) restoreSnapshot(preEditSnapshot);
           if (window.__rebindBlogCards) window.__rebindBlogCards();
-          rebindDeleteButtons();
         }
         preEditSnapshot = null;
         preEditSectionsSnapshot = null;
@@ -4053,21 +4007,23 @@
         cancelBtn.style.display = 'none';
       }
 
-      editModeToggleBtn.addEventListener('click', () => {
+      editModeToggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (!editModeOn) enterEditMode();
       });
 
-      cancelBtn.addEventListener('click', () => {
+      cancelBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         exitEditMode(true);
       });
 
-      logoutBtn.addEventListener('click', () => {
+      logoutBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (editModeOn) exitEditMode(true);
         sessionStorage.removeItem(SESSION_KEY);
         hideAdminBar();
       });
 
-      // ---------- Profile photo replacement ----------
       photoEditBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         if (!editModeOn) return;
@@ -4110,7 +4066,8 @@
         }
         return true;
       }
-      saveBtn.onclick = () => {
+      saveBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         const ok = saveAllDataWithPhoto();
         if (ok) {
           exitEditMode(false);
@@ -4118,30 +4075,26 @@
           saveBtn.textContent = 'Saved ✓';
           setTimeout(() => { saveBtn.textContent = original; }, 1200);
         }
-      };
+      });
 
-      // ========================================================================
-      // ADD / DELETE — Projects, Experience, Certificates, Blog
-      // ========================================================================
-      const delIconSVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0-1 14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2L4 6h16z"/></svg>';
+      /* ---------- DELETE: event delegation, capture phase ----------
+         Bound once on document so it always wins over any per-card
+         mousemove/click/tilt handlers or contenteditable focus logic,
+         and works for cards added later via Add modals too. */
+      document.addEventListener('click', function (e) {
+        const btn = e.target.closest('.admin-delete-icon');
+        if (!btn) return;
+        e.preventDefault();
+        e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === 'function') e.stopImmediatePropagation();
+        if (!editModeOn) return;
+        const card = btn.closest('.proj, .exp, .cert, .blog-card');
+        if (card && confirm('Delete this item? This cannot be undone after you Save.')) {
+          card.remove();
+        }
+      }, true);
 
-      function rebindDeleteButtons() {
-        document.querySelectorAll('.admin-delete-icon').forEach(btn => {
-          if (btn.dataset.bound === '1') return;
-          btn.dataset.bound = '1';
-          btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (!editModeOn) return;
-            const card = btn.closest('.proj, .exp, .cert, .blog-card');
-            if (card && confirm('Delete this item? This cannot be undone after you Save.')) {
-              card.remove();
-            }
-          });
-        });
-      }
-      rebindDeleteButtons();
-
-      // ---- Generic small modal for collecting new-item fields ----
+      /* ---------- ADD MODAL ---------- */
       const addOverlay = document.getElementById('adminAddModalOverlay');
       const addTitle = document.getElementById('adminAddModalTitle');
       const addFieldsWrap = document.getElementById('adminAddModalFields');
@@ -4165,9 +4118,10 @@
         addOverlay.classList.remove('open');
         currentAddHandler = null;
       }
-      addCancelBtn.addEventListener('click', closeAddModal);
+      addCancelBtn.addEventListener('click', (e) => { e.stopPropagation(); closeAddModal(); });
       addOverlay.addEventListener('click', e => { if (e.target === addOverlay) closeAddModal(); });
-      addConfirmBtn.addEventListener('click', () => {
+      addConfirmBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (!currentAddHandler) return;
         const values = {};
         addFieldsWrap.querySelectorAll('[data-field]').forEach(el => { values[el.dataset.field] = el.value.trim(); });
@@ -4183,10 +4137,11 @@
         });
       }
 
-      // ---- Add Project ----
       const addProjectBtn = document.getElementById('addProjectBtn');
       if (addProjectBtn) {
-        addProjectBtn.addEventListener('click', () => {
+        addProjectBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!editModeOn) return;
           openAddModal('Add Project', [
             { key: 'title', label: 'Project title', placeholder: 'e.g. Customer Churn Predictor' },
             { key: 'tags', label: 'Tags (comma separated)', placeholder: 'Python, ML, EDA' },
@@ -4199,7 +4154,7 @@
             const card = document.createElement('div');
             card.className = 'proj reveal in';
             card.innerHTML = `
-              <button type="button" class="admin-delete-icon" title="Delete this project">${delIconSVG}</button>
+              <button type="button" class="admin-delete-icon" title="Delete this project" style="display:flex">${delIconSVG}</button>
               <div class="proj-thumb"><img src="https://via.placeholder.com/640x400?text=Project" alt="${v.title || 'New Project'}" loading="lazy"></div>
               <div class="proj-body">
                 <div class="proj-tags">${tagsHTML}</div>
@@ -4212,15 +4167,15 @@
               </div>`;
             document.getElementById('projGrid').appendChild(card);
             makeEditableItemsEditable(card);
-            rebindDeleteButtons();
           });
         });
       }
 
-      // ---- Add Experience ----
       const addExperienceBtn = document.getElementById('addExperienceBtn');
       if (addExperienceBtn) {
-        addExperienceBtn.addEventListener('click', () => {
+        addExperienceBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!editModeOn) return;
           openAddModal('Add Experience', [
             { key: 'range', label: 'Date range', placeholder: 'e.g. May 2026 — Jul 2026' },
             { key: 'role', label: 'Role title', placeholder: 'e.g. Data Analyst Intern' },
@@ -4230,7 +4185,7 @@
             const card = document.createElement('div');
             card.className = 'exp reveal in';
             card.innerHTML = `
-              <button type="button" class="admin-delete-icon" title="Delete this experience">${delIconSVG}</button>
+              <button type="button" class="admin-delete-icon" title="Delete this experience" style="display:flex">${delIconSVG}</button>
               <div class="yr" data-editable-item>${v.range || 'New Role'}</div>
               <div>
                 <h4 data-editable-item>${v.role || 'Role title'}</h4>
@@ -4239,15 +4194,15 @@
               </div>`;
             document.getElementById('expGrid').appendChild(card);
             makeEditableItemsEditable(card);
-            rebindDeleteButtons();
           });
         });
       }
 
-      // ---- Add Certificate ----
       const addCertBtn = document.getElementById('addCertBtn');
       if (addCertBtn) {
-        addCertBtn.addEventListener('click', () => {
+        addCertBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!editModeOn) return;
           openAddModal('Add Certificate', [
             { key: 'title', label: 'Certificate title', placeholder: 'e.g. Advanced SQL' },
             { key: 'issuer', label: 'Issued by', placeholder: 'e.g. Coursera' },
@@ -4259,22 +4214,22 @@
             card.className = 'cert reveal in';
             card.setAttribute('data-cat', cat);
             card.innerHTML = `
-              <button type="button" class="admin-delete-icon" title="Delete this certificate">${delIconSVG}</button>
+              <button type="button" class="admin-delete-icon" title="Delete this certificate" style="display:flex">${delIconSVG}</button>
               <div class="badge"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="m9 14-2 8 5-3 5 3-2-8"/></svg></div>
               <h4 data-editable-item>${v.title || 'New Certificate'}</h4>
               <div class="issuer" data-editable-item>Issued by ${v.issuer || 'Issuer'}</div>
               <span class="cat">${cat}</span><span class="yr">${v.year || '2026'}</span>`;
             document.getElementById('certScroll').appendChild(card);
             makeEditableItemsEditable(card);
-            rebindDeleteButtons();
           });
         });
       }
 
-      // ---- Add Blog Article ----
       const addBlogBtn = document.getElementById('addBlogBtn');
       if (addBlogBtn) {
-        addBlogBtn.addEventListener('click', () => {
+        addBlogBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (!editModeOn) return;
           openAddModal('Add Article', [
             { key: 'tag', label: 'Category tag', placeholder: 'e.g. Data Analytics' },
             { key: 'title', label: 'Article title', placeholder: 'e.g. Why Clean Data Matters' },
@@ -4297,24 +4252,21 @@
             card.setAttribute('role', 'button');
             card.setAttribute('tabindex', '0');
             card.innerHTML = `
-              <button type="button" class="admin-delete-icon" title="Delete this article">${delIconSVG}</button>
+              <button type="button" class="admin-delete-icon" title="Delete this article" style="display:flex">${delIconSVG}</button>
               <span class="btag">${v.tag || 'Blog'}</span>
               <h3>${titleSafe}</h3>
               <p>${v.excerpt || ''}</p>
               <div class="meta"><span>${v.readtime || '5 min read'}</span><span>·</span><span>${v.date || ''}</span><span class="read-more">Read →</span></div>`;
             document.getElementById('blogGrid').appendChild(card);
-            rebindDeleteButtons();
             if (window.__rebindBlogCards) window.__rebindBlogCards();
           });
         });
       }
 
-      // ---------- Auto-reopen admin bar if already logged in this session ----------
       if (sessionStorage.getItem(SESSION_KEY) === '1') {
         showAdminBar();
       }
     })();
-    /* ===== end Admin Edit Mode ===== */
   </script>
 </body>
 
