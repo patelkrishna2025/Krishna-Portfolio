@@ -3204,7 +3204,7 @@
         <h3>From Raw Data to Real Insights: A Practical Guide</h3>
         <p>Discover how to transform messy datasets into clear, compelling stories that help business leaders make
           smarter, faster decisions.</p>
-        <div class="meta"><span>5 min read</span><span>·</span><span>May 2025</span><span
+        <div class="meta"><span>9 min read</span><span>·</span><span>May 2025</span><span
             class="read-more">Read →</span></div>
       </div>
       <div class="blog-card reveal" data-title="demystifying machine learning concepts every analyst should know"
@@ -3214,7 +3214,7 @@
         <h3>Demystifying Machine Learning: Concepts Every Analyst Should Know</h3>
         <p>Break down supervised vs. unsupervised learning, model evaluation metrics, and why understanding ML is now
           a must-have skill.</p>
-        <div class="meta"><span>7 min read</span><span>·</span><span>April 2025</span><span
+        <div class="meta"><span>10 min read</span><span>·</span><span>April 2025</span><span
             class="read-more">Read →</span></div>
       </div>
       <div class="blog-card reveal" data-title="10 power bi dashboard tips that will impress any stakeholder"
@@ -3224,7 +3224,7 @@
         <h3>10 Power BI Dashboard Tips That Will Impress Any Stakeholder</h3>
         <p>Elevate your Power BI dashboards from plain to professional with these design, performance, and
           storytelling techniques.</p>
-        <div class="meta"><span>6 min read</span><span>·</span><span>March 2025</span><span
+        <div class="meta"><span>8 min read</span><span>·</span><span>March 2025</span><span
             class="read-more">Read →</span></div>
       </div>
     </div>
@@ -3420,7 +3420,7 @@
       if (!scrollTicking) { requestAnimationFrame(onScrollFrame); scrollTicking = true; }
     }, { passive: true });
 
-    const roles = ['Data Analyst', 'Excel', 'SQL Wizard', 'Insight Storyteller', 'Power Bi'];
+    const roles = ['Data Analyst', 'Data Scientist', 'SQL Wizard', 'Insight Storyteller', 'Python Developer'];
     let ri = 0, ci = 0, del = false; const tw = document.getElementById('tw');
     (function type() {
       const w = roles[ri]; tw.textContent = w.slice(0, ci);
@@ -3526,61 +3526,126 @@
       'raw-data-insights': {
         tag: 'Data Analytics',
         title: 'From Raw Data to Real Insights: A Practical Guide',
-        meta: '5 min read · May 2025',
+        meta: '9 min read · May 2025',
         body: `
-          <p>Every dataset arrives messy. Missing values, inconsistent formats, duplicate rows — the raw material of analytics is rarely ready to use. The real work of a data analyst begins long before a single chart is drawn.</p>
+          <p>Every dataset arrives messy. Missing values, inconsistent formats, duplicate rows, mismatched units — the raw material of analytics is rarely ready to use straight out of the box. The real work of a data analyst begins long before a single chart is drawn, and it's this unglamorous groundwork that quietly determines whether an analysis will actually be trusted.</p>
+
           <h3>Start with the question, not the data</h3>
-          <p>It's tempting to dive straight into cleaning and exploring, but the most useful analyses start by clarifying what decision the business actually needs to make. A well-framed question keeps the entire workflow focused and prevents wasted effort on interesting but irrelevant patterns.</p>
-          <h3>Clean deliberately</h3>
-          <p>Cleaning isn't just about removing errors — it's about making informed choices on how to handle them. Should missing values be imputed or excluded? Should outliers be capped or investigated? Each decision shapes the final insight, so documenting the reasoning matters as much as the cleaning itself.</p>
+          <p>It's tempting to open a dataset and dive straight into cleaning and exploring. But the most useful analyses start by clarifying what decision the business actually needs to make. Is the goal to reduce churn, forecast demand, or explain a drop in revenue? A well-framed question keeps the entire workflow focused, prevents wasted effort on interesting-but-irrelevant patterns, and gives you a clear finish line before you even open a notebook.</p>
+          <p>A simple habit that helps: write the question down as a single sentence before touching any data. If you can't phrase it clearly, that's usually a sign more conversation with stakeholders is needed first.</p>
+
+          <h3>Understand before you clean</h3>
+          <p>Before fixing anything, spend time simply looking. Check column types, distributions, and cardinality. Skim a random sample of rows instead of only the first few — the first rows often hide how messy the middle of a dataset really is. This exploratory pass tells you what "clean" should even mean for this particular dataset.</p>
+
+          <h3>Clean deliberately, not automatically</h3>
+          <p>Cleaning isn't just about removing errors — it's about making informed choices on how to handle them. Should missing values be imputed or excluded? Should outliers be capped, removed, or investigated as genuine signals? Each decision shapes the final insight, so documenting the reasoning matters as much as the cleaning itself. A dataset "cleaned" without notes is very hard to trust or reproduce later.</p>
+          <p>Some practical rules of thumb:</p>
+          <ul>
+            <li><strong>Missing data:</strong> understand why it's missing before deciding how to handle it — random gaps and systematic gaps need different treatment.</li>
+            <li><strong>Duplicates:</strong> confirm they're true duplicates, not legitimate repeat transactions.</li>
+            <li><strong>Outliers:</strong> investigate first, remove only if there's a clear reason.</li>
+          </ul>
+
+          <h3>Explore with a purpose</h3>
+          <p>Exploratory analysis should still be anchored to the original question. It's easy to get pulled into every interesting correlation a dataset offers, but not every pattern is relevant to the decision at hand. Keep a running note of what supports the core question and what's an interesting tangent for later.</p>
+
           <h3>Turn numbers into a narrative</h3>
-          <p>A table full of statistics rarely moves a stakeholder to action. The final and most important step is translating findings into a narrative: what changed, why it matters, and what should happen next. Clear visuals paired with a concise storyline are what separate a report that gets read from one that gets ignored.</p>
+          <p>A table full of statistics rarely moves a stakeholder to action. The final and most important step is translating findings into a narrative: what changed, why it matters, and what should happen next. Clear visuals paired with a concise storyline are what separate a report that gets read from one that gets closed after ten seconds.</p>
+          <p>A useful structure for this narrative is: context, then finding, then implication, then recommendation. Stakeholders rarely need to see every chart you made along the way — they need the two or three that actually carry the story.</p>
+
+          <h3>Key takeaways</h3>
           <ul>
             <li><strong>Define the question</strong> before touching the dataset.</li>
+            <li><strong>Explore before you clean</strong>, so your cleaning decisions are informed.</li>
             <li><strong>Document cleaning decisions</strong> so results are reproducible.</li>
-            <li><strong>Lead with the story</strong>, then support it with the data.</li>
+            <li><strong>Lead with the story</strong>, then support it with the data — not the other way around.</li>
           </ul>
-          <p>Insight isn't found in the data alone — it's built through the discipline of asking the right questions, cleaning with intent, and communicating with clarity.</p>
+
+          <p>Insight isn't found in the data alone — it's built through the discipline of asking the right questions, cleaning with intent, and communicating with clarity. Master that workflow, and the tools you use to execute it become secondary.</p>
         `
       },
       'demystifying-ml': {
         tag: 'Machine Learning',
         title: 'Demystifying Machine Learning: Concepts Every Analyst Should Know',
-        meta: '7 min read · April 2025',
+        meta: '10 min read · April 2025',
         body: `
-          <p>Machine learning can feel intimidating from the outside, but most of its core ideas are approachable once broken into plain language. Analysts don't need to build models from scratch to benefit from understanding how they work.</p>
+          <p>Machine learning can feel intimidating from the outside, but most of its core ideas are approachable once broken into plain language. Analysts don't need to build models from scratch to benefit from understanding how they work — a working mental model is often enough to collaborate confidently with data science teams and to spot when ML is genuinely the right tool.</p>
+
           <h3>Supervised vs. unsupervised learning</h3>
-          <p>Supervised learning uses labeled examples — historical data where the outcome is already known — to teach a model to predict future outcomes, like forecasting churn or sales. Unsupervised learning, on the other hand, looks for hidden structure in data without predefined labels, such as grouping customers into segments based on behavior.</p>
+          <p>Supervised learning uses labeled examples — historical data where the outcome is already known — to teach a model to predict future outcomes, like forecasting churn or estimating sales. Unsupervised learning, on the other hand, looks for hidden structure in data without predefined labels, such as grouping customers into segments based on behavior. A quick way to tell them apart: if you already have a column of "correct answers" in your training data, you're in supervised territory.</p>
+
+          <h3>Classification vs. regression</h3>
+          <p>Within supervised learning, tasks split further into two families. Classification predicts a category — will this customer churn or not, is this transaction fraudulent or legitimate. Regression predicts a continuous number — next month's revenue, expected delivery time. The distinction matters because it determines which algorithms and evaluation metrics are appropriate.</p>
+
           <h3>Why evaluation metrics matter</h3>
-          <p>A model's accuracy alone rarely tells the full story. Precision and recall reveal how well a model performs on the outcomes that matter most, especially when classes are imbalanced. Choosing the right metric depends entirely on the business cost of false positives versus false negatives.</p>
+          <p>A model's accuracy alone rarely tells the full story, especially with imbalanced classes. Precision and recall reveal how well a model performs on the outcomes that matter most — precision tells you how many predicted positives were actually correct, recall tells you how many actual positives the model managed to catch. Choosing the right metric depends entirely on the business cost of false positives versus false negatives; a fraud detector and a spam filter should not be optimized the same way.</p>
+
+          <h3>Overfitting: the silent trap</h3>
+          <p>A model that performs beautifully on training data but poorly on new data has likely memorized noise rather than learned a real pattern. This is overfitting, and it's one of the most common reasons a promising model fails in production. Guarding against it usually means testing on unseen data, keeping models reasonably simple, and being skeptical of results that look too good.</p>
+
+          <h3>Feature engineering: often more important than the algorithm</h3>
+          <p>The raw columns in a dataset are rarely the best inputs for a model. Creating derived features — a ratio, a time-since-last-event, a rolling average — often improves performance more than switching to a fancier algorithm. This is where domain knowledge and data intuition give analysts a real edge over pure automation.</p>
+
           <h3>From model to decision</h3>
-          <p>A trained model is only useful once its output influences a real decision. That means analysts need to think beyond model performance and consider how predictions will be interpreted, trusted, and acted upon by the people using them.</p>
+          <p>A trained model is only useful once its output influences a real decision. That means thinking beyond model performance and considering how predictions will be interpreted, trusted, and acted upon by the people using them. A highly accurate model that nobody trusts or understands rarely survives contact with a real business process.</p>
+
+          <h3>Key takeaways</h3>
           <ul>
-            <li><strong>Supervised learning</strong> predicts known outcomes from labeled data.</li>
-            <li><strong>Unsupervised learning</strong> finds patterns without labels.</li>
-            <li><strong>Metrics should match</strong> the real-world cost of errors.</li>
+            <li><strong>Supervised learning</strong> predicts known outcomes from labeled data; <strong>unsupervised learning</strong> finds patterns without labels.</li>
+            <li><strong>Classification vs. regression</strong> determines which metrics apply.</li>
+            <li><strong>Metrics should match</strong> the real-world cost of errors, not just overall accuracy.</li>
+            <li><strong>Overfitting</strong> is the gap between a model that looks good and one that actually works.</li>
+            <li><strong>Feature engineering</strong> often matters more than algorithm choice.</li>
           </ul>
-          <p>Understanding these fundamentals equips analysts to collaborate confidently with data science teams and to know when machine learning is — and isn't — the right tool for the job.</p>
+
+          <p>Understanding these fundamentals equips analysts to ask sharper questions of data science teams, sanity-check model results, and know when machine learning is — and isn't — the right tool for the job.</p>
         `
       },
       'powerbi-tips': {
         tag: 'Power BI Tips',
         title: '10 Power BI Dashboard Tips That Will Impress Any Stakeholder',
-        meta: '6 min read · March 2025',
+        meta: '8 min read · March 2025',
         body: `
-          <p>A Power BI dashboard is often the only artifact a stakeholder ever sees from an entire analysis. Getting the design and performance right can be the difference between a dashboard that drives decisions and one that gets closed after a single glance.</p>
-          <h3>Design with intent</h3>
-          <p>Group related visuals together, keep a consistent color palette tied to meaning (not decoration), and use whitespace generously. A dashboard that feels calm is easier to trust than one crammed with every possible chart.</p>
-          <h3>Optimize for performance</h3>
-          <p>Slow dashboards lose stakeholders before the insight even loads. Reducing the number of visuals per page, using aggregated tables instead of raw row-level data, and applying query folding where possible all keep reports responsive.</p>
-          <h3>Guide the eye, guide the story</h3>
-          <p>Placing the most important KPI in the top-left corner, using bookmarks for guided walkthroughs, and adding tooltips with context all help stakeholders find the insight without needing a live explanation.</p>
+          <p>A Power BI dashboard is often the only artifact a stakeholder ever sees from an entire analysis. Getting the design and performance right can be the difference between a dashboard that drives decisions every week and one that gets closed after a single glance and never opened again.</p>
+
+          <h3>1. Design with intent</h3>
+          <p>Group related visuals together, keep a consistent color palette tied to meaning rather than decoration, and use whitespace generously. A dashboard that feels calm is easier to trust than one crammed with every possible chart the data could produce.</p>
+
+          <h3>2. Lead with the most important number</h3>
+          <p>Place the single KPI that matters most in the top-left corner — the natural starting point for how people scan a screen. Everything else should support that headline number, not compete with it.</p>
+
+          <h3>3. Limit the color palette</h3>
+          <p>Two or three brand colors plus a neutral gray go further than a rainbow of categories. Reserve bold color for the data point that actually needs attention, such as a KPI that's below target.</p>
+
+          <h3>4. Optimize for performance</h3>
+          <p>Slow dashboards lose stakeholders before the insight even loads. Reducing the number of visuals per page, using aggregated tables instead of raw row-level data, and applying query folding where possible all keep reports responsive even as datasets grow.</p>
+
+          <h3>5. Use bookmarks for guided storytelling</h3>
+          <p>Bookmarks let you build a guided walkthrough of a dashboard instead of leaving stakeholders to figure it out alone. This is especially useful for executive presentations where you want to control the narrative before opening the floor to exploration.</p>
+
+          <h3>6. Add context with tooltips</h3>
+          <p>A number without context invites questions. Custom tooltips that show trend lines or comparisons on hover let stakeholders self-serve answers to the "compared to what?" question without needing a live explanation from you.</p>
+
+          <h3>7. Make filters obvious, not hidden</h3>
+          <p>If a slicer changes what someone is looking at, it should be visible and clearly labeled. Hidden or ambiguous filters are one of the most common reasons stakeholders misread a dashboard.</p>
+
+          <h3>8. Design for the device it'll actually be viewed on</h3>
+          <p>A dashboard built only for a widescreen monitor often breaks on a laptop or tablet in a meeting room. Testing at a few common resolutions early saves a scramble right before a presentation.</p>
+
+          <h3>9. Keep DAX measures readable</h3>
+          <p>Well-named, well-commented DAX measures save enormous time when a dashboard needs updating six months later — including by someone else. Treat your measure names the way you'd treat variable names in code.</p>
+
+          <h3>10. Ask "so what?" of every visual</h3>
+          <p>Before adding a chart, ask what decision it helps someone make. If the honest answer is "none, it's just interesting," it probably belongs in an appendix page, not the main view.</p>
+
+          <h3>Key takeaways</h3>
           <ul>
             <li><strong>Consistency</strong> in color and layout builds trust.</li>
-            <li><strong>Performance</strong> is part of the user experience.</li>
-            <li><strong>Guided storytelling</strong> beats a wall of charts.</li>
+            <li><strong>Performance</strong> is part of the user experience, not a separate concern.</li>
+            <li><strong>Guided storytelling</strong> — via layout, bookmarks, and tooltips — beats a wall of charts.</li>
           </ul>
-          <p>Small refinements — a cleaner layout, faster load times, a clearer visual hierarchy — compound into a dashboard stakeholders actually want to open.</p>
+
+          <p>Small refinements — a cleaner layout, faster load times, a clearer visual hierarchy — compound into a dashboard stakeholders actually want to open, week after week.</p>
         `
       }
     };
